@@ -1,0 +1,7 @@
+{
+    "#!/usr/bin/env python": {
+        "prefix": "rn",
+        "body": "raise NotImplementedError$0",
+        "description": "Placeholder for unimplemented function body"
+    }
+}

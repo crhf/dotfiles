@@ -1,0 +1,23 @@
+---[[
+-- require 'lspconfig'.pylsp.setup {
+--     settings = {
+--         pylsp = {
+--             plugins = {
+--                 pycodestyle = {
+--                     ignore = { 'E501', 'W503' },
+--                     maxLineLength = 88
+--                 },
+--                 rope_autoimport = {
+--                     enabled = true,
+--                 },
+--                 rope_completion = {
+--                     enabled = true
+--                 },
+--                 jedi_completion = {
+--                     enabled = false
+--                 }
+--             }
+--         }
+--     },
+-- }
+--]]
