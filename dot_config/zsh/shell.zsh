@@ -8,7 +8,7 @@ bindkey "^P" up-line-or-history
 bindkey "^N" down-line-or-history
 
 function tmux_sessionize {
-  BUFFER="/home/crhf/dotfiles/tmux-sessionizer.sh"
+  BUFFER="${ZDOTDIR}/tmux-sessionizer.sh"
   zle accept-line
 }
 zle -N tmux_sessionize tmux_sessionize
