@@ -56,37 +56,59 @@ require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 require('lspconfig').pyright.setup({
     settings = {
         pyright = {
-            disableLanguageServices = true
-        }
-        -- python = {
-        --     analysis = {
-        --         autoSearchPaths = true,
-        --         diagnosticMode = "workspace",
-        --         useLibraryCodeForTypes = true,
-        --         autoImportCompletions = false,
-        --     },
-        -- },
+            disableLanguageServices = false
+        },
+        python = {
+            analysis = {
+                autoSearchPaths = true,
+                diagnosticMode = "workspace",
+                useLibraryCodeForTypes = true,
+                autoImportCompletions = false,
+            },
+        },
         -- linting = { pylintEnabled = false }
     },
+    on_attach = function(client, bufnr)
+        for key, value in pairs(client.server_capabilities) do
+            client.server_capabilities[key] = false
+        end
+        client.server_capabilities.documentSymbolProvider = true
+        client.server_capabilities.workspaceSymbolProvider = true
+
+        -- if client.server_capabilities.documentSymbolProvider then
+        require("nvim-navic").attach(client, bufnr)
+        -- end
+    end
+})
+
+
+local lspconfig = require 'lspconfig'
+local util = require 'lspconfig.util'
+
+local root_files = {
+    'pyproject.toml',
+    'setup.py',
+    'setup.cfg',
+    'requirements.txt',
+    'Pipfile',
+    'pyrightconfig.json',
+    '.git',
+}
+
+lspconfig.jedi_language_server.setup {
+    root_dir = function(fname)
+        return util.root_pattern(unpack(root_files))(fname)
+    end,
     on_attach = function(client, bufnr)
         client.server_capabilities.documentSymbolProvider = false
         client.server_capabilities.workspaceSymbolProvider = false
     end
-})
-
-local lspconfig = require 'lspconfig'
-lspconfig.jedi_language_server.setup {
-    on_attach = function(client, bufnr)
-        if client.server_capabilities.documentSymbolProvider then
-            require("nvim-navic").attach(client, bufnr)
-        end
-    end,
-    root_dir = function(fname, bufnr)
-        -- local result = lspconfig.util.find_git_ancestor(fname) .. "src"
-        -- print(result)
-        -- return result
-        return vim.fn.getcwd() .. "src"
-    end
+    -- root_dir = function(fname, bufnr)
+    -- local result = lspconfig.util.find_git_ancestor(fname) .. "src"
+    -- print(result)
+    -- return result
+    -- return vim.fn.getcwd() .. "src"
+    -- end
 }
 
 -- require('lspconfig').pylsp.setup({
