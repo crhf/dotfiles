@@ -1,4 +1,5 @@
 setopt incappendhistory
+unsetopt beep
 
 bindkey -v
 bindkey -r "^L"

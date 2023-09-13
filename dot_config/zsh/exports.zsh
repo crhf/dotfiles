@@ -31,4 +31,4 @@ export MANWIDTH=999
 # unset __conda_setup
 # <<< conda initialize <<<
 
-export TERM='xterm-256color'
+# export TERM='tmux-256color'
