@@ -10,3 +10,4 @@ vim.keymap.set("n", "<leader>h", ui.toggle_quick_menu)
 -- vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
 
 vim.cmd([[autocmd filetype harpoon setlocal relativenumber]])
+vim.cmd([[autocmd filetype harpoon setlocal wrap]])

@@ -1,6 +1,7 @@
 vim.keymap.set("n", "<leader>1", require('dap').restart, {desc="dap restart"})
 vim.keymap.set("n", "<leader>2", require('dap').terminate, {desc="dap terminate"})
 vim.keymap.set("n", "<leader>3", require('dap').restart_frame, {desc="dap restart frame"})
+vim.keymap.set("n", "<leader>4", require('dap').run_last, {desc="dap run last"})
 vim.keymap.set("n", "<leader>5", require('dap').continue, {desc="dap continue"})
 vim.keymap.set("n", "<leader>7", require('dap').step_into, {desc="dap step into"})
 vim.keymap.set("n", "<leader>8", require('dap').step_over, {desc="dap step over"})
@@ -19,3 +20,4 @@ vim.keymap.set('n', '<Leader>dr', require('dap').repl.open, {desc="dap repl"})
 vim.keymap.set('n', '<Leader>dl', require('dap').run_last, {desc="dap run last"})
 
 -- require('dap').defaults.fallback.terminal_win_cmd = 'terminal'
+

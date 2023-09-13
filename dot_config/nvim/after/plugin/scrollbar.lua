@@ -1,5 +1,5 @@
 -- local colors = require("gruvbox-material").setup()
-require("scrollbar").setup(
+-- require("scrollbar").setup(
 --[[
 {
     handle = {
@@ -15,4 +15,4 @@ require("scrollbar").setup(
     }
 }
 --]]
-)
+-- )

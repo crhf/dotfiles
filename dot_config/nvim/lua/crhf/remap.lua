@@ -52,3 +52,7 @@ vim.api.nvim_set_keymap("n", "<Up>", ":resize +5<cr>", opts)
 vim.api.nvim_set_keymap("n", "<Down>", ":resize -5<cr>", opts)
 vim.api.nvim_set_keymap("n", "<Left>", ":vert resize -5<cr>", opts)
 vim.api.nvim_set_keymap("n", "<Right>", ":vert resize +5<cr>", opts)
+
+vim.keymap.set("n", "<leader>wr", function ()
+    vim.o.wrap = not vim.o.wrap
+end, {desc = "toggle text wrap"})

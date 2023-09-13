@@ -14,8 +14,27 @@ require("nvim-tree").setup {
             warning = "",
             error = "",
         },
-    }, view = { relativenumber = true }
+    }, view = { relativenumber = true },
+    actions = {
+        open_file = {
+            resize_window = false,
+        }
+    },
+    renderer = {
+        icons = {
+            web_devicons = {
+                folder = {
+                    enable = true,
+                    color = true
+                },
+            },
+        }
+    },
+    filters = {
+        git_ignored = false
+    }
 }
 local api = require('nvim-tree.api')
 vim.keymap.set('n', '<leader>tt', function() api.tree.toggle({ focus = false }) end)
-vim.keymap.set("n", "<leader>pv", function() api.tree.focus() end)
+vim.keymap.set('n', '<leader>tf', function() api.tree.find_file() end)
+-- vim.keymap.set("n", "<leader>pv", function() api.tree.focus() end)

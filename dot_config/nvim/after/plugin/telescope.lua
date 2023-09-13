@@ -9,6 +9,7 @@ local mappings = {
         -- ["<C-p>"] = false,
         -- ["<C-n>"] = false,
         ["<C-k>"] = actions.send_to_qflist + actions.open_qflist,
+        ["<C-j>"] = actions.send_selected_to_qflist + actions.open_qflist,
         ["<C-h>"] = "which_key"
     },
     n = {
@@ -19,7 +20,7 @@ local mappings = {
         -- ["<C-k>"] = "move_selection_previous",
         -- ["<C-p>"] = false,
         -- ["<C-n>"] = false,
-        ["<C-k>"] = "send_to_qflist",
+        ["<C-k>"] = actions.send_to_qflist + actions.open_qflist,
         ["<C-h>"] = "which_key"
     },
 }
@@ -82,3 +83,4 @@ vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sc', require('telescope.builtin').commands, { desc = '[S]earch [C]ommands' })
+vim.keymap.set('n', '<leader>sp', require('telescope.builtin').oldfiles, { desc = '[S]earch [P]revious Files' })

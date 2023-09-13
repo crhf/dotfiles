@@ -4,7 +4,7 @@ local ensure_packer = function()
     if fn.empty(fn.glob(install_path)) > 0 then
         fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
         vim.cmd [[packadd packer.nvim]]
-        vim.o.runtimepath = vim.fn.stdpath "data" .. "/site/pack/*/start/*," .. vim.o.runtimepath
+        --vim.o.runtimepath = vim.fn.stdpath "data" .. "/site/pack/*/start/*," .. vim.o.runtimepath
         return true
     end
     return false
@@ -154,7 +154,7 @@ return require('packer').startup(function(use)
     --     ft = { "markdown" },
     -- })
 
-    use("petertriho/nvim-scrollbar")
+    -- use("petertriho/nvim-scrollbar")
 
     use("kevinhwang91/nvim-hlslens")
 
@@ -244,7 +244,7 @@ return require('packer').startup(function(use)
                 attach_navic = false
             }
             )
-        end,
+        end
     })
 
     use "lukas-reineke/indent-blankline.nvim"
@@ -274,4 +274,8 @@ return require('packer').startup(function(use)
     use "rafamadriz/friendly-snippets"
     use "hrsh7th/cmp-buffer"
     use "hrsh7th/cmp-path"
+
+    -- use "dhruvasagar/vim-zoom"
+
+    -- use "Hoffs/omnisharp-extended-lsp.nvim"
 end)

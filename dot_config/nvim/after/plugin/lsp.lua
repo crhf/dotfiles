@@ -53,34 +53,39 @@ end)
 -- (Optional) Configure lua language server for neovim
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
+-- lsp.skip_server_setup({ 'pyright' })
 require('lspconfig').pyright.setup({
     settings = {
         pyright = {
-            disableLanguageServices = false
+            disableLanguageServices = true
         },
-        python = {
-            analysis = {
-                autoSearchPaths = true,
-                diagnosticMode = "workspace",
-                useLibraryCodeForTypes = true,
-                autoImportCompletions = false,
-            },
-        },
+        -- python = {
+        --     analysis = {
+        --         autoSearchPaths = true,
+        --         diagnosticMode = "workspace",
+        --         useLibraryCodeForTypes = false,
+        --         autoImportCompletions = false,
+        --     },
+        -- },
         -- linting = { pylintEnabled = false }
     },
     on_attach = function(client, bufnr)
-        for key, value in pairs(client.server_capabilities) do
-            client.server_capabilities[key] = false
-        end
-        client.server_capabilities.documentSymbolProvider = true
-        client.server_capabilities.workspaceSymbolProvider = true
-
+    --     for key, value in pairs(client.server_capabilities) do
+    --         if value == true then
+    --             client.server_capabilities[key] = false
+    --         end
+    --     end
+        client.server_capabilities.documentSymbolProvider = false
+        client.server_capabilities.workspaceSymbolProvider = false
+        -- client.server_capabilities.completionProvider.workDoneProgress = false
+        -- client.server_capabilities.completionProvider.resolveProvider = false
         -- if client.server_capabilities.documentSymbolProvider then
-        require("nvim-navic").attach(client, bufnr)
+    --     require("nvim-navic").attach(client, bufnr)
         -- end
     end
 })
 
+require 'lspconfig'.omnisharp_mono.setup {}
 
 local lspconfig = require 'lspconfig'
 local util = require 'lspconfig.util'
@@ -100,8 +105,9 @@ lspconfig.jedi_language_server.setup {
         return util.root_pattern(unpack(root_files))(fname)
     end,
     on_attach = function(client, bufnr)
-        client.server_capabilities.documentSymbolProvider = false
-        client.server_capabilities.workspaceSymbolProvider = false
+        client.server_capabilities.documentSymbolProvider = true
+        client.server_capabilities.workspaceSymbolProvider = true
+        require("nvim-navic").attach(client, bufnr)
     end
     -- root_dir = function(fname, bufnr)
     -- local result = lspconfig.util.find_git_ancestor(fname) .. "src"
