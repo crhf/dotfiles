@@ -57,7 +57,7 @@ require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 require('lspconfig').pyright.setup({
     settings = {
         pyright = {
-            disableLanguageServices = true
+            disableLanguageServices = false
         },
         -- python = {
         --     analysis = {
@@ -70,17 +70,26 @@ require('lspconfig').pyright.setup({
         -- linting = { pylintEnabled = false }
     },
     on_attach = function(client, bufnr)
-    --     for key, value in pairs(client.server_capabilities) do
-    --         if value == true then
-    --             client.server_capabilities[key] = false
-    --         end
-    --     end
-        client.server_capabilities.documentSymbolProvider = false
-        client.server_capabilities.workspaceSymbolProvider = false
-        -- client.server_capabilities.completionProvider.workDoneProgress = false
-        -- client.server_capabilities.completionProvider.resolveProvider = false
-        -- if client.server_capabilities.documentSymbolProvider then
-    --     require("nvim-navic").attach(client, bufnr)
+        --     for key, value in pairs(client.server_capabilities) do
+        --         if value == true then
+        --             client.server_capabilities[key] = false
+        --         end
+        --     end
+        client.server_capabilities = require 'vim.lsp.protocol'.resolve_capabilities({
+            documentSymbolProvider = true,
+            workspaceSymbolProvider = true,
+            documentHighlightProvider = {
+                workDoneProgress = false
+            },
+            textDocumentSync = {
+                change = 2,
+                openClose = true,
+                save = true,
+                willSave = false,
+                willSaveWaitUntil = false
+            },
+        })
+        require("nvim-navic").attach(client, bufnr)
         -- end
     end
 })
@@ -105,9 +114,9 @@ lspconfig.jedi_language_server.setup {
         return util.root_pattern(unpack(root_files))(fname)
     end,
     on_attach = function(client, bufnr)
-        client.server_capabilities.documentSymbolProvider = true
-        client.server_capabilities.workspaceSymbolProvider = true
-        require("nvim-navic").attach(client, bufnr)
+        client.server_capabilities.documentSymbolProvider = false
+        client.server_capabilities.workspaceSymbolProvider = false
+        -- require("nvim-navic").attach(client, bufnr)
     end
     -- root_dir = function(fname, bufnr)
     -- local result = lspconfig.util.find_git_ancestor(fname) .. "src"

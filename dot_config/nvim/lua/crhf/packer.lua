@@ -247,7 +247,7 @@ return require('packer').startup(function(use)
         end
     })
 
-    use "lukas-reineke/indent-blankline.nvim"
+    -- use "lukas-reineke/indent-blankline.nvim"
     --
     -- use {
     --     "Shatur/neovim-session-manager",
@@ -278,4 +278,48 @@ return require('packer').startup(function(use)
     -- use "dhruvasagar/vim-zoom"
 
     -- use "Hoffs/omnisharp-extended-lsp.nvim"
+
+    use({
+        "Zeioth/compiler.nvim",
+        requires = {
+            {
+                "stevearc/overseer.nvim",
+                commit = "19aac0426710c8fc0510e54b7a6466a03a1a7377",
+                config = function()
+                    require('overseer').setup({
+                        task_list = {
+                            direction = "bottom",
+                            min_height = 25,
+                            max_height = 25,
+                            default_detail = 1,
+                            bindings = { ["q"] = function() vim.cmd("OverseerClose") end },
+                        },
+                    })
+                end
+            }
+        },
+        config = function()
+            require 'compiler'.setup()
+
+            -- Open compiler
+            vim.keymap.set('n', '<F6>', "<cmd>CompilerOpen<cr>", { noremap = true, silent = true })
+            --
+            -- -- Redo last selected option
+            vim.keymap.set('n', '<S-F6>', function()
+                vim.cmd("CompilerStop") -- (Optional, to dispose all tasks before redo)
+                vim.cmd("CompilerRedo")
+            end, { noremap = true, silent = true })
+            --
+            -- -- Toggle compiler results
+            vim.keymap.set('n', '<S-F7>', "<cmd>CompilerToggleResults<cr>",
+                { noremap = true, silent = true })
+        end
+    })
+
+    use({
+        'monkoose/matchparen.nvim',
+        config = function()
+            require('matchparen').setup()
+        end
+    })
 end)
