@@ -1,6 +1,17 @@
 local lsp = require('lsp-zero').preset({})
+
+local get_hostname = function ()
+    local f = io.popen ("/bin/hostname")
+    local hostname = f:read("*a") or ""
+    f:close()
+    hostname =string.gsub(hostname, "\n$", "")
+    return hostname
+end
+local hostname = get_hostname()
+
 require('barbecue').setup({
     attach_navic = false, -- prevent barbecue from automatically attaching nvim-navic
+    lead_custom_section = function() return " " .. hostname .. "  " end,
 })
 
 lsp.on_attach(function(client, bufnr)
