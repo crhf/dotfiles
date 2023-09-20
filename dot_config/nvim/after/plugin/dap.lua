@@ -11,8 +11,8 @@ vim.keymap.set("n", "<leader>0", require('dap').run_to_cursor, { desc = "dap run
 vim.keymap.set("n", "<leader>dk", require('dap').up, { desc = "dap up" })
 vim.keymap.set("n", "<leader>dj", require('dap').down, { desc = "dap down" })
 
-vim.keymap.set("n", "<leader>db", require('dap').toggle_breakpoint, { desc = "dap breakpoint" })
-vim.keymap.set("n", "<leader>dB", ":lua require('dap').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+vim.keymap.set("n", "<leader>db", require('persistent-breakpoints.api').toggle_breakpoint, { desc = "dap breakpoint" })
+vim.keymap.set("n", "<leader>dB", ":lua require('persistent-breakpoints.api').set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
     { desc = "dap conditional breakpoint" })
 
 vim.keymap.set('n', '<Leader>dp',
@@ -24,7 +24,7 @@ vim.keymap.set('n', '<Leader>dl', require('dap').run_last, { desc = "dap run las
 
 local dap = require('dap')
 
-dap.adapters.vscode_mono_debug = {
+dap.adapters.cs = {
     type = 'executable',
     command = '/usr/bin/mono',
     args = { '/home/crhf/installers/vscode-mono-debug/extension/bin/Release/mono-debug.exe' }
@@ -33,7 +33,7 @@ dap.adapters.vscode_mono_debug = {
 dap.configurations.cs = {
     {
         name = "launch-mono",
-        type = "vscode_mono_debug",
+        type = "cs",
         request = "launch",
         runtimeExecutable = "/usr/bin/mono",
         program = function()
@@ -42,9 +42,11 @@ dap.configurations.cs = {
     },
     {
         name = "attach-mono",
-        type = "vscode_mono_debug",
+        type = "cs",
         request = "attach",
         address = "localhost",
         port = 55555
     }
 }
+
+require('dap.ext.vscode').load_launchjs()
