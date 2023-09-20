@@ -322,4 +322,6 @@ return require('packer').startup(function(use)
             require('matchparen').setup()
         end
     })
+
+    use 'RRethy/vim-illuminate'
 end)
