@@ -79,7 +79,7 @@ vim.api.nvim_create_autocmd({ "BufReadPre" }, {
     if ok and stats and (stats.size > 1000000) then
       vim.b.large_buf = true
       vim.cmd("syntax off")
-      -- vim.cmd("IlluminatePauseBuf") -- disable vim-illuminate
+      vim.cmd("IlluminatePauseBuf") -- disable vim-illuminate
       -- vim.cmd("IndentBlanklineDisable") -- disable indent-blankline.nvim
       vim.opt_local.foldmethod = "manual"
       vim.opt_local.spell = false
