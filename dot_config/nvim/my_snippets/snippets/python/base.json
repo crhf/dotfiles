@@ -1,7 +1,12 @@
 {
-    "#!/usr/bin/env python": {
+    "notimplementederror": {
         "prefix": "rn",
         "body": "raise NotImplementedError$0",
+        "description": "Placeholder for unimplemented function body"
+    },
+    "icecream": {
+        "prefix": "fic",
+        "body": "from icecream import ic$0",
         "description": "Placeholder for unimplemented function body"
     }
 }

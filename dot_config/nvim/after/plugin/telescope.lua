@@ -24,9 +24,24 @@ local mappings = {
         ["<C-h>"] = "which_key"
     },
 }
-require("telescope").setup {
+local fzf_opts = {
+    fuzzy = true,                   -- false will only do exact matching
+    override_generic_sorter = true, -- override the generic sorter
+    override_file_sorter = true,    -- override the file sorter
+    case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+}
+local telescope = require('telescope')
+telescope.setup {
     defaults = {
         mappings = mappings
+    },
+    pickers = {
+        lsp_dynamic_workspace_symbols = {
+            sorter = telescope.extensions.fzf.native_fzf_sorter(fzf_opts)
+        },
+    },
+    extensions = {
+        fzf = fzf_opts
     },
     -- pickers = {
     --     find_files = {
@@ -61,6 +76,8 @@ require("telescope").setup {
     --     },
     -- },
 }
+telescope.load_extension('fzf')
+
 local builtin = require('telescope.builtin')
 -- vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
 vim.keymap.set('n', '<leader>pf', function()
@@ -73,11 +90,11 @@ vim.keymap.set('n', '<leader>ps', function()
 end)
 vim.keymap.set('n', '<leader>/', function()
     require('telescope.builtin').current_buffer_fuzzy_find()
--- vim.keymap.set('n', '<leader>/', function()
---     require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
---         winblend = 10,
---         previewer = false,
---     })
+    -- vim.keymap.set('n', '<leader>/', function()
+    --     require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    --         winblend = 10,
+    --         previewer = false,
+    --     })
 end, { desc = '[/] Fuzzily search in current buffer' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
