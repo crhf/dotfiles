@@ -1,10 +1,10 @@
 local lsp = require('lsp-zero').preset({})
 
-local get_hostname = function ()
-    local f = io.popen ("/bin/hostname")
+local get_hostname = function()
+    local f = io.popen("/bin/hostname")
     local hostname = f:read("*a") or ""
     f:close()
-    hostname =string.gsub(hostname, "\n$", "")
+    hostname = string.gsub(hostname, "\n$", "")
     return hostname
 end
 local hostname = get_hostname()
@@ -40,7 +40,7 @@ lsp.on_attach(function(client, bufnr)
 
     lsp.default_keymaps({ buffer = bufnr })
     -- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
-    vim.keymap.set("n", "<leader>ff", function()
+    vim.keymap.set({"n", "v"}, "<leader>ff", function()
         vim.lsp.buf.format { async = true }
     end)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition)
@@ -54,7 +54,10 @@ lsp.on_attach(function(client, bufnr)
 
     nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
     nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-    nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+
+    if client.server_capabilities.workspaceSymbolProvider then
+        nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+    end
 
     -- if client.server_capabilities.documentSymbolProvider then
     -- require('nvim-navic').attach(client, bufnr)
@@ -181,7 +184,7 @@ luasnip.setup({
             unvisited = {
                 virt_text = { { '|', 'Conceal' } },
                 virt_text_pos = 'overlay',
-                -- hl_group = 'LuaSnipPlace'
+                -- hl_group = 'GruvboxRed'
             },
         },
         -- Add this to also have a placeholder in the final tabstop.
@@ -190,7 +193,7 @@ luasnip.setup({
             unvisited = {
                 virt_text = { { '|', 'Conceal' } },
                 virt_text_pos = 'overlay',
-                -- hl_group = 'LuaSnipPlace'
+                -- hl_group = 'GruvboxRed'
             },
         },
     }

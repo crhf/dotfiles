@@ -446,4 +446,7 @@ return require('packer').startup(function(use)
     --         })
     --     end
     -- }
+    --
+    use 'AndrewRadev/linediff.vim'
+
 end)

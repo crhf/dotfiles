@@ -146,6 +146,12 @@ local function jdtls_on_attach(client, bufnr)
     vim.keymap.set('n', 'crc', "<cmd>lua require('jdtls').extract_constant()<cr>", opts)
     vim.keymap.set('x', 'crc', "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", opts)
     vim.keymap.set('x', 'crm', "<esc><Cmd>lua require('jdtls').extract_method(true)<cr>", opts)
+
+    vim.keymap.set('n', '<leader>ws', function ()
+        vim.ui.input({ prompt = "Workspace symbols: " }, function(query)
+            require('telescope.builtin').lsp_workspace_symbols({ query = query })
+        end)
+    end, opts)
 end
 
 local function jdtls_setup(event)
@@ -170,7 +176,6 @@ local function jdtls_setup(event)
     local cmd = {
         -- 💀
         '/home/crhf/.sdkman/candidates/java/17.0.7-zulu/bin/java',
-
         '-Declipse.application=org.eclipse.jdt.ls.core.id1',
         '-Dosgi.bundles.defaultStartLevel=4',
         '-Declipse.product=org.eclipse.jdt.ls.core.product',
