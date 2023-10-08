@@ -293,6 +293,14 @@ cmp.setup({
             -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
         end,
     },
+    performance = {
+      debounce = 60,
+      throttle = 30,
+      fetching_timeout = 100,
+      confirm_resolve_timeout = 80,
+      async_budget = 1,
+      max_view_entries = 15,
+    },
     -- performance = {
     --     debounce = 10,
     --     throttle = 0,
