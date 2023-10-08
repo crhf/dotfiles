@@ -182,9 +182,9 @@ luasnip.setup({
     ext_opts = {
         [types.insertNode] = {
             unvisited = {
-                virt_text = { { '|', 'Conceal' } },
-                virt_text_pos = 'overlay',
-                -- hl_group = 'GruvboxRed'
+                -- virt_text = { { '|', 'Conceal' } },
+                -- virt_text_pos = 'overlay',
+                hl_group = 'Cursor'
             },
         },
         -- Add this to also have a placeholder in the final tabstop.
@@ -193,7 +193,7 @@ luasnip.setup({
             unvisited = {
                 virt_text = { { '|', 'Conceal' } },
                 virt_text_pos = 'overlay',
-                -- hl_group = 'GruvboxRed'
+                hl_group = 'Cursor'
             },
         },
     }
