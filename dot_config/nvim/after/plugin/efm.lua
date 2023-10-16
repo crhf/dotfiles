@@ -20,6 +20,9 @@ require "lspconfig".efm.setup {
                 -- { formatCommand = "yamlfmt", formatStdin = false }
                 { formatCommand = "npx prettier --parser yaml", formatStdin = true }
             },
+            cs = {
+                { formatCommand = "/home/crhf/.local/share/nvim/mason/packages/csharpier/dotnet-csharpier --write-stdout", formatStdin=false}
+            }
         }
     }
 }

@@ -59,6 +59,39 @@ lsp.on_attach(function(client, bufnr)
         nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
     end
 
+    --- Guard against servers without the signatureHelper capability
+    if client.server_capabilities.signatureHelpProvider then
+        require('lsp-overloads').setup(client, {
+            -- UI options are mostly the same as those passed to vim.lsp.util.open_floating_preview
+            ui = {
+                border = "single", -- The border to use for the signature popup window. Accepts same border values as |nvim_open_win()|.
+                height = nil, -- Height of the signature popup window (nil allows dynamic sizing based on content of the help)
+                width = nil, -- Width of the signature popup window (nil allows dynamic sizing based on content of the help)
+                wrap = true, -- Wrap long lines
+                wrap_at = nil, -- Character to wrap at for computing height when wrap enabled
+                max_width = 60, -- Maximum signature popup width
+                max_height = 10, -- Maximum signature popup height
+                -- Events that will close the signature popup window: use {"CursorMoved", "CursorMovedI", "InsertCharPre"} to hide the window when typing
+                close_events = { "CursorMoved", "BufHidden", "InsertLeave" },
+                focusable = true,                 -- Make the popup float focusable
+                focus = false,                    -- If focusable is also true, and this is set to true, navigating through overloads will focus into the popup window (probably not what you want)
+                offset_x = 0,                     -- Horizontal offset of the floating window relative to the cursor position
+                offset_y = 0,                     -- Vertical offset of the floating window relative to the cursor position
+                floating_window_above_cur_line = false, -- Attempt to float the popup above the cursor position
+                -- (note, if the height of the float would be greater than the space left above the cursor, it will default
+                -- to placing the float below the cursor. The max_height option allows for finer tuning of this)
+            },
+            keymaps = {
+                next_signature = "<C-d>",
+                previous_signature = "<C-u>",
+                next_parameter = "<C-l>",
+                previous_parameter = "<C-h>",
+                close_signature = "<A-s>"
+            },
+            display_automatically = true -- Uses trigger characters to automatically display the signature overloads when typing a method signature
+        })
+    end
+
     -- if client.server_capabilities.documentSymbolProvider then
     -- require('nvim-navic').attach(client, bufnr)
     -- end
@@ -102,13 +135,24 @@ require('lspconfig').pyright.setup({
                 willSave = false,
                 willSaveWaitUntil = false
             },
+            signatureHelpProvider = {
+                triggerCharacters = {},
+                retriggerCharacters = {}
+            }
         })
         require("nvim-navic").attach(client, bufnr)
         -- end
     end
 })
 
-require 'lspconfig'.omnisharp_mono.setup {}
+require 'lspconfig'.omnisharp_mono.setup {
+    on_attach = function (client, bufnr)
+        require("nvim-navic").attach(client, bufnr)
+
+        client.server_capabilities.documentFormattingProvider = nil
+        client.server_capabilities.documentRangeFormattingProvider = nil
+    end
+}
 
 local lspconfig = require 'lspconfig'
 local util = require 'lspconfig.util'
@@ -213,6 +257,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
     ['<C-j>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.insert }),
     ['<C-k>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.insert }),
     ['<C-y>'] = cmp.mapping.close(),
+    ['<C-e>'] = cmp.mapping.abort(),
     -- ['<C-e>'] = function()
     --     local active = cmp.get_active_entry()
     --     -- if active then
@@ -271,6 +316,7 @@ cmp.setup({
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
+        { name = 'nvim_lsp_signature_help' },
         -- { name = 'vsnip' }, -- For vsnip users.
         { name = 'luasnip' }, -- For luasnip users.
         -- { name = 'ultisnips' }, -- For ultisnips users.
@@ -294,10 +340,10 @@ cmp.setup({
         end,
     },
     performance = {
-      debounce = 60,
-      throttle = 30,
-      fetching_timeout = 100,
-      confirm_resolve_timeout = 80,
+      debounce = 30,
+      throttle = 5,
+      fetching_timeout = 70,
+      confirm_resolve_timeout = 5,
       async_budget = 1,
       max_view_entries = 15,
     },
@@ -307,7 +353,7 @@ cmp.setup({
     --     fetching_timeout = 10
     -- }
     experimental = {
-        ghost_text = false
+        ghost_text = true
     }
 })
 
@@ -335,6 +381,15 @@ vim.diagnostic.config({
 })
 ]]
 --
+
+vim.keymap.set({ "i", "x", "v", "n" }, "<C-s>", function()
+    if
+        require('luasnip').session.current_nodes[vim.api.nvim_get_current_buf()]
+        and not require('luasnip').session.jump_active
+    then
+        require('luasnip').unlink_current()
+    end
+end)
 
 -- HACK: Cancel the snippet session when leaving insert mode.
 -- local unlink_group = vim.api.nvim_create_augroup('UnlinkSnippet', {})

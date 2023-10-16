@@ -32,7 +32,11 @@ require("nvim-tree").setup {
     },
     filters = {
         git_ignored = false
-    }
+    },
+    notify = {
+        threshold = vim.log.levels.WARN,
+        absolute_path = true,
+    },
 }
 local api = require('nvim-tree.api')
 vim.keymap.set('n', '<leader>tt', function() api.tree.toggle({ focus = false }) end)

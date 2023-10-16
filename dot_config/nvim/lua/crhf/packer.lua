@@ -69,7 +69,9 @@ return require('packer').startup(function(use)
         }
     }
 
-    use 'ray-x/lsp_signature.nvim'
+    -- use 'hrsh7th/cmp-nvim-lsp-signature-help'
+    -- use 'ray-x/lsp_signature.nvim'
+    use { 'Issafalcon/lsp-overloads.nvim'}
 
     use({
         "Pocco81/auto-save.nvim",
@@ -448,5 +450,7 @@ return require('packer').startup(function(use)
     -- }
     --
     use 'AndrewRadev/linediff.vim'
+
+    use 'unblevable/quick-scope'
 
 end)
