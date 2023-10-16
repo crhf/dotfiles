@@ -453,4 +453,5 @@ return require('packer').startup(function(use)
 
     use 'unblevable/quick-scope'
 
+    use 'WhoIsSethDaniel/mason-tool-installer.nvim'
 end)
