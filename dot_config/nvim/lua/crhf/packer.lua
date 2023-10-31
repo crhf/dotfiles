@@ -71,7 +71,7 @@ return require('packer').startup(function(use)
 
     -- use 'hrsh7th/cmp-nvim-lsp-signature-help'
     -- use 'ray-x/lsp_signature.nvim'
-    use { 'Issafalcon/lsp-overloads.nvim'}
+    use { 'Issafalcon/lsp-overloads.nvim' }
 
     use({
         "Pocco81/auto-save.nvim",
@@ -451,7 +451,12 @@ return require('packer').startup(function(use)
     --
     use 'AndrewRadev/linediff.vim'
 
-    use 'unblevable/quick-scope'
-
     use 'WhoIsSethDaniel/mason-tool-installer.nvim'
+
+    use({
+        "stevearc/conform.nvim",
+        config = function()
+            require("conform").setup()
+        end,
+    })
 end)

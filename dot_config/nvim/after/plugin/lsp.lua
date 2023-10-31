@@ -40,9 +40,9 @@ lsp.on_attach(function(client, bufnr)
 
     lsp.default_keymaps({ buffer = bufnr })
     -- vim.cmd [[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]]
-    vim.keymap.set({"n", "v"}, "<leader>ff", function()
-        vim.lsp.buf.format { async = true }
-    end)
+    -- vim.keymap.set({"n", "v"}, "<leader>ff", function()
+    --     vim.lsp.buf.format { async = true }
+    -- end)
     vim.keymap.set("n", "gd", vim.lsp.buf.definition)
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename)
     vim.keymap.set("n", "<leader>rf", vim.lsp.buf.references)
@@ -145,14 +145,14 @@ require('lspconfig').pyright.setup({
     end
 })
 
-require 'lspconfig'.omnisharp_mono.setup {
-    on_attach = function (client, bufnr)
-        require("nvim-navic").attach(client, bufnr)
-
-        client.server_capabilities.documentFormattingProvider = nil
-        client.server_capabilities.documentRangeFormattingProvider = nil
-    end
-}
+-- require 'lspconfig'.omnisharp_mono.setup {
+--     on_attach = function (client, bufnr)
+--         require("nvim-navic").attach(client, bufnr)
+--
+--         client.server_capabilities.documentFormattingProvider = nil
+--         client.server_capabilities.documentRangeFormattingProvider = nil
+--     end
+-- }
 
 local lspconfig = require 'lspconfig'
 local util = require 'lspconfig.util'
