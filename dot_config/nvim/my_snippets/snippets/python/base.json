@@ -8,5 +8,15 @@
         "prefix": "fic",
         "body": "from icecream import ic$0",
         "description": "Placeholder for unimplemented function body"
+    },
+    "exit": {
+        "prefix": "rs",
+        "body": "raise SystemExit",
+        "description": "Placeholder for unimplemented function body"
+    },
+    "openfile": {
+        "prefix": "wo",
+        "body": "with open($1) as f:$0",
+        "description": "Placeholder for unimplemented function body"
     }
 }

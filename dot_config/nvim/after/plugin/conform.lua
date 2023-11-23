@@ -5,10 +5,13 @@ require("conform").setup({
         python = { "isort", "black" },
         -- Use a sub-list to run only the first available formatter
         javascript = { { "prettierd", "prettier" } },
-        json = { "biome" }
+        json = { "biome" },
+        csharp = { "clang-format" }
     },
 })
 
 vim.keymap.set({ "n", "v" }, "<leader>ff", function()
-    require("conform").format()
+    require("conform").format({
+        lsp_fallback = true
+    })
 end)
