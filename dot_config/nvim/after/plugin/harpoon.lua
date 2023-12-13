@@ -11,5 +11,5 @@ vim.keymap.set("n", "<leader>h", ui.toggle_quick_menu)
 
 vim.cmd([[autocmd filetype harpoon setlocal relativenumber]])
 vim.cmd([[autocmd filetype harpoon setlocal wrap]])
-vim.cmd([[autocmd filetype harpoon nnoremap j j]])
-vim.cmd([[autocmd filetype harpoon nnoremap k k]])
+-- vim.cmd([[autocmd filetype harpoon nnoremap j j]])
+-- vim.cmd([[autocmd filetype harpoon nnoremap k k]])

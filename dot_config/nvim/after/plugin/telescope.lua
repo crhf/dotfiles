@@ -41,7 +41,13 @@ telescope.setup {
         },
     },
     extensions = {
-        fzf = fzf_opts
+        fzf = fzf_opts,
+        file_browser = {
+            theme = "ivy",
+            hijack_netrw = true,
+            mappings = mappings
+        }
+
     },
     -- pickers = {
     --     find_files = {
@@ -77,6 +83,7 @@ telescope.setup {
     -- },
 }
 telescope.load_extension('fzf')
+telescope.load_extension('file_browser')
 
 local builtin = require('telescope.builtin')
 -- vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
