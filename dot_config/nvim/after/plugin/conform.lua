@@ -7,7 +7,7 @@ require("conform").setup({
 		javascript = { { "prettierd", "prettier" } },
 		json = { "biome" },
 		csharp = { "clang-format" },
-		java = { "google-java-format" },
+		-- java = { "google-java-format" },
 	},
 })
 

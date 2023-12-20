@@ -245,13 +245,13 @@ return require("packer").startup(function(use)
 	-- 	requires = { "nvim-tree/nvim-web-devicons", opt = true },
 	-- })
 
-    use({
-        'windwp/windline.nvim',
-        config = function ()
-            require('wlsample.airline')
-        end,
-        requires = { "nvim-tree/nvim-web-devicons", opt = true }
-    })
+	use({
+		"windwp/windline.nvim",
+		config = function()
+			require("wlsample.airline")
+		end,
+		requires = { "nvim-tree/nvim-web-devicons", opt = true },
+	})
 
 	use({
 		"utilyre/barbecue.nvim",
@@ -490,6 +490,8 @@ return require("packer").startup(function(use)
 		"nvim-telescope/telescope-file-browser.nvim",
 		requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	})
+
+    -- use({ "codota/tabnine-nvim", run = "./dl_binaries.sh" })
 end)
 
 -- cffooze
