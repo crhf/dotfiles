@@ -195,7 +195,12 @@ local function jdtls_setup(event)
     local jdtls = require('jdtls')
 
     local path = get_jdtls_paths()
-    local data_dir = path.data_dir .. '/' .. vim.fn.fnamemodify(vim.fn.getcwd(), ':p:h:t')
+    -- local bufname = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
+    local root_dir = jdtls.setup.find_root(root_files)
+    -- local data_dir = path.data_dir .. '/' .. vim.fn.fnamemodify(root_dir, ':p:h:t')
+    local data_dir_name = vim.fn.fnamemodify(root_dir, ':p:gs?/?-?')
+    data_dir_name = string.sub(data_dir_name, 2, string.len(data_dir_name) - 1)
+    local data_dir = path.data_dir .. '/' .. data_dir_name
 
     if cache_vars.capabilities == nil then
         jdtls.extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
@@ -212,7 +217,7 @@ local function jdtls_setup(event)
     -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
     local cmd = {
         -- 💀
-        '/home/crhf/.sdkman/candidates/java/17.0.7-zulu/bin/java',
+        '/home/haifeng/.sdkman/candidates/java/17.0.7-zulu/bin/java',
         '-Declipse.application=org.eclipse.jdt.ls.core.id1',
         '-Dosgi.bundles.defaultStartLevel=4',
         '-Declipse.product=org.eclipse.jdt.ls.core.product',
