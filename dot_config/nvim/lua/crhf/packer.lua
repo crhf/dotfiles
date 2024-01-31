@@ -491,7 +491,19 @@ return require("packer").startup(function(use)
 		requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
 	})
 
-    -- use({ "codota/tabnine-nvim", run = "./dl_binaries.sh" })
+	-- use({ "codota/tabnine-nvim", run = "./dl_binaries.sh" })
+
+	use({
+		"danymat/neogen",
+		config = function()
+			require("neogen").setup({})
+		end,
+		requires = "nvim-treesitter/nvim-treesitter",
+		-- Uncomment next line if you want to follow only stable versions
+		-- tag = "*"
+	})
+
+    use({ "yioneko/nvim-yati", tag = "*", requires = "nvim-treesitter/nvim-treesitter" })
 end)
 
 -- cffooze
