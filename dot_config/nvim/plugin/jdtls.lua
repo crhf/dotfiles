@@ -2,12 +2,49 @@ local java_cmds = vim.api.nvim_create_augroup('java_cmds', { clear = true })
 local cache_vars = {}
 
 local root_files = {
-    '.git',
+    -- '.git',
     'mvnw',
     'gradlew',
     'pom.xml',
     'build.gradle',
 }
+
+
+local function find_root(markers, bufname)
+    local api = vim.api
+    local uv = vim.loop
+    local path = require('jdtls.path')
+
+	bufname = bufname or api.nvim_buf_get_name(api.nvim_get_current_buf())
+	local dirname = vim.fn.fnamemodify(bufname, ":p:h")
+	local getparent = function(p)
+		return vim.fn.fnamemodify(p, ":h")
+	end
+	local highest = ""
+	while getparent(dirname) ~= dirname do
+		for _, marker in ipairs(markers) do
+			if uv.fs_stat(path.join(dirname, marker)) then
+				-- return dirname
+				highest = dirname
+			end
+		end
+		dirname = getparent(dirname)
+	end
+	if highest ~= "" then
+		return highest
+	end
+
+	dirname = vim.fn.fnamemodify(bufname, ":p:h")
+	while getparent(dirname) ~= dirname do
+        if uv.fs_stat(path.join(dirname, ".git")) then
+            return dirname
+        end
+		dirname = getparent(dirname)
+	end
+
+    return vim.fn.fnamemodify(bufname, ":p:h")
+end
+
 
 local features = {
     -- change this to `true` to enable codelens
@@ -184,19 +221,21 @@ local function jdtls_on_attach(client, bufnr)
                 previous_signature = "<C-u>",
                 next_parameter = "<C-l>",
                 previous_parameter = "<C-h>",
-                close_signature = "<A-s>"
+                close_signature = "<C-e>"
             },
             display_automatically = true -- Uses trigger characters to automatically display the signature overloads when typing a method signature
         })
     end
 end
 
+
 local function jdtls_setup(event)
     local jdtls = require('jdtls')
 
     local path = get_jdtls_paths()
     -- local bufname = vim.api.nvim_buf_get_name(vim.api.nvim_get_current_buf())
-    local root_dir = jdtls.setup.find_root(root_files)
+    -- local root_dir = jdtls.setup.find_root(root_files)
+    local root_dir = find_root(root_files)
     -- local data_dir = path.data_dir .. '/' .. vim.fn.fnamemodify(root_dir, ':p:h:t')
     local data_dir_name = vim.fn.fnamemodify(root_dir, ':p:gs?/?-?')
     data_dir_name = string.sub(data_dir_name, 2, string.len(data_dir_name) - 1)
@@ -318,7 +357,8 @@ local function jdtls_setup(event)
         settings = lsp_settings,
         on_attach = jdtls_on_attach,
         capabilities = cache_vars.capabilities,
-        root_dir = jdtls.setup.find_root(root_files), -- .. '/src/main/java',
+        -- root_dir = jdtls.setup.find_root(root_files), -- .. '/src/main/java',
+        root_dir = find_root(root_files), -- .. '/src/main/java',
         flags = {
             allow_incremental_sync = true,
         },
