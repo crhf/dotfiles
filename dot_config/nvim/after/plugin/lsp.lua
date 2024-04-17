@@ -107,6 +107,10 @@ require("lspconfig").pyright.setup({
 	settings = {
 		pyright = {
 			disableLanguageServices = false,
+            openFilesOnly = false,
+            analysis = {
+                diagnosticMode = "workspace"
+            }
 		},
 		-- python = {
 		--     analysis = {

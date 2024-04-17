@@ -1,15 +1,15 @@
-local mark = require("harpoon.mark")
-local ui = require("harpoon.ui")
-
-vim.keymap.set("n", "<leader>a", mark.add_file)
-vim.keymap.set("n", "<leader>h", ui.toggle_quick_menu)
-
--- vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
--- vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
--- vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end)
--- vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
-
-vim.cmd([[autocmd filetype harpoon setlocal relativenumber]])
-vim.cmd([[autocmd filetype harpoon setlocal wrap]])
--- vim.cmd([[autocmd filetype harpoon nnoremap j j]])
--- vim.cmd([[autocmd filetype harpoon nnoremap k k]])
+-- local mark = require("harpoon.mark")
+-- local ui = require("harpoon.ui")
+--
+-- vim.keymap.set("n", "<leader>a", mark.add_file)
+-- vim.keymap.set("n", "<leader>h", ui.toggle_quick_menu)
+--
+-- -- vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
+-- -- vim.keymap.set("n", "<C-t>", function() ui.nav_file(2) end)
+-- -- vim.keymap.set("n", "<C-n>", function() ui.nav_file(3) end)
+-- -- vim.keymap.set("n", "<C-s>", function() ui.nav_file(4) end)
+--
+-- vim.cmd([[autocmd filetype harpoon setlocal relativenumber]])
+-- vim.cmd([[autocmd filetype harpoon setlocal wrap]])
+-- -- vim.cmd([[autocmd filetype harpoon nnoremap j j]])
+-- -- vim.cmd([[autocmd filetype harpoon nnoremap k k]])

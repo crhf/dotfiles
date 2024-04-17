@@ -16,6 +16,13 @@ return require("packer").startup(function(use)
 	-- Packer can manage itself
 	use("wbthomason/packer.nvim")
 
+	use("nvim-lua/plenary.nvim") -- don't forget to add this one if you don't have it yet!
+	use({
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		requires = { { "nvim-lua/plenary.nvim" } },
+	})
+
 	use({
 		"nvim-telescope/telescope.nvim", --, tag = '0.1.1', -- , branch = '0.1.x',
 		branch = "master",
@@ -40,8 +47,6 @@ return require("packer").startup(function(use)
 		after = "nvim-treesitter",
 		requires = "nvim-treesitter/nvim-treesitter",
 	})
-
-	use("ThePrimeagen/harpoon")
 
 	use("mbbill/undotree")
 
@@ -155,7 +160,7 @@ return require("packer").startup(function(use)
 
 	-- install without yarn or npm
 	use({
-		"iamcco/markdown-preview.nvim",
+		"wzf03/markdown-preview.nvim",
 		run = function()
 			vim.fn["mkdp#util#install"]()
 		end,
@@ -174,6 +179,7 @@ return require("packer").startup(function(use)
 
 	use("mfussenegger/nvim-dap")
 	use("mfussenegger/nvim-dap-python")
+	use({ "nvim-neotest/nvim-nio" })
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 	use("theHamsta/nvim-dap-virtual-text")
 	use("JRasmusBm/telescope-dap.nvim")
@@ -503,7 +509,42 @@ return require("packer").startup(function(use)
 		-- tag = "*"
 	})
 
-    use({ "yioneko/nvim-yati", tag = "*", requires = "nvim-treesitter/nvim-treesitter" })
+	use({ "yioneko/nvim-yati", tag = "*", requires = "nvim-treesitter/nvim-treesitter" })
+
+	use("lambdalisue/fern.vim")
+
+	-- use({
+	-- 	"stevearc/oil.nvim",
+	-- 	config = function()
+	-- 		require("oil").setup()
+	-- 	end,
+	-- })
+
+	use({
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+			-- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+		},
+	})
+
+	use({
+		"ThePrimeagen/refactoring.nvim",
+		requires = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-treesitter/nvim-treesitter" },
+		},
+	})
+
+	-- use({
+	-- 	"folke/trouble.nvim",
+	-- 	requires = {
+	-- 		"nvim-tree/nvim-web-devicons",
+	-- 	},
+	-- })
 end)
 
 -- cffooze
