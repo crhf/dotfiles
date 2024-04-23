@@ -80,10 +80,10 @@ end
 
 -- For maximum comfort, make sure to set the mappings in a way that
 -- forces linewise selection:
-vim.keymap.set('n', '\\', function() return "<cmd>lua leap_linewise()<cr>" end, {expr=true})
-vim.keymap.set('x', '\\', function()
+vim.keymap.set('n', 'zj', function() return "<cmd>lua leap_linewise()<cr>" end, {expr=true})
+vim.keymap.set('x', 'zj', function()
     -- Do not exit from V if already in it (pressing v/V/<C-v>
     -- again exits the corresponding Visual mode).
     return (vim.fn.mode(1) == "V" and "" or "V") .. "<cmd>lua leap_linewise()<cr>"
 end, { expr = true })
-vim.keymap.set('o', '\\', "V<cmd>lua leap_linewise()<cr>", { desc = 'leap linewise visual' })
+vim.keymap.set('o', 'zj', "V<cmd>lua leap_linewise()<cr>", { desc = 'leap linewise visual' })

@@ -117,15 +117,15 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	-- use({
-	--     "kylechui/nvim-surround",
-	--     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-	--     config = function()
-	--         require("nvim-surround").setup({
-	--             -- Configuration here, or leave empty to use defaults
-	--         })
-	--     end
-	-- })
+	use({
+	    "kylechui/nvim-surround",
+	    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+	    config = function()
+	        require("nvim-surround").setup({
+	            -- Configuration here, or leave empty to use defaults
+	        })
+	    end
+	})
 	-- use({'mhinz/vim-signify',
 	--     config = function()
 	--         require("vim-signify").setup({
@@ -149,7 +149,7 @@ return require("packer").startup(function(use)
 	-- }
 	use({
 		"altermo/ultimate-autopair.nvim",
-		event = { "InsertEnter", "CmdlineEnter" },
+		-- event = { "InsertEnter", "CmdlineEnter" },
 		branch = "v0.6", --recomended as each new version will have breaking changes
 		config = function()
 			require("ultimate-autopair").setup({

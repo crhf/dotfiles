@@ -9,11 +9,18 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
+vim.keymap.set(
+	"n",
+	"<leader>ip",
+	"<cmd>keepjumps execute 'norm gg/\\<import\\>/'<CR><cmd>keepjumps norm n<CR>O",
+	{ desc = "python import" }
+)
+
 vim.keymap.set("n", "<leader>vwm", function()
-    require("vim-with-me").StartVimWithMe()
+	require("vim-with-me").StartVimWithMe()
 end)
 vim.keymap.set("n", "<leader>svwm", function()
-    require("vim-with-me").StopVimWithMe()
+	require("vim-with-me").StopVimWithMe()
 end)
 
 -- greatest remap ever
@@ -40,22 +47,22 @@ vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 -- vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/crhf/packer.lua<CR>");
-vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>");
+vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/crhf/packer.lua<CR>")
+vim.keymap.set("n", "<leader>mr", "<cmd>CellularAutomaton make_it_rain<CR>")
 
 -- vim.keymap.set("n", "<leader><leader>", function()
 --     vim.cmd("so")
 -- end)
 
-local opts = {noremap=true, silent=true}
+local opts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap("n", "<Up>", ":resize +5<cr>", opts)
 vim.api.nvim_set_keymap("n", "<Down>", ":resize -5<cr>", opts)
 vim.api.nvim_set_keymap("n", "<Left>", ":vert resize -5<cr>", opts)
 vim.api.nvim_set_keymap("n", "<Right>", ":vert resize +5<cr>", opts)
 
-vim.keymap.set("n", "<leader>wr", function ()
-    vim.o.wrap = not vim.o.wrap
-end, {desc = "toggle text wrap"})
+vim.keymap.set("n", "<leader>wr", function()
+	vim.o.wrap = not vim.o.wrap
+end, { desc = "toggle text wrap" })
 
 -- vim.cmd([[nnoremap <expr> j (v:count > 1 ? "m'" . v:count . 'j' : 'gj')]])
 -- vim.cmd([[nnoremap <expr> j (v:count > 1 ? "m'" . v:count . 'j' : 'gj')]])

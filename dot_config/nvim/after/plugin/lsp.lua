@@ -51,8 +51,8 @@ lsp.on_attach(function(client, bufnr)
 	vim.keymap.set("n", "<leader>vh", vim.lsp.buf.hover)
 	vim.keymap.set("n", "<leader>im", vim.lsp.buf.implementation)
 	vim.keymap.set("n", "<leader>ac", vim.lsp.buf.code_action)
-	vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+	-- vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+	-- vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 
 	nmap("gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 	nmap("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
@@ -282,8 +282,10 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 			cmp.confirm({ select = true })
 			-- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
 			-- they way you will only jump inside the snippet region
-		elseif luasnip.expand_or_jumpable() then
-			luasnip.expand_or_jump()
+		-- elseif luasnip.expand_or_jumpable() then
+		elseif luasnip.jumpable(1) then
+            luasnip.jump(1)
+			-- luasnip.expand_or_jump()
 			-- elseif has_words_before() then
 			-- cmp.complete()
 		else
@@ -351,6 +353,7 @@ cmp.setup({
 	--     { name = 'path',  option = { trailing_slash = true } },
 	--     { name = 'buffer' },
 	-- }),
+
 	snippet = {
 		-- REQUIRED - you must specify a snippet engine
 		expand = function(args)
@@ -382,11 +385,12 @@ cmp.setup({
 		comparators = {
 			cmp.config.compare.offset,
 			cmp.config.compare.exact,
-			cmp.config.compare.score,
 
-			deprio(cmp_types.lsp.CompletionItemKind.Snippet),
-			deprio(cmp_types.lsp.CompletionItemKind.Text),
-			deprio(cmp_types.lsp.CompletionItemKind.Keyword),
+			-- deprio(cmp_types.lsp.CompletionItemKind.Keyword),
+			-- deprio(cmp_types.lsp.CompletionItemKind.Text),
+			-- deprio(cmp_types.lsp.CompletionItemKind.Snippet),
+
+			-- cmp.config.compare.score,
 
 			-- copied from cmp-under, but I don't think I need the plugin for this.
 			-- I might add some more of my own.
@@ -402,9 +406,9 @@ cmp.setup({
 				end
 			end,
 
-			cmp.config.compare.kind,
-			cmp.config.compare.sort_text,
+			-- cmp.config.compare.kind,
 			cmp.config.compare.length,
+			cmp.config.compare.sort_text,
 			cmp.config.compare.order,
 		},
 	},
