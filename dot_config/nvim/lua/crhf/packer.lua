@@ -556,6 +556,7 @@ return require("packer").startup(function(use)
 
 	use({
 		"dense-analysis/ale",
+        ft="python",
 		config = function()
 			local g = vim.g
 
