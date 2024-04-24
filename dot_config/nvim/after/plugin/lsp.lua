@@ -107,19 +107,19 @@ require("lspconfig").pyright.setup({
 	settings = {
 		pyright = {
 			disableLanguageServices = false,
-            openFilesOnly = false,
-            analysis = {
-                diagnosticMode = "workspace"
-            }
+			openFilesOnly = false,
+			analysis = {
+				diagnosticMode = "workspace",
+			},
 		},
-		-- python = {
-		--     analysis = {
-		--         autoSearchPaths = true,
-		--         diagnosticMode = "workspace",
-		--         useLibraryCodeForTypes = false,
-		--         autoImportCompletions = false,
-		--     },
-		-- },
+		python = {
+		    analysis = {
+		        autoSearchPaths = true,
+		        diagnosticMode = "workspace",
+		        useLibraryCodeForTypes = true,
+		        autoImportCompletions = true,
+		    },
+		},
 		-- linting = { pylintEnabled = false }
 	},
 	on_attach = function(client, bufnr)
@@ -128,28 +128,48 @@ require("lspconfig").pyright.setup({
 		--             client.server_capabilities[key] = false
 		--         end
 		--     end
-		client.server_capabilities = require("vim.lsp.protocol").resolve_capabilities({
-			documentSymbolProvider = true,
-			workspaceSymbolProvider = true,
-			documentHighlightProvider = {
-				workDoneProgress = false,
-			},
-			textDocumentSync = {
-				change = 2,
-				openClose = true,
-				save = true,
-				willSave = false,
-				willSaveWaitUntil = false,
-			},
-			signatureHelpProvider = {
-				triggerCharacters = {},
-				retriggerCharacters = {},
-			},
-		})
+		-- client.server_capabilities = require("vim.lsp.protocol").resolve_capabilities({
+		-- 	documentSymbolProvider = true,
+		-- 	workspaceSymbolProvider = true,
+		-- 	documentHighlightProvider = {
+		-- 		workDoneProgress = false,
+		-- 	},
+		-- 	textDocumentSync = {
+		-- 		change = 2,
+		-- 		openClose = true,
+		-- 		save = true,
+		-- 		willSave = false,
+		-- 		willSaveWaitUntil = false,
+		-- 	},
+		-- 	signatureHelpProvider = {
+		-- 		triggerCharacters = {},
+		-- 		retriggerCharacters = {},
+		-- 	},
+		-- })
 		require("nvim-navic").attach(client, bufnr)
 		-- end
 	end,
 })
+
+-- require("lspconfig").pylsp.setup({
+-- 	-- To enable pylsp-rope logging
+-- 	-- cmd = { "pylsp", "-v", "--log-file", "/tmp/nvim-pylsp.log" },
+-- 	cmd = { "pylsp" },
+-- 	settings = {
+-- 		pylsp = {
+-- 			plugins = {
+-- 				rope_completion = {
+-- 					enabled = true,
+-- 				},
+-- 			},
+-- 		},
+-- 	},
+--
+-- 	on_attach = function()
+-- 		vim.keymap.set("n", "<leader>ac", vim.lsp.buf.code_action)
+-- 		vim.keymap.set("v", "<leader>ac", vim.lsp.buf.range_code_action)
+-- 	end,
+-- })
 
 require("mason").setup()
 require("mason-lspconfig").setup()
@@ -176,6 +196,7 @@ local root_files = {
 }
 
 lspconfig.jedi_language_server.setup({
+    autostart = false,
 	root_dir = function(fname)
 		return util.root_pattern(unpack(root_files))(fname)
 	end,
@@ -282,9 +303,9 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 			cmp.confirm({ select = true })
 			-- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
 			-- they way you will only jump inside the snippet region
-		-- elseif luasnip.expand_or_jumpable() then
+			-- elseif luasnip.expand_or_jumpable() then
 		elseif luasnip.jumpable(1) then
-            luasnip.jump(1)
+			luasnip.jump(1)
 			-- luasnip.expand_or_jump()
 			-- elseif has_words_before() then
 			-- cmp.complete()
@@ -331,7 +352,7 @@ local function deprio(kind)
 	end
 end
 
-local cmp_types = require('cmp.types')
+local cmp_types = require("cmp.types")
 cmp.setup({
 	mapping = cmp_mappings,
 	window = {

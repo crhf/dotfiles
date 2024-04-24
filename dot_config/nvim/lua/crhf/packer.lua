@@ -118,13 +118,13 @@ return require("packer").startup(function(use)
 	})
 
 	use({
-	    "kylechui/nvim-surround",
-	    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-	    config = function()
-	        require("nvim-surround").setup({
-	            -- Configuration here, or leave empty to use defaults
-	        })
-	    end
+		"kylechui/nvim-surround",
+		tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+		config = function()
+			require("nvim-surround").setup({
+				-- Configuration here, or leave empty to use defaults
+			})
+		end,
 	})
 	-- use({'mhinz/vim-signify',
 	--     config = function()
@@ -545,9 +545,47 @@ return require("packer").startup(function(use)
 	-- 		"nvim-tree/nvim-web-devicons",
 	-- 	},
 	-- })
-    --
+	--
 
-    use("chaoren/vim-wordmotion")
+	use("chaoren/vim-wordmotion")
+
+	use({
+		"python-rope/ropevim",
+		ft = "python",
+	})
+
+	use({
+		"dense-analysis/ale",
+		config = function()
+			local g = vim.g
+
+			g.ale_linters = {
+				python = { "pylsp" },
+			}
+
+			g.ale_python_pylsp_use_global = 1
+
+			g.ale_python_pylsp_config = {
+				pylsp = {
+					plugins = {
+						rope_completion = {
+							enabled = true,
+						},
+                        rope_autoimport = {
+                            enabled = true
+                        }
+					},
+				},
+			}
+
+			g.ale_hover_cursor = 0
+
+            g.ale_fixers = {"autoimport"}
+
+			vim.keymap.set({ "n", "v" }, "<leader>at", "<cmd>ALECodeAction<CR>", {desc = "ALECodeAction"})
+			vim.keymap.set({ "n", "v" }, "<leader>af", "<cmd>ALEFix<CR>", {desc = "ALEFix"})
+		end,
+	})
 end)
 
 -- cffooze
