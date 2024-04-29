@@ -97,3 +97,7 @@ vim.api.nvim_create_autocmd({ "BufReadPre" }, {
 })
 
 vim.cmd[[set laststatus=3]]
+
+vim.diagnostic.config({virtual_text = false})
+
+vim.g.ale_hover_cursor = 0
