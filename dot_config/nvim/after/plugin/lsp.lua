@@ -112,14 +112,14 @@ require("lspconfig").pyright.setup({
 				diagnosticMode = "workspace",
 			},
 		},
-		python = {
-		    analysis = {
-		        autoSearchPaths = true,
-		        diagnosticMode = "workspace",
-		        useLibraryCodeForTypes = true,
-		        autoImportCompletions = true,
-		    },
-		},
+		-- python = {
+		--     analysis = {
+		--         autoSearchPaths = true,
+		--         diagnosticMode = "workspace",
+		--         useLibraryCodeForTypes = true,
+		--         autoImportCompletions = true,
+		--     },
+		-- },
 		-- linting = { pylintEnabled = false }
 	},
 	on_attach = function(client, bufnr)
@@ -128,24 +128,24 @@ require("lspconfig").pyright.setup({
 		--             client.server_capabilities[key] = false
 		--         end
 		--     end
-		-- client.server_capabilities = require("vim.lsp.protocol").resolve_capabilities({
-		-- 	documentSymbolProvider = true,
-		-- 	workspaceSymbolProvider = true,
-		-- 	documentHighlightProvider = {
-		-- 		workDoneProgress = false,
-		-- 	},
-		-- 	textDocumentSync = {
-		-- 		change = 2,
-		-- 		openClose = true,
-		-- 		save = true,
-		-- 		willSave = false,
-		-- 		willSaveWaitUntil = false,
-		-- 	},
-		-- 	signatureHelpProvider = {
-		-- 		triggerCharacters = {},
-		-- 		retriggerCharacters = {},
-		-- 	},
-		-- })
+		client.server_capabilities = require("vim.lsp.protocol").resolve_capabilities({
+			documentSymbolProvider = true,
+			workspaceSymbolProvider = true,
+			documentHighlightProvider = {
+				workDoneProgress = false,
+			},
+			textDocumentSync = {
+				change = 2,
+				openClose = true,
+				save = true,
+				willSave = false,
+				willSaveWaitUntil = false,
+			},
+			signatureHelpProvider = {
+				triggerCharacters = {},
+				retriggerCharacters = {},
+			},
+		})
 		require("nvim-navic").attach(client, bufnr)
 		-- end
 	end,
@@ -196,7 +196,6 @@ local root_files = {
 }
 
 lspconfig.jedi_language_server.setup({
-    autostart = false,
 	root_dir = function(fname)
 		return util.root_pattern(unpack(root_files))(fname)
 	end,
@@ -298,7 +297,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 	--     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-j>" .. "<C-k>" .. "<C-y>", true, true, true), 'i', true)
 	-- end,
 	["<Tab>"] = cmp.mapping(function(fallback)
-		if cmp.visible() then
+        if cmp.visible() then
 			-- cmp.select_next_item()
 			cmp.confirm({ select = true })
 			-- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
