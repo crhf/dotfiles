@@ -4,9 +4,9 @@
     -- show_current_context = false,
     -- show_current_context_start = false,
 -- }
-require("ibl").setup({
-    enabled = false
+-- require("ibl").setup({
+    -- enabled = false
     -- scope = {
     --     char = { '|', '¦', '┆', '┊' }
     -- }
-})
+-- })

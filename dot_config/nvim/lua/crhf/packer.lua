@@ -274,7 +274,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 
-	use("lukas-reineke/indent-blankline.nvim")
+	-- use("lukas-reineke/indent-blankline.nvim")
 	--
 	-- use {
 	--     "Shatur/neovim-session-manager",
@@ -346,10 +346,18 @@ return require("packer").startup(function(use)
 		end,
 	})
 
+	-- use({
+	-- 	"monkoose/matchparen.nvim",
+	-- 	config = function()
+	-- 		require("matchparen").setup()
+	-- 	end,
+	-- })
+
 	use({
-		"monkoose/matchparen.nvim",
-		config = function()
-			require("matchparen").setup()
+		"andymass/vim-matchup",
+		setup = function()
+			-- may set any options here
+			vim.g.matchup_matchparen_offscreen = { method = "popup" }
 		end,
 	})
 
@@ -556,7 +564,7 @@ return require("packer").startup(function(use)
 
 	use({
 		"dense-analysis/ale",
-        ft="python",
+		ft = "python",
 		config = function()
 			local g = vim.g
 
@@ -572,74 +580,117 @@ return require("packer").startup(function(use)
 						rope_completion = {
 							enabled = true,
 						},
-                        rope_autoimport = {
-                            enabled = true
-                        }
+						rope_autoimport = {
+							enabled = true,
+						},
 					},
 				},
 			}
 
 			g.ale_hover_cursor = 0
 
-            g.ale_fixers = {"autoimport"}
+			g.ale_fixers = { "autoimport" }
 
-			vim.keymap.set({ "n", "v" }, "<leader>at", "<cmd>ALECodeAction<CR>", {desc = "ALECodeAction"})
-			vim.keymap.set({ "n", "v" }, "<leader>af", "<cmd>ALEFix<CR>", {desc = "ALEFix"})
+			vim.keymap.set({ "n", "v" }, "<leader>at", "<cmd>ALECodeAction<CR>", { desc = "ALECodeAction" })
+			vim.keymap.set({ "n", "v" }, "<leader>af", "<cmd>ALEFix<CR>", { desc = "ALEFix" })
 		end,
 	})
 
-    use {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = function()
-            require('copilot').setup({
-                panel = {
-                    enabled = false,
-                    auto_refresh = true,
-                    keymap = {
-                        jump_prev = "[[",
-                        jump_next = "]]",
-                        accept = "<CR>",
-                        refresh = "gr",
-                        open = "<M-CR>"
-                    },
-                    layout = {
-                        position = "bottom", -- | top | left | right
-                        ratio = 0.4
-                    },
-                },
-                suggestion = {
-                    enabled = true,
-                    auto_trigger = true,
-                    debounce = 75,
-                    keymap = {
-                        accept = "<C-f>",
-                        accept_word = false,
-                        accept_line = false,
-                        next = "<C-s>",
-                        prev = "<C-t>",
-                        dismiss = false,
-                    },
-                },
-                filetypes = {
-                    yaml = false,
-                    markdown = false,
-                    help = false,
-                    gitcommit = false,
-                    gitrebase = false,
-                    hgcommit = false,
-                    svn = false,
-                    cvs = false,
-                    ["."] = false,
-                },
-                copilot_node_command = 'node', -- Node.js version must be > 18.x
-                server_opts_overrides = {},
-            })
-        end,
-    }
-    --
-    -- use("github/copilot.vim")
+	use({
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "InsertEnter",
+		config = function()
+			require("copilot").setup({
+				panel = {
+					enabled = false,
+					auto_refresh = true,
+					keymap = {
+						jump_prev = "[[",
+						jump_next = "]]",
+						accept = "<CR>",
+						refresh = "gr",
+						open = "<M-CR>",
+					},
+					layout = {
+						position = "bottom", -- | top | left | right
+						ratio = 0.4,
+					},
+				},
+				suggestion = {
+					enabled = false,
+					auto_trigger = true,
+					debounce = 75,
+					keymap = {
+						accept = "<C-f>",
+						accept_word = "<C-h>",
+						accept_line = false,
+						next = "<C-s>",
+						prev = "<C-t>",
+						dismiss = false,
+					},
+				},
+				filetypes = {
+					yaml = false,
+					markdown = false,
+					help = false,
+					gitcommit = false,
+					gitrebase = false,
+					hgcommit = false,
+					svn = false,
+					cvs = false,
+					["."] = false,
+				},
+				copilot_node_command = "node", -- Node.js version must be > 18.x
+				server_opts_overrides = {},
+			})
+		end,
+	})
+	--
+	-- use("github/copilot.vim")
+	--
+
+	use({ "kevinhwang91/nvim-ufo", requires = "kevinhwang91/promise-async" })
+
+	use({
+		"luukvbaal/statuscol.nvim",
+		config = function()
+			local builtin = require("statuscol.builtin")
+			require("statuscol").setup({
+				relculright = true,
+				segments = {
+					{ text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+					{ text = { "%s" }, click = "v:lua.ScSa" },
+					{ text = { builtin.lnumfunc, " " }, click = "v:lua.ScLa" },
+				},
+				-- segments = {
+				-- { text = { "%s" }, click = "v:lua.ScSa" },
+				-- { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
+				-- {
+				-- 	text = { " ", builtin.foldfunc, " " },
+				-- 	condition = { builtin.not_empty, true, builtin.not_empty },
+				-- 	click = "v:lua.ScFa",
+				-- },
+				-- configuration goes here, for example:
+				-- relculright = true,
+				-- segments = {
+				--   { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+				--   {
+				--     sign = { name = { "Diagnostic" }, maxwidth = 2, auto = true },
+				--     click = "v:lua.ScSa"
+				--   },
+				--   { text = { builtin.lnumfunc }, click = "v:lua.ScLa", },
+				--   {
+				--     sign = { name = { ".*" }, maxwidth = 2, colwidth = 1, auto = true, wrap = true },
+				--     click = "v:lua.ScSa"
+				--   },
+				-- }
+				-- },
+			})
+		end,
+	})
+
+	use("tmhedberg/SimpylFold")
 end)
 
 -- cffooze

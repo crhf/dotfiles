@@ -173,16 +173,19 @@ require("lspconfig").pyright.setup({
 
 require("mason").setup()
 require("mason-lspconfig").setup()
-require("lspconfig").omnisharp_mono.setup({
-	on_attach = function(client, bufnr)
-		require("nvim-navic").attach(client, bufnr)
-
-		client.server_capabilities.documentFormattingProvider = nil
-		client.server_capabilities.documentRangeFormattingProvider = nil
-	end,
-})
+-- require("lspconfig").omnisharp_mono.setup({
+-- 	on_attach = function(client, bufnr)
+-- 		require("nvim-navic").attach(client, bufnr)
+--
+-- 		client.server_capabilities.documentFormattingProvider = nil
+-- 		client.server_capabilities.documentRangeFormattingProvider = nil
+-- 	end,
+-- })
 
 local lspconfig = require("lspconfig")
+
+require("lsp-zero").skip_server_setup({ "omnisharp_mono" })
+
 local util = require("lspconfig.util")
 
 local root_files = {

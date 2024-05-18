@@ -30,7 +30,7 @@
     },
 	"New function": {
 		"prefix": "def",
-		"body": "def ${1:foo}(${2:arg}) -> ${3:Any}:\n\t$0",
+		"body": "def ${1:foo}(${2: }) -> ${3:None}:\n\t$0",
 		"description": "Code snippet for function definition."
 	},
 	"New class": {
@@ -52,15 +52,15 @@
     },
     "instance method": {
         "prefix": "defm",
-        "body": "def foo(self${1}) -> ${2:Any}:\n\t$0"
+        "body": "def ${1:foo}(self${2}) -> ${3:None}:\n\t$0"
     },
     "class method": {
         "prefix": "defc",
-        "body": "@classmethod\ndef foo(cls${1}) -> ${2:Any}:\n\t$0"
+        "body": "@classmethod\ndef ${1:foo}(cls${2}) -> ${3:None}:\n\t$0"
     },
     "static method": {
         "prefix": "defs",
-        "body": "@staticmethod\ndef foo(${1}) -> ${2:Any}:\n\t$0"
+        "body": "@staticmethod\ndef foo(${1: }) -> ${2:None}:\n\t$0"
     },
     "try except": {
         "prefix": "try",
@@ -75,7 +75,7 @@
         "body": "while ${1:True}:\n\t"
     },
     "main": {
-        "prefix": "main",
+        "prefix": "ifmain",
         "body": "if __name__ == \"__main__\":\n\t"
     }
 }
