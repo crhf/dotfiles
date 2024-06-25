@@ -1,0 +1,81 @@
+{
+	"notimplementederror": {
+		"prefix": "rn",
+		"body": "raise NotImplementedError$0",
+		"description": "Placeholder for unimplemented function body"
+	},
+	"icecream": {
+		"prefix": "fic",
+		"body": "from icecream import ic$0",
+		"description": "Placeholder for unimplemented function body"
+	},
+	"exit": {
+		"prefix": "rs",
+		"body": "raise SystemExit",
+		"description": "Placeholder for unimplemented function body"
+	},
+	"openfile": {
+		"prefix": "wo",
+		"body": "with open($1) as f:\n\t$0",
+		"description": "Placeholder for unimplemented function body"
+	},
+	"with as": {
+		"prefix": "wa",
+		"body": "with ${1} as ${2:f}:\n\t$0",
+		"description": "Placeholder for unimplemented function body"
+	},
+    "with": {
+        "prefix": "with",
+        "body": "with ${1}:\n\t$0"
+    },
+	"New function": {
+		"prefix": "def",
+		"body": "def ${1:foo}(${2: }) -> ${3:None}:\n\t$0",
+		"description": "Code snippet for function definition."
+	},
+	"New class": {
+		"prefix": "class",
+		"body": "class ${1:Foo}:\n\t$0",
+		"description": "Code snippet for function definition."
+	},
+	"import": {
+		"prefix": "im",
+		"body": "import $0"
+	},
+    "import from": {
+        "prefix": "fim",
+        "body": "from ${1:package} import $0"
+    },
+    "__init__": {
+        "prefix": "ini",
+        "body": "def __init__(self${1}) -> None:\n\t"
+    },
+    "instance method": {
+        "prefix": "defm",
+        "body": "def ${1:foo}(self${2}) -> ${3:None}:\n\t$0"
+    },
+    "class method": {
+        "prefix": "defc",
+        "body": "@classmethod\ndef ${1:foo}(cls${2}) -> ${3:None}:\n\t$0"
+    },
+    "static method": {
+        "prefix": "defs",
+        "body": "@staticmethod\ndef foo(${1: }) -> ${2:None}:\n\t$0"
+    },
+    "try except": {
+        "prefix": "try",
+        "body": "try:\n\tpass$0\nexcept ${1:Exception}${2}:\n\traise NotImplementedError"
+    },
+    "if": {
+        "prefix": "if",
+        "body": "if ${1:True}:\n\t"
+    },
+    "while": {
+        "prefix": "while",
+        "body": "while ${1:True}:\n\t"
+    },
+    "main": {
+        "prefix": "ifmain",
+        "body": "if __name__ == \"__main__\":\n\t"
+    }
+}
