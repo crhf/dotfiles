@@ -8,3 +8,5 @@ foo.*
 data
 lazy-lock.json
 lazyvim.json
+dot_git
+dot_neoconf.json
