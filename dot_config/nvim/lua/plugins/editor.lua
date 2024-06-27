@@ -18,6 +18,7 @@ return {
             ["z"] = "noop",
             ["<bs>"] = "close_node",
             ["-"] = "navigate_up",
+            ["<tab>"] = "preview",
           },
         },
         follow_current_file = false,
