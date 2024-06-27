@@ -6,5 +6,5 @@ return {
         ["<CR>"] = require("cmp").config.disable,
       },
     },
-  },
+  }
 }

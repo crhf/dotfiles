@@ -9,10 +9,3 @@ vim.api.nvim_create_autocmd("InsertLeave", {
     require("lazyvim.util").format({ force = true })
   end,
 })
-
-vim.api.nvim_create_autocmd("VimEnter", {
-  group = vim.api.nvim_create_augroup("persistence", { clear = true }),
-  callback = function()
-    require("persistence").load()
-  end,
-})

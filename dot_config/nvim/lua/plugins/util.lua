@@ -1,5 +1,10 @@
 return {
   {
+    "folke/persistence.nvim",
+    enabled = true,
+  },
+
+  {
     "pocco81/auto-save.nvim",
     enabled = true,
     commit = "979b6c82f60cfa80f4cf437d77446d0ded0addf0",

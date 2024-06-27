@@ -1,7 +1,16 @@
 return {
   {
+    "echasnovski/mini.files",
+    lazy = false,
+    opts = {
+      options = {
+        use_as_default_explorer = true,
+      },
+    },
+  },
+  {
     "nvim-neo-tree/neo-tree.nvim",
-    enabled = true,
+    enabled = false,
     keys = {
       {
         "<leader>sf",
@@ -23,6 +32,7 @@ return {
         },
         follow_current_file = false,
         bind_to_cwd = false,
+        hijack_netrw_behavior = "open_default",
       },
     },
   },
