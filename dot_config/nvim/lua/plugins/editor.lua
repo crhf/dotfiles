@@ -9,6 +9,17 @@ return {
     },
   },
   {
+    "stevearc/oil.nvim",
+    keys = {
+      { "-", "<cmd>Oil<cr>", { desc = "Open parent directory" } },
+    },
+    opts = {
+      default_file_explorer = false,
+    },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+
+  {
     "nvim-neo-tree/neo-tree.nvim",
     enabled = false,
     keys = {
