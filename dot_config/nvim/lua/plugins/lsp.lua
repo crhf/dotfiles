@@ -11,6 +11,9 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = {
+      diagnostics = {
+        virtual_text = false,
+      },
       servers = {
         pyright = {
           settings = {
@@ -57,6 +60,13 @@ return {
             })
             require("nvim-navic").attach(client, bufnr)
             -- end
+          end,
+        },
+        jedi_language_server = {
+          on_attach = function(client, bufnr)
+            client.server_capabilities.documentSymbolProvider = false
+            client.server_capabilities.workspaceSymbolProvider = false
+            -- require("nvim-navic").attach(client, bufnr)
           end,
         },
       },

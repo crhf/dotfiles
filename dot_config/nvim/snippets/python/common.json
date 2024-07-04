@@ -6,7 +6,7 @@
   },
   "icecream": {
     "prefix": "fic",
-    "body": "from icecream import ic$0",
+    "body": "from icecream import ic\nic.configureOutput(includeContext=True)$0",
     "description": "Placeholder for unimplemented function body"
   },
   "exit": {
