@@ -41,6 +41,7 @@ return {
             --         end
             --     end
             client.server_capabilities = require("vim.lsp.protocol").resolve_capabilities({
+              referencesProvider = true,
               documentSymbolProvider = true,
               workspaceSymbolProvider = true,
               documentHighlightProvider = {
@@ -57,15 +58,33 @@ return {
                 triggerCharacters = {},
                 retriggerCharacters = {},
               },
+              -- completionProvider = false,
+              -- completion = {
+              --   completionItem = {
+              --     completionItemKind = {},
+              --     completionList = {
+              --       -- itemDefaults = { "editRange", "insertTextFormat", "insertTextMode", "data" },
+              --       itemDefaults = {  },
+              --     },
+              --   },
+              -- },
             })
             require("nvim-navic").attach(client, bufnr)
             -- end
           end,
         },
         jedi_language_server = {
+          settings = {
+            jediSettings = {
+              debug = true
+            }
+          },
           on_attach = function(client, bufnr)
             client.server_capabilities.documentSymbolProvider = false
             client.server_capabilities.workspaceSymbolProvider = false
+            client.server_capabilities.referencesProvider = false
+
+            -- client.server_capabilities.completionProvider = true
             -- require("nvim-navic").attach(client, bufnr)
           end,
         },

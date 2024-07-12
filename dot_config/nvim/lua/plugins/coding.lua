@@ -12,11 +12,24 @@ return {
   {
     "kevinhwang91/nvim-ufo",
     tag = "v1.4.0",
-    opts = {
-      provider_selector = function(bufnr, filetype, buftype)
-        return { "treesitter", "indent" }
-      end,
-    },
+    config = function()
+      local ufo = require("ufo")
+
+      vim.o.foldcolumn = "1" -- '0' is not bad
+      vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+      vim.o.foldlevelstart = 99
+      vim.o.foldenable = true
+
+      -- Using ufo provider need remap `zR` and `zM`. If Neovim is 0.6.1, remap yourself
+      vim.keymap.set("n", "zR", ufo.openAllFolds)
+      vim.keymap.set("n", "zM", ufo.closeAllFolds)
+
+      ufo.setup({
+        provider_selector = function(bufnr, filetype, buftype)
+          return { "treesitter", "indent" }
+        end,
+      })
+    end,
     dependencies = {
       {
         "kevinhwang91/promise-async",
@@ -37,7 +50,7 @@ return {
       opts["performance"] = {
         debounce = 30,
         throttle = 5,
-        fetching_timeout = 70,
+        fetching_timeout = 10,
         confirm_resolve_timeout = 5,
         async_budget = 1,
         max_view_entries = 15,

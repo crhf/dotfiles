@@ -4,6 +4,9 @@ return {
     opts = {
       fomat_on_save = false,
       format_after_save = false,
+      formatters_by_ft = {
+        python = { "isort", "black" },
+      },
     },
   },
 
