@@ -14,7 +14,7 @@ vim.keymap.del({"n", "t"}, "<C-j>")
 vim.keymap.del({"n", "t"}, "<C-k>")
 vim.keymap.del({"n", "t"}, "<C-l>")
 
-vim.keymap.del({"n"}, "grr")
+-- vim.keymap.del({"n"}, "grr")
 vim.keymap.del({"n"}, "grn")
 vim.keymap.del({"n"}, "gra")
 vim.keymap.del({"n"}, "<C-S>")
