@@ -18,3 +18,6 @@ vim.keymap.del({"n"}, "grr")
 vim.keymap.del({"n"}, "grn")
 vim.keymap.del({"n"}, "gra")
 vim.keymap.del({"n"}, "<C-S>")
+
+vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>")
+vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>")

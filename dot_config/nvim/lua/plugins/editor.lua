@@ -231,12 +231,16 @@ return {
 
   {
     "nvim-telescope/telescope.nvim",
-    keys = {
-      {
-        "<leader>SS",
-        function()
-          require("telescope.builtin").lsp_workspace_symbols()
-        end,
+    opts = {
+      defaults = {
+        mappings = {
+          i = {
+            ["<C-j>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
+            ["<C-k>"] = require("telescope.actions").send_selected_to_qflist + require("telescope.actions").open_qflist,
+            ["<C-q>"] = false,
+            ["<M-q>"] = false,
+          },
+        },
       },
     },
   },

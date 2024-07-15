@@ -23,7 +23,8 @@ return {
       -- return true: if buffer is ok to be saved
       -- return false: if it's not ok to be saved
       condition = function(buf)
-        if vim.bo[buf].filetype == "harpoon" then
+        local filetype = vim.bo[buf].filetype
+        if filetype == "harpoon" or filetype == "oil" then
           return false
         end
 
