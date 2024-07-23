@@ -136,6 +136,32 @@ return {
     },
     opts = {
       default_file_explorer = false,
+      keymaps = {
+        ["gyy"] = {
+          function ()
+            local name = require("oil").get_cursor_entry().name
+            vim.fn.setreg("+", name)
+          end
+        },
+        ["gyY"] = {
+          function ()
+            local oil = require("oil")
+            local dir = oil.get_current_dir()
+            local name = oil.get_cursor_entry().name
+            local path = dir .. name
+            vim.fn.setreg("+", vim.fn.fnamemodify(path, ":~:."))
+          end
+        },
+        ["gYY"] = {
+          function ()
+            local oil = require("oil")
+            local dir = oil.get_current_dir()
+            local name = oil.get_cursor_entry().name
+            local path = dir .. name
+            vim.fn.setreg("+", path)
+          end
+        },
+      }
     },
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
