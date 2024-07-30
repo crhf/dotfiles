@@ -95,4 +95,12 @@ return {
       }
     end,
   },
+
+  {
+    "karb94/neoscroll.nvim",
+    tag = "0.2.0",
+    config = function()
+      require("neoscroll").setup({})
+    end,
+  },
 }
