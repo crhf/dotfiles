@@ -88,6 +88,12 @@ return {
             -- require("nvim-navic").attach(client, bufnr)
           end,
         },
+        phpactor = {
+          enabled = false,
+        },
+        intelephense = {
+          enabled = true,
+        },
       },
     },
   },
