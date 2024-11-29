@@ -55,6 +55,8 @@ return {
         async_budget = 1,
         max_view_entries = 15,
       }
+
+      opts["mapping"]["<CR>"] = require("cmp").config.disable
     end,
   },
 

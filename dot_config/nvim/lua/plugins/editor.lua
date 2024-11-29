@@ -138,30 +138,30 @@ return {
       default_file_explorer = false,
       keymaps = {
         ["gyy"] = {
-          function ()
+          function()
             local name = require("oil").get_cursor_entry().name
             vim.fn.setreg("+", name)
-          end
+          end,
         },
         ["gyY"] = {
-          function ()
+          function()
             local oil = require("oil")
             local dir = oil.get_current_dir()
             local name = oil.get_cursor_entry().name
             local path = dir .. name
             vim.fn.setreg("+", vim.fn.fnamemodify(path, ":~:."))
-          end
+          end,
         },
         ["gYY"] = {
-          function ()
+          function()
             local oil = require("oil")
             local dir = oil.get_current_dir()
             local name = oil.get_cursor_entry().name
             local path = dir .. name
             vim.fn.setreg("+", path)
-          end
+          end,
         },
-      }
+      },
     },
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
@@ -269,5 +269,27 @@ return {
         },
       },
     },
+  },
+
+  {
+    "folke/flash.nvim",
+    enabled = false,
+    event = "VeryLazy",
+    vscode = true,
+    ---@type Flash.Config
+    opts = {},
+    -- stylua: ignore
+    keys = {
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    },
+  },
+
+  {
+    "ggandor/flit.nvim",
+    enabled = false,
   },
 }

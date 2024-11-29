@@ -1,6 +1,6 @@
 {
   "extras": [
-    "lazyvim.plugins.extras.coding.copilot",
+    "lazyvim.plugins.extras.coding.codeium",
     "lazyvim.plugins.extras.coding.mini-surround",
     "lazyvim.plugins.extras.coding.neogen",
     "lazyvim.plugins.extras.editor.dial",
@@ -14,7 +14,8 @@
     "lazyvim.plugins.extras.lang.java",
     "lazyvim.plugins.extras.lang.json",
     "lazyvim.plugins.extras.lang.php",
-    "lazyvim.plugins.extras.lang.python"
+    "lazyvim.plugins.extras.lang.python",
+    "lazyvim.plugins.extras.ui.mini-indentscope"
   ],
   "news": {
     "NEWS.md": "6077"
