@@ -13,12 +13,13 @@ return {
   { "loctvl842/monokai-pro.nvim" },
   { "Shatur/neovim-ayu" },
   { "cocopon/iceberg.vim" },
+  { "savq/melange-nvim" },
 
   -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "everforest",
+      colorscheme = "kanagawa",
     },
   },
 }
