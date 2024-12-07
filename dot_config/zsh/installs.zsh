@@ -22,8 +22,6 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # virtualenv wrapper
 export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh
 alias mkvv='mkvirtualenv'
 alias lsvv='lsvirtualenv'
 alias showvv='showvirtualenv'
@@ -34,7 +32,7 @@ alias wo='workon'
 alias da='deactivate'
 
 # software
-export PATH=$PATH:$(ls -d $HOME/software/*/bin | paste -sd:)
+# export PATH=$PATH:$(find -d $HOME/software/*/bin | paste -sd:)
 
 # Go
 export PATH=$PATH:$HOME/go/bin
@@ -58,3 +56,25 @@ alias lg='lazygit'
 
 # zellij
 alias zj='zellij'
+
+# pyenv and pyenv-virtualenv
+
+# Load pyenv automatically by appending
+# the following to
+# ~/.bash_profile if it exists, otherwise ~/.profile (for login shells)
+# and ~/.bashrc (for interactive shells) :
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# Restart your shell for the changes to take effect.
+
+# Load pyenv-virtualenv automatically by adding
+# the following to ~/.bashrc:
+
+eval "$(pyenv virtualenv-init -)"
+
+
+# nix
+. ~/.nix-profile/etc/profile.d/nix.sh
