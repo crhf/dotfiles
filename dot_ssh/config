@@ -1,0 +1,176 @@
+ServerAliveInterval 60
+ServerAliveCountMax 5
+
+Host nus-dev
+	HostName development-server.d2.comp.nus.edu.sg
+	User haifeng
+	PreferredAuthentications publickey
+
+Host pc
+	HostName 172.26.191.112
+	User crhf
+	PreferredAuthentications publickey
+
+Host pc-ts
+	HostName 100.82.119.9
+	User crhf
+	PreferredAuthentications publickey
+
+Host vulnfix
+	HostName 172.26.191.242
+	port 18080
+	User root
+	PreferredAuthentications publickey
+
+Host freia
+	#HostName 172.28.176.128
+	HostName freia.d2.comp.nus.edu.sg
+	User haifeng
+	PreferredAuthentications publickey
+
+Host freia-sj
+	#HostName 172.28.176.128
+	HostName freia.d2.comp.nus.edu.sg
+	User haifeng
+	PreferredAuthentications publickey
+  ProxyJump sjump_wireless
+
+Host file-server
+	HostName file-server.d1.comp.nus.edu.sg
+	User haifeng
+	PreferredAuthentications publickey
+
+Host fricka
+	HostName fricka.d2.comp.nus.edu.sg
+	User haifeng
+	PreferredAuthentications publickey
+
+Host fricka-sj
+	HostName fricka.d2.comp.nus.edu.sg
+	User haifeng
+	PreferredAuthentications password
+	ProxyJump sjump_wireless
+
+Host wotan
+	HostName wotan.d2.comp.nus.edu.sg
+	User haifeng
+	HostKeyAlgorithms=+ssh-rsa
+
+Host wotan-sj
+	HostName wotan.d2.comp.nus.edu.sg
+	User haifeng
+  ProxyJump sjump_wireless
+  HostKeyAlgorithms=+ssh-rsa
+
+Host ta
+	HostName its-i.comp.nus.edu.sg
+	User haifeng
+
+Host ncl
+	HostName gateway.ncl.sg
+	User haifeng
+	PreferredAuthentications publickey
+
+Host vm
+	HostName 192.168.101.228
+	User haifeng
+	ProxyJump ncl
+
+Host fat
+	HostName angelix.d2.comp.nus.edu.sg
+	# HostName 172.26.190.92
+	User haifeng
+	PreferredAuthentications publickey,password
+
+Host fat-sj
+	HostName angelix.d2.comp.nus.edu.sg
+	# HostName 172.26.190.92
+	User haifeng
+	PreferredAuthentications publickey,password
+	ProxyJump sjump_wireless
+
+Host tss
+	HostName 172.26.191.240
+	User haifeng
+	PreferredAuthentications publickey,password
+
+Host tss-sj
+	HostName 172.26.191.240
+	User haifeng
+	PreferredAuthentications publickey,password
+	ProxyJump sjump_wireless
+
+Host froh
+	HostName froh.d2.comp.nus.edu.sg
+	User haifeng
+	PreferredAuthentications publickey
+
+Host froh-sj
+	HostName froh.d2.comp.nus.edu.sg
+	User haifeng
+	PreferredAuthentications publickey
+	ProxyJump sjump_wireless
+
+Host donner
+	HostName donner.d2.comp.nus.edu.sg
+	User haifeng
+	PreferredAuthentications publickey
+
+Host donner-sj
+	HostName donner.d2.comp.nus.edu.sg
+	User haifeng
+	PreferredAuthentications publickey
+  ProxyJump sjump_wireless
+
+Host ss
+	HostName 139.180.157.104
+	User root
+	PreferredAuthentications publickey
+
+Host skeys
+	HostName skeys.comp.nus.edu.sg
+	User hruan
+	PreferredAuthentications password
+
+Host sjump_wireless
+	HostName sjump.comp.nus.edu.sg
+	User hruan
+	# PreferredAuthentications password
+	# IdentityFile ~/.ssh/id_ed25519
+
+Host sjump_wired
+	HostName sproxy.comp.nus.edu.sg
+	User hruan
+	PreferredAuthentications publickey
+	IdentityFile ~/.ssh/id_ed25519
+
+Host swe2
+	HostName 65.2.69.183
+	User ubuntu
+	PreferredAuthentications publickey
+	IdentityFile ~/.ssh/autocoderover-haifeng.pem
+
+Host swe3
+	HostName 65.2.153.185
+	User ubuntu
+	PreferredAuthentications publickey
+	IdentityFile ~/.ssh/autocoderover-haifeng.pem
+
+Host swe4
+	HostName 65.0.106.41
+	User ubuntu
+	PreferredAuthentications publickey
+	IdentityFile ~/.ssh/autocoderover-haifeng.pem
+
+Host swe1
+	HostName 65.0.20.181
+	User ubuntu
+	PreferredAuthentications publickey
+	IdentityFile ~/.ssh/autocoderover-haifeng.pem
+
+Host swe
+	HostName 3.109.155.159
+	User ubuntu
+	PreferredAuthentications publickey
+	IdentityFile ~/.ssh/autocoderover-haifeng.pem
+
