@@ -93,10 +93,10 @@ return {
 
           -- get buf number of buf
 
-          vim.api.nvim_set_option_value("wrap", true, { buf = buf })
+          -- vim.api.nvim_set_option_value("wrap", true)
 
           -- auto detect filetype of buffer
-          vim.api.nvim_set_option_value("filetype", "markdown", { buf = buf })
+          vim.api.nvim_set_option_value("filetype", "markdown", {buf = buf})
 
           local width = vim.api.nvim_win_get_width(0)
           local height = vim.api.nvim_win_get_height(0)
@@ -115,5 +115,25 @@ return {
         buffer = true,
       },
     },
+  },
+
+  {
+    "nvim-orgmode/orgmode",
+    event = "VeryLazy",
+    ft = { "org" },
+    config = function()
+      -- Setup orgmode
+      require("orgmode").setup({
+        org_agenda_files = "~/orgfiles/**/*",
+        org_default_notes_file = "~/orgfiles/refile.org",
+      })
+
+      -- NOTE: If you are using nvim-treesitter with ~ensure_installed = "all"~ option
+      -- add ~org~ to ignore_install
+      -- require('nvim-treesitter.configs').setup({
+      --   ensure_installed = 'all',
+      --   ignore_install = { 'org' },
+      -- })
+    end,
   },
 }

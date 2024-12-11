@@ -292,4 +292,9 @@ return {
     "ggandor/flit.nvim",
     enabled = false,
   },
+
+  {
+    "sindrets/diffview.nvim",
+    commit = "4516612"
+  }
 }

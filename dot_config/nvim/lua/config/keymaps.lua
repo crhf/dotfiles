@@ -6,13 +6,5 @@ vim.keymap.set("n", "<C-down>", "<cmd>resize -5<cr>", {})
 vim.keymap.set("n", "<C-left>", "<cmd>vert resize -5<cr>", {})
 vim.keymap.set("n", "<C-right>", "<cmd>vert resize +5<cr>", {})
 
-vim.keymap.del({ "n", "i", "v" }, "<M-j>")
-vim.keymap.del({ "n", "i", "v" }, "<M-k>")
-
-vim.keymap.del({"n", "t"}, "<C-h>")
-vim.keymap.del({"n", "t"}, "<C-j>")
-vim.keymap.del({"n", "t"}, "<C-k>")
-vim.keymap.del({"n", "t"}, "<C-l>")
-
 vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>")
 vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>")

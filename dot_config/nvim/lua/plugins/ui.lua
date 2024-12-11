@@ -14,10 +14,11 @@ return {
     "rcarriga/nvim-notify",
     enabled = true,
   },
+
   {
     "j-hui/fidget.nvim",
     tag = "v1.4.5",
-    enabled = false,
+    -- enabled = false,
   },
 
   {
@@ -137,5 +138,16 @@ return {
         vim.keymap.set(modes, key, func)
       end
     end,
+  },
+
+  {
+    "folke/snacks.nvim",
+    opts = {
+      terminal = {
+        win = {
+          position = "float",
+        },
+      },
+    },
   },
 }
