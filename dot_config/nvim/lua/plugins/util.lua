@@ -96,7 +96,7 @@ return {
           -- vim.api.nvim_set_option_value("wrap", true)
 
           -- auto detect filetype of buffer
-          vim.api.nvim_set_option_value("filetype", "markdown", {buf = buf})
+          vim.api.nvim_set_option_value("filetype", "markdown", { buf = buf })
 
           local width = vim.api.nvim_win_get_width(0)
           local height = vim.api.nvim_win_get_height(0)
@@ -134,6 +134,22 @@ return {
       --   ensure_installed = 'all',
       --   ignore_install = { 'org' },
       -- })
+    end,
+  },
+
+  {
+    "m00qek/baleia.nvim",
+    version = "*",
+    config = function()
+      vim.g.baleia = require("baleia").setup({})
+
+      -- Command to colorize the current buffer
+      vim.api.nvim_create_user_command("BaleiaColorize", function()
+        vim.g.baleia.once(vim.api.nvim_get_current_buf())
+      end, { bang = true })
+
+      -- Command to show logs
+      vim.api.nvim_create_user_command("BaleiaLogs", vim.g.baleia.logger.show, { bang = true })
     end,
   },
 }

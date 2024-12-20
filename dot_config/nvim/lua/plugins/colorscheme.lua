@@ -14,12 +14,13 @@ return {
   { "Shatur/neovim-ayu" },
   { "cocopon/iceberg.vim" },
   { "savq/melange-nvim" },
+  { "mhartington/oceanic-next" },
 
   -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight",
+      colorscheme = "monokai-pro-default",
     },
   },
 }
