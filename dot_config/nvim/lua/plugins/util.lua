@@ -74,48 +74,48 @@ return {
     ft = "json", -- only load for json filetype
   },
 
-  {
-    "phelipetls/jsonpath.nvim",
-    ft = "json",
-    keys = {
-      {
-        "<leader>jj",
-        function()
-          local file = vim.fn.expand("%:p")
-          local json_path = require("jsonpath").get()
-
-          local cmd = string.format("jq -r '%s' %s", json_path, file)
-          local result = vim.fn.system(cmd)
-
-          local buf = vim.api.nvim_create_buf(false, true)
-
-          vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.fn.split(result, "\n"))
-
-          -- get buf number of buf
-
-          -- vim.api.nvim_set_option_value("wrap", true)
-
-          -- auto detect filetype of buffer
-          vim.api.nvim_set_option_value("filetype", "markdown", { buf = buf })
-
-          local width = vim.api.nvim_win_get_width(0)
-          local height = vim.api.nvim_win_get_height(0)
-
-          vim.api.nvim_open_win(buf, true, {
-            relative = "win",
-            width = width - math.floor(width * 0.2),
-            height = height - math.floor(height * 0.2),
-            row = 5,
-            col = 5,
-            style = "minimal",
-            border = "single",
-          })
-        end,
-        desc = "copy json path",
-        buffer = true,
-      },
-    },
-  },
+  -- {
+  --   "phelipetls/jsonpath.nvim",
+  --   ft = "json",
+  --   keys = {
+  --     {
+  --       "<leader>jj",
+  --       function()
+  --         local file = vim.fn.expand("%:p")
+  --         local json_path = require("jsonpath").get()
+  --
+  --         local cmd = string.format("jq -r '%s' %s", json_path, file)
+  --         local result = vim.fn.system(cmd)
+  --
+  --         local buf = vim.api.nvim_create_buf(false, true)
+  --
+  --         vim.api.nvim_buf_set_lines(buf, 0, -1, false, vim.fn.split(result, "\n"))
+  --
+  --         -- get buf number of buf
+  --
+  --         -- vim.api.nvim_set_option_value("wrap", true)
+  --
+  --         -- auto detect filetype of buffer
+  --         vim.api.nvim_set_option_value("filetype", "markdown", { buf = buf })
+  --
+  --         local width = vim.api.nvim_win_get_width(0)
+  --         local height = vim.api.nvim_win_get_height(0)
+  --
+  --         vim.api.nvim_open_win(buf, true, {
+  --           relative = "win",
+  --           width = width - math.floor(width * 0.2),
+  --           height = height - math.floor(height * 0.2),
+  --           row = 5,
+  --           col = 5,
+  --           style = "minimal",
+  --           border = "single",
+  --         })
+  --       end,
+  --       desc = "copy json path",
+  --       buffer = true,
+  --     },
+  --   },
+  -- },
 
   {
     "nvim-orgmode/orgmode",
