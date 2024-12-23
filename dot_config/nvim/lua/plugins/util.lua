@@ -24,7 +24,7 @@ return {
       -- return false: if it's not ok to be saved
       condition = function(buf)
         local filetype = vim.bo[buf].filetype
-        if filetype == "harpoon" or filetype == "oil" then
+        if filetype == "harpoon" or filetype == "oil" or filetype == "org" then
           return false
         end
 
@@ -47,26 +47,6 @@ return {
         after_saving = nil, -- ran after doing the actual save
       },
     },
-  },
-
-  {
-    "nvim-orgmode/orgmode",
-    event = "VeryLazy",
-    ft = { "org" },
-    config = function()
-      -- Setup orgmode
-      require("orgmode").setup({
-        org_agenda_files = "~/orgfiles/**/*",
-        org_default_notes_file = "~/orgfiles/refile.org",
-      })
-
-      -- NOTE: If you are using nvim-treesitter with ~ensure_installed = "all"~ option
-      -- add ~org~ to ignore_install
-      -- require('nvim-treesitter.configs').setup({
-      --   ensure_installed = 'all',
-      --   ignore_install = { 'org' },
-      -- })
-    end,
   },
 
   {
@@ -118,26 +98,6 @@ return {
   -- },
 
   {
-    "nvim-orgmode/orgmode",
-    event = "VeryLazy",
-    ft = { "org" },
-    config = function()
-      -- Setup orgmode
-      require("orgmode").setup({
-        org_agenda_files = "~/orgfiles/**/*",
-        org_default_notes_file = "~/orgfiles/refile.org",
-      })
-
-      -- NOTE: If you are using nvim-treesitter with ~ensure_installed = "all"~ option
-      -- add ~org~ to ignore_install
-      -- require('nvim-treesitter.configs').setup({
-      --   ensure_installed = 'all',
-      --   ignore_install = { 'org' },
-      -- })
-    end,
-  },
-
-  {
     "m00qek/baleia.nvim",
     version = "*",
     config = function()
@@ -150,6 +110,38 @@ return {
 
       -- Command to show logs
       vim.api.nvim_create_user_command("BaleiaLogs", vim.g.baleia.logger.show, { bang = true })
+    end,
+  },
+
+  {
+    "nvim-orgmode/orgmode",
+    event = "VeryLazy",
+    ft = { "org" },
+    config = function()
+      -- Setup orgmode
+      require("orgmode").setup({
+        org_agenda_files = "~/orgfiles/**/*",
+        org_default_notes_file = "~/orgfiles/refile.org",
+        org_capture_templates = {
+          t = {
+            description = "Todo",
+            template = "* TODO %?\n  %U\n  %a",
+            target = "~/orgfiles/todo.org",
+          },
+          j = {
+            description = "Journal",
+            template = "\n*** %<%Y-%m-%d> %<%A>\n**** %U\n\n%?",
+            target = "~/orgfiles/journal.org",
+          },
+        },
+      })
+
+      -- NOTE: If you are using nvim-treesitter with ~ensure_installed = "all"~ option
+      -- add ~org~ to ignore_install
+      -- require('nvim-treesitter.configs').setup({
+      --   ensure_installed = 'all',
+      --   ignore_install = { 'org' },
+      -- })
     end,
   },
 }

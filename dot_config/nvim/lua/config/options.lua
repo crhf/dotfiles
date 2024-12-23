@@ -30,3 +30,5 @@ function MyTabLine()
   return tabline
 end
 vim.go.tabline = "%!v:lua.MyTabLine()"
+
+vim.g.ai_cmp = false

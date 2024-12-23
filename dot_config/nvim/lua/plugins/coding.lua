@@ -1,4 +1,6 @@
 return {
+  {"LazyVim/LazyVim", version = "v13.9.1"},
+
   { "folke/flash.nvim", enabled = false },
 
   {
