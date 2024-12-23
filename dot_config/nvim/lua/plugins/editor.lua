@@ -125,50 +125,50 @@ return {
     end,
     opts = {
       options = {
-        use_as_default_explorer = true,
+        use_as_default_explorer = false,
       },
     },
   },
-  {
-    "stevearc/oil.nvim",
-    keys = {
-      { "-", "<cmd>Oil<cr>", { desc = "Open parent directory" } },
-    },
-    opts = {
-      default_file_explorer = false,
-      keymaps = {
-        ["gyy"] = {
-          function()
-            local name = require("oil").get_cursor_entry().name
-            vim.fn.setreg("+", name)
-          end,
-        },
-        ["gyY"] = {
-          function()
-            local oil = require("oil")
-            local dir = oil.get_current_dir()
-            local name = oil.get_cursor_entry().name
-            local path = dir .. name
-            vim.fn.setreg("+", vim.fn.fnamemodify(path, ":~:."))
-          end,
-        },
-        ["gYY"] = {
-          function()
-            local oil = require("oil")
-            local dir = oil.get_current_dir()
-            local name = oil.get_cursor_entry().name
-            local path = dir .. name
-            vim.fn.setreg("+", path)
-          end,
-        },
-      },
-    },
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
+  -- {
+  --   "stevearc/oil.nvim",
+  --   keys = {
+  --     { "-", "<cmd>Oil<cr>", { desc = "Open parent directory" } },
+  --   },
+  --   opts = {
+  --     default_file_explorer = false,
+  --     keymaps = {
+  --       ["gyy"] = {
+  --         function()
+  --           local name = require("oil").get_cursor_entry().name
+  --           vim.fn.setreg("+", name)
+  --         end,
+  --       },
+  --       ["gyY"] = {
+  --         function()
+  --           local oil = require("oil")
+  --           local dir = oil.get_current_dir()
+  --           local name = oil.get_cursor_entry().name
+  --           local path = dir .. name
+  --           vim.fn.setreg("+", vim.fn.fnamemodify(path, ":~:."))
+  --         end,
+  --       },
+  --       ["gYY"] = {
+  --         function()
+  --           local oil = require("oil")
+  --           local dir = oil.get_current_dir()
+  --           local name = oil.get_cursor_entry().name
+  --           local path = dir .. name
+  --           vim.fn.setreg("+", path)
+  --         end,
+  --       },
+  --     },
+  --   },
+  --   dependencies = { "nvim-tree/nvim-web-devicons" },
+  -- },
 
   {
     "nvim-neo-tree/neo-tree.nvim",
-    enabled = true,
+    enabled = false,
     keys = {
       {
         "<leader>sf",
@@ -201,6 +201,30 @@ return {
   --   enabled = true,
   --   config = function()
   --     require("nvim-tree").setup({
+  --       on_attach = function(bufnr)
+  --         local api = require("nvim-tree.api")
+  --
+  --         local function opts(desc)
+  --           return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  --         end
+  --
+  --         api.config.mappings.default_on_attach(bufnr)
+  --
+  --         -- local function single_click_edit(node)
+  --         --   vim.defer_fn(function()
+  --         --     local win = vim.api.nvim_get_current_win()
+  --         --     local view = require("nvim-tree.view")
+  --         --     if view.get_winnr() ~= win then
+  --         --       return
+  --         --     end
+  --         --     local actions = require("nvim-tree.actions.dispatch")
+  --         --     actions.dispatch("edit")
+  --         --   end, 10)
+  --         -- end
+  --         --
+  --         vim.keymap.set("n", "<LeftRelease>", api.node.open.edit, opts("LeftClick"))
+  --       end,
+  --
   --       diagnostics = {
   --         enable = true,
   --         show_on_dirs = false,
@@ -217,7 +241,9 @@ return {
   --           error = "",
   --         },
   --       },
-  --       view = { relativenumber = true },
+  --       view = {
+  --         relativenumber = true,
+  --       },
   --       actions = {
   --         open_file = {
   --           resize_window = false,
@@ -255,6 +281,66 @@ return {
   --   end,
   --   version = "v1.4.0",
   -- },
+
+  -- @type LazySpec
+  -- {
+  --   "mikavilpas/yazi.nvim",
+  --   event = "VeryLazy",
+  --   keys = {
+  --     -- 👇 in this section, choose your own keymappings!
+  --     {
+  --       "-",
+  --       "<cmd>Yazi<cr>",
+  --       desc = "Open yazi at the current file",
+  --     },
+  --     {
+  --       -- Open in the current working directory
+  --       "<leader>E",
+  --       "<cmd>Yazi cwd<cr>",
+  --       desc = "Open the file manager in nvim's working directory",
+  --     },
+  --     -- {
+  --     --   -- NOTE: this requires a version of yazi that includes
+  --     --   -- https://github.com/sxyazi/yazi/pull/1305 from 2024-07-18
+  --     --   "<c-up>",
+  --     --   "<cmd>Yazi toggle<cr>",
+  --     --   desc = "Resume the last yazi session",
+  --     -- },
+  --   },
+  --   ---@type YaziConfig
+  --   opts = {
+  --     -- if you want to open yazi instead of netrw, see below for more info
+  --     open_for_directories = false,
+  --     keymaps = {
+  --       show_help = "g?",
+  --     },
+  --   },
+  -- },
+
+  {
+    "lambdalisue/vim-fern",
+    keys = {
+      { "-", mode = { "n", "x", "o" }, "<Cmd>Fern . -reveal=%<CR>" },
+      { "<leader>e", mode = { "n", "x", "o" }, "<Cmd>Fern . -drawer -toggle<CR>" },
+      {
+        "<leader>fe",
+        mode = { "n", "x", "o" },
+        function()
+          cmd = "FernDo FernReveal " .. vim.fn.expand("%:p")
+          vim.cmd(cmd)
+        end,
+      },
+    },
+  },
+  { "lambdalisue/vim-fern-hijack", dependencies = { "lambdalisue/vim-fern" } },
+  { "lambdalisue/vim-fern-git-status", dependencies = { "lambdalisue/vim-fern" } },
+  {
+    "lambdalisue/vim-fern-renderer-nerdfont",
+    dependencies = { "lambdalisue/vim-fern", "lambdalisue/vim-nerdfont" },
+    config = function()
+      vim.cmd([[let g:fern#renderer = "nerdfont"]])
+    end,
+  },
 
   {
     "nvim-telescope/telescope.nvim",
