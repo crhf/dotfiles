@@ -326,11 +326,27 @@ return {
         "<leader>fe",
         mode = { "n", "x", "o" },
         function()
-          cmd = "FernDo FernReveal " .. vim.fn.expand("%:p")
-          vim.cmd(cmd)
+          vim.cmd("FernDo FernReveal " .. vim.fn.expand("%:p"))
         end,
       },
     },
+    config = function()
+      vim.cmd.amenu([[PopUp.Toggle\ tree <Cmd>Fern . -drawer -toggle<CR>]])
+      vim.cmd([[
+        function! s:init_fern() abort
+          map <buffer><expr> <LeftRelease> fern#smart#leaf("<Plug>(fern-action-open)", "<Plug>(fern-action-expand:stay)", "<Plug>(fern-action-collapse)")
+          map <buffer><expr> <CR> fern#smart#leaf("<Plug>(fern-action-open)", "<Plug>(fern-action-expand:stay)", "<Plug>(fern-action-collapse)")
+          map <buffer> <BS> <Plug>(fern-action-collapse)
+          map <buffer> - <Plug>(fern-action-leave)
+          map <buffer><expr> <C-]> fern#smart#leaf("<Plug>(fern-action-open)", "<Plug>(fern-action-enter)", "<Plug>(fern-action-enter)")
+        endfunction
+
+        augroup FernGroup
+        autocmd! *
+        autocmd FileType fern call s:init_fern()
+        augroup END
+      ]])
+    end,
   },
   { "lambdalisue/vim-fern-hijack", dependencies = { "lambdalisue/vim-fern" } },
   { "lambdalisue/vim-fern-git-status", dependencies = { "lambdalisue/vim-fern" } },

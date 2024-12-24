@@ -40,16 +40,30 @@ vim.api.nvim_create_user_command("UnescapeInFloatWin", function()
   local width = vim.api.nvim_win_get_width(0)
   local height = vim.api.nvim_win_get_height(0)
 
-  vim.api.nvim_open_win(buf, true, {
-    relative = "win",
-    width = width - math.floor(width * 0.2),
-    height = height - math.floor(height * 0.2),
-    row = 5,
-    col = 5,
+  local row = math.floor(height * 0.1)
+  local col = math.floor(width * 0.1)
+
+  win = vim.api.nvim_open_win(buf, true, {
+    relative = "editor",
+    width = width - 2 * col,
+    height = height - 2 * row,
+    row = row,
+    col = col,
     style = "minimal",
-    border = "single",
+    border = "rounded",
   })
+
+  vim.api.nvim_set_option_value("wrap", true, { win = win })
+  vim.api.nvim_set_option_value("number", true, { win = win })
+  vim.api.nvim_set_option_value("relativenumber", true, { win = win })
+  vim.api.nvim_buf_set_keymap(buf, "n", "q", "<cmd>q<CR>", {})
+  vim.api.nvim_buf_set_keymap(buf, "n", "<MiddleRelease>", "<cmd>q<CR>", {})
 end, {})
 
-vim.cmd.amenu([[PopUp.unescape <Cmd>UnescapeInFloatWin<CR>]])
+vim.cmd([[aunmenu PopUp.How-to\ disable\ mouse ]])
+vim.cmd([[aunmenu PopUp.Inspect ]])
+
+vim.cmd([[amenu .600 PopUp.Unescape\ line <Cmd>UnescapeInFloatWin<CR>]])
 vim.api.nvim_set_keymap("n", "<leader>jj", "<Cmd>UnescapeInFloatWin<CR>", {})
+
+vim.cmd.amenu([[PopUp.Close\ floatwin <Cmd>fclose<CR>]])
