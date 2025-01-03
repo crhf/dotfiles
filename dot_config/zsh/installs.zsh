@@ -1,6 +1,9 @@
 # rust cargo (before zoxide)
 export PATH=$PATH:$HOME/.cargo/bin
 
+# nix must come before starship & zoxide
+. ~/.nix-profile/etc/profile.d/nix.sh
+
 # zoxide
 eval "$(zoxide init zsh)"
 
@@ -75,6 +78,4 @@ eval "$(pyenv init -)"
 
 eval "$(pyenv virtualenv-init -)"
 
-
-# nix
-. ~/.nix-profile/etc/profile.d/nix.sh
+alias lzd=lazydocker
