@@ -15,6 +15,8 @@ return {
   { "cocopon/iceberg.vim" },
   { "savq/melange-nvim" },
   { "mhartington/oceanic-next" },
+  { "yorik1984/newpaper.nvim" },
+  { "yorickpeterse/vim-paper" },
 
   -- Configure LazyVim to load gruvbox
   {

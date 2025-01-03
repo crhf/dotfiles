@@ -349,7 +349,28 @@ return {
     end,
   },
   { "lambdalisue/vim-fern-hijack", dependencies = { "lambdalisue/vim-fern" } },
-  { "lambdalisue/vim-fern-git-status", dependencies = { "lambdalisue/vim-fern" } },
+  {
+    "lambdalisue/vim-fern-git-status",
+    enabled = false,
+    dependencies = { "lambdalisue/vim-fern" },
+    config = function()
+      vim.cmd([[
+        " Disable the following options one by one if you encounter performance issues.
+
+        " Disable listing ignored files/directories
+        let g:fern_git_status#disable_ignored = 1
+
+        " Disable listing untracked files
+        let g:fern_git_status#disable_untracked = 1
+
+        " Disable listing status of submodules
+        let g:fern_git_status#disable_submodules = 1
+
+        " Disable listing status of directories
+        let g:fern_git_status#disable_directories = 1
+      ]])
+    end,
+  },
   {
     "lambdalisue/vim-fern-renderer-nerdfont",
     dependencies = { "lambdalisue/vim-fern", "lambdalisue/vim-nerdfont" },
