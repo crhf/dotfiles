@@ -393,6 +393,14 @@ return {
         },
       },
     },
+    keys = {
+      {
+        "gr",
+        function()
+          require("telescope.builtin").lsp_references({ include_current_line = true })
+        end,
+      },
+    },
   },
 
   {
@@ -420,5 +428,12 @@ return {
   {
     "sindrets/diffview.nvim",
     commit = "4516612",
+  },
+
+  {
+    "lewis6991/gitsigns.nvim",
+    keys = {
+      { "<leader>ghp", mode = { "n" }, "<cmd>Gitsigns preview_hunk<CR>" },
+    },
   },
 }

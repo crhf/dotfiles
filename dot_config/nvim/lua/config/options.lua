@@ -7,7 +7,7 @@ vim.cmd([[ set laststatus=3 ]])
 
 vim.cmd([[ set showtabline=2 ]])
 
-vim.cmd([[ set colorcolumn=89 ]])
+vim.cmd([[ set colorcolumn=89,121 ]])
 
 -- ## Tabline, defines how tabpages title looks like
 -- For convenience of cross-probjects development, show project names directly.

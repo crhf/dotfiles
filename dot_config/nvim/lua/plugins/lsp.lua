@@ -1,91 +1,118 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    opts = {
-      diagnostics = {
-        virtual_text = false,
-      },
-      servers = {
-        pyright = {
-          settings = {
-            pyright = {
-              disableLanguageServices = false,
-              openFilesOnly = false,
-              analysis = {
-                diagnosticMode = "workspace",
+    opts = function(_, opts)
+      local keys = require("lazyvim.plugins.lsp.keymaps").get()
+      keys[#keys + 1] = { "gr", false }
+
+      local function deepMerge(t1, t2)
+        local merged = {}
+
+        for key, value in pairs(t1) do
+          if type(value) == "table" and type(t2[key]) == "table" then
+            merged[key] = deepMerge(value, t2[key])
+          else
+            merged[key] = value
+          end
+        end
+
+        for key, value in pairs(t2) do
+          if merged[key] == nil then
+            merged[key] = value
+          end
+        end
+
+        return merged
+      end
+
+      local custom = {
+        diagnostics = {
+          virtual_text = false,
+        },
+        servers = {
+          pyright = {
+            settings = {
+              pyright = {
+                disableLanguageServices = false,
+                openFilesOnly = false,
+                analysis = {
+                  diagnosticMode = "workspace",
+                },
+              },
+              -- python = {
+              --     analysis = {
+              --         autoSearchPaths = true,
+              --         diagnosticMode = "workspace",
+              --         useLibraryCodeForTypes = true,
+              --         autoImportCompletions = true,
+              --     },
+              -- },
+              -- linting = { pylintEnabled = false }
+            },
+            on_attach = function(client, bufnr)
+              --     for key, value in pairs(client.server_capabilities) do
+              --         if value == true then
+              --             client.server_capabilities[key] = false
+              --         end
+              --     end
+              client.server_capabilities = require("vim.lsp.protocol").resolve_capabilities({
+                referencesProvider = true,
+                documentSymbolProvider = true,
+                workspaceSymbolProvider = true,
+                documentHighlightProvider = {
+                  workDoneProgress = false,
+                },
+                textDocumentSync = {
+                  change = 2,
+                  openClose = true,
+                  save = true,
+                  willSave = false,
+                  willSaveWaitUntil = false,
+                },
+                signatureHelpProvider = {
+                  triggerCharacters = {},
+                  retriggerCharacters = {},
+                },
+                -- completionProvider = false,
+                -- completion = {
+                --   completionItem = {
+                --     completionItemKind = {},
+                --     completionList = {
+                --       -- itemDefaults = { "editRange", "insertTextFormat", "insertTextMode", "data" },
+                --       itemDefaults = {  },
+                --     },
+                --   },
+                -- },
+              })
+              require("nvim-navic").attach(client, bufnr)
+              -- end
+            end,
+          },
+          jedi_language_server = {
+            settings = {
+              jediSettings = {
+                debug = true,
               },
             },
-            -- python = {
-            --     analysis = {
-            --         autoSearchPaths = true,
-            --         diagnosticMode = "workspace",
-            --         useLibraryCodeForTypes = true,
-            --         autoImportCompletions = true,
-            --     },
-            -- },
-            -- linting = { pylintEnabled = false }
-          },
-          on_attach = function(client, bufnr)
-            --     for key, value in pairs(client.server_capabilities) do
-            --         if value == true then
-            --             client.server_capabilities[key] = false
-            --         end
-            --     end
-            client.server_capabilities = require("vim.lsp.protocol").resolve_capabilities({
-              referencesProvider = true,
-              documentSymbolProvider = true,
-              workspaceSymbolProvider = true,
-              documentHighlightProvider = {
-                workDoneProgress = false,
-              },
-              textDocumentSync = {
-                change = 2,
-                openClose = true,
-                save = true,
-                willSave = false,
-                willSaveWaitUntil = false,
-              },
-              signatureHelpProvider = {
-                triggerCharacters = {},
-                retriggerCharacters = {},
-              },
-              -- completionProvider = false,
-              -- completion = {
-              --   completionItem = {
-              --     completionItemKind = {},
-              --     completionList = {
-              --       -- itemDefaults = { "editRange", "insertTextFormat", "insertTextMode", "data" },
-              --       itemDefaults = {  },
-              --     },
-              --   },
-              -- },
-            })
-            require("nvim-navic").attach(client, bufnr)
-            -- end
-          end,
-        },
-        jedi_language_server = {
-          settings = {
-            jediSettings = {
-              debug = true
-            }
-          },
-          on_attach = function(client, bufnr)
-            client.server_capabilities.documentSymbolProvider = false
-            client.server_capabilities.workspaceSymbolProvider = false
-            client.server_capabilities.referencesProvider = false
+            on_attach = function(client, bufnr)
+              client.server_capabilities.documentSymbolProvider = false
+              client.server_capabilities.workspaceSymbolProvider = false
+              client.server_capabilities.referencesProvider = false
 
-            -- client.server_capabilities.completionProvider = true
-            -- require("nvim-navic").attach(client, bufnr)
-          end,
+              -- client.server_capabilities.completionProvider = true
+              -- require("nvim-navic").attach(client, bufnr)
+            end,
+          },
+          phpactor = {
+            enabled = false,
+          },
+          intelephense = {
+            enabled = true,
+          },
         },
-        phpactor = {
-          enabled = false,
-        },
-        intelephense = {
-          enabled = true,
-        },
-      },
-    },
+      }
+
+      return deepMerge(opts, custom)
+    end,
   },
 }

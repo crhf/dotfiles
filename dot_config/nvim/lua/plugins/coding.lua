@@ -1,5 +1,4 @@
 return {
-  {"LazyVim/LazyVim", version = "v13.9.1"},
 
   { "folke/flash.nvim", enabled = false },
 
@@ -64,21 +63,21 @@ return {
 
   {
     "tpope/vim-abolish",
-    tag = "v1.2"
+    tag = "v1.2",
   },
 
   {
     "andymass/vim-matchup",
-    tag = "v0.7.3"
+    tag = "v0.7.3",
   },
 
   {
     "AndrewRadev/linediff.vim",
-    tag = "v0.3.0"
+    tag = "v0.3.0",
   },
 
   {
     "tpope/vim-sleuth",
-    tag = "v2.0"
-  } 
+    tag = "v2.0",
+  },
 }
