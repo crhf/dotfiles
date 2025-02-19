@@ -379,29 +379,29 @@ return {
     end,
   },
 
-  {
-    "nvim-telescope/telescope.nvim",
-    opts = {
-      defaults = {
-        mappings = {
-          i = {
-            ["<C-j>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
-            ["<C-k>"] = require("telescope.actions").send_selected_to_qflist + require("telescope.actions").open_qflist,
-            ["<C-q>"] = false,
-            ["<M-q>"] = false,
-          },
-        },
-      },
-    },
-    keys = {
-      {
-        "gr",
-        function()
-          require("telescope.builtin").lsp_references({ include_current_line = true })
-        end,
-      },
-    },
-  },
+  -- {
+  --   "nvim-telescope/telescope.nvim",
+  --   opts = {
+  --     defaults = {
+  --       mappings = {
+  --         i = {
+  --           ["<C-j>"] = require("telescope.actions").send_to_qflist + require("telescope.actions").open_qflist,
+  --           ["<C-k>"] = require("telescope.actions").send_selected_to_qflist + require("telescope.actions").open_qflist,
+  --           ["<C-q>"] = false,
+  --           ["<M-q>"] = false,
+  --         },
+  --       },
+  --     },
+  --   },
+  --   keys = {
+  --     {
+  --       "gr",
+  --       function()
+  --         require("telescope.builtin").lsp_references({ include_current_line = true })
+  --       end,
+  --     },
+  --   },
+  -- },
 
   {
     "folke/flash.nvim",
@@ -436,4 +436,11 @@ return {
       { "<leader>ghp", mode = { "n" }, "<cmd>Gitsigns preview_hunk<CR>" },
     },
   },
+
+  {
+    "hedyhli/outline.nvim",
+    keys = {
+      { "<leader>cs", mode = { "n" }, "<cmd>Outline!<CR>" },
+    }
+  }
 }

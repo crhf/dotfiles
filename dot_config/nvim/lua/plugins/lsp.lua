@@ -2,8 +2,8 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
-      local keys = require("lazyvim.plugins.lsp.keymaps").get()
-      keys[#keys + 1] = { "gr", false }
+      -- local keys = require("lazyvim.plugins.lsp.keymaps").get()
+      -- keys[#keys + 1] = { "gr", false }
 
       local function deepMerge(t1, t2)
         local merged = {}
