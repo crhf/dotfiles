@@ -436,4 +436,11 @@ return {
       { "<leader>ghp", mode = { "n" }, "<cmd>Gitsigns preview_hunk<CR>" },
     },
   },
+
+  -- {
+  --   "ibhagwan/fzf-lua",
+  --   keys = {
+  --     { "gr", mode = { "n" }, "<cmd>FzfLua lsp_references      jump1=false ignore_current_line=false<CR>" },
+  --   }
+  -- }
 }

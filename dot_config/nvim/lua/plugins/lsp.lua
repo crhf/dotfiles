@@ -1,54 +1,56 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    opts = {
-      servers = {
-        pyright = {
-          settings = {
-            pyright = {
-              disableLanguageServices = true,
-              openFilesOnly = false,
-              analysis = {
-                diagnosticMode = "workspace",
-              },
+    opts = function(_, opts)
+      local keys = require("lazyvim.plugins.lsp.keymaps").get()
+      -- change a keymap
+      keys[#keys + 1] = { "gr", "<cmd>FzfLua lsp_references      jump1=false ignore_current_line=false<CR>" }
+
+      opts["servers"]["pyright"] = {
+        settings = {
+          pyright = {
+            disableLanguageServices = true,
+            openFilesOnly = false,
+            analysis = {
+              diagnosticMode = "workspace",
             },
           },
-          on_attach = function(client, bufnr)
-            client.server_capabilities = require("vim.lsp.protocol").resolve_capabilities({
-              referencesProvider = false,
-              documentSymbolProvider = false,
-              workspaceSymbolProvider = false,
-              documentHighlightProvider = {
-                workDoneProgress = false,
-              },
-              textDocumentSync = {
-                change = 2,
-                openClose = true,
-                save = true,
-                willSave = false,
-                willSaveWaitUntil = false,
-              },
-              signatureHelpProvider = {
-                triggerCharacters = {},
-                retriggerCharacters = {},
-              },
-              -- completionProvider = false,
-              -- completion = {
-              --   completionItem = {
-              --     completionItemKind = {},
-              --     completionList = {
-              --       -- itemDefaults = { "editRange", "insertTextFormat", "insertTextMode", "data" },
-              --       itemDefaults = {  },
-              --     },
-              --   },
-              -- },
-            })
-            -- require("nvim-navic").attach(client, bufnr)
-            -- end
-          end,
         },
-      },
-    },
+        on_attach = function(client, bufnr)
+          client.server_capabilities = require("vim.lsp.protocol").resolve_capabilities({
+            referencesProvider = false,
+            documentSymbolProvider = false,
+            workspaceSymbolProvider = false,
+            documentHighlightProvider = {
+              workDoneProgress = false,
+            },
+            textDocumentSync = {
+              change = 2,
+              openClose = true,
+              save = true,
+              willSave = false,
+              willSaveWaitUntil = false,
+            },
+            signatureHelpProvider = {
+              triggerCharacters = {},
+              retriggerCharacters = {},
+            },
+            -- completionProvider = false,
+            -- completion = {
+            --   completionItem = {
+            --     completionItemKind = {},
+            --     completionList = {
+            --       -- itemDefaults = { "editRange", "insertTextFormat", "insertTextMode", "data" },
+            --       itemDefaults = {  },
+            --     },
+            --   },
+            -- },
+          })
+          -- require("nvim-navic").attach(client, bufnr)
+          -- end
+        end,
+      }
+    end,
   },
 }
 -- return {
