@@ -48,7 +48,7 @@ return {
           { "filename", path = 1 },
         },
         lualine_x = {},
-        lualine_y = { { "branch", icon = icons.git.Branch, padding = { left = 1, right = 0 } } },
+        lualine_y = {},
         lualine_z = {},
       }
 
@@ -91,10 +91,6 @@ return {
           symbols and symbols.get,
           cond = symbols and symbols.has,
         })
-        table.insert(inactive_winbar.lualine_c, #inactive_winbar.lualine_c + 1, {
-          symbols and symbols.get,
-          cond = symbols and symbols.has,
-        })
       end
 
       -- opts["winbar"] = winbar
@@ -126,6 +122,10 @@ return {
               },
             },
           },
+
+          lualine_x = { { "searchcount" } },
+          lualine_y = { { "filetype" }, { "location" } },
+          lualine_z = { { "branch", icon = icons.git.Branch, padding = { left = 1, right = 0 } } },
         },
       }
     end,
