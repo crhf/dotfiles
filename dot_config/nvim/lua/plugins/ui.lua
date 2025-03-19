@@ -23,15 +23,15 @@ return {
 
   {
     "nvim-lualine/lualine.nvim",
-    opts = function()
+    opts = function(_, opts)
       local LazyVim = require("lazyvim.util")
       local icons = LazyVim.config.icons
 
       local winbar = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = {
-          LazyVim.lualine.root_dir(),
+        lualine_a = {
+          -- { "diff", symbols = { added = icons.git.Added, modified = icons.git.Modified, removed = icons.git.Removed } },
+        },
+        lualine_b = {
           {
             "diagnostics",
             symbols = {
@@ -41,20 +41,20 @@ return {
               hint = icons.diagnostics.Hint,
             },
           },
+        },
+        lualine_c = {
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           -- { LazyVim.lualine.pretty_path() },
           { "filename", path = 1 },
         },
         lualine_x = {},
-        lualine_y = {},
+        lualine_y = { { "branch", icon = icons.git.Branch, padding = { left = 1, right = 0 } } },
         lualine_z = {},
       }
 
       local inactive_winbar = {
         lualine_a = {},
-        lualine_b = {},
-        lualine_c = {
-          LazyVim.lualine.root_dir(),
+        lualine_b = {
           {
             "diagnostics",
             symbols = {
@@ -64,6 +64,9 @@ return {
               hint = icons.diagnostics.Hint,
             },
           },
+        },
+        lualine_c = {
+          -- LazyVim.lualine.root_dir(),
           { "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
           -- { LazyVim.lualine.pretty_path() },
           { "filename", path = 1 },
@@ -84,15 +87,46 @@ return {
             format = "{kind_icon}{symbol.name:Normal}",
             hl_group = "lualine_c_normal",
           })
-        table.insert(winbar.lualine_c, {
+        table.insert(winbar.lualine_c, #winbar.lualine_c + 1, {
+          symbols and symbols.get,
+          cond = symbols and symbols.has,
+        })
+        table.insert(inactive_winbar.lualine_c, #inactive_winbar.lualine_c + 1, {
           symbols and symbols.get,
           cond = symbols and symbols.has,
         })
       end
 
+      -- opts["winbar"] = winbar
+      -- opts["inactive_winbar"] = inactive_winbar
+
+      -- table.insert(
+      --   opts["sections"]["lualine_c"],
+      --   #opts["sections"]["lualine_c"],
+      --   { "buffers", show_filename_only = true, mode = 2 }
+      -- )
       return {
         winbar = winbar,
         inactive_winbar = inactive_winbar,
+        sections = {
+          lualine_b = {},
+          lualine_c = {
+            {
+              "buffers",
+              max_length = vim.o.columns * 2 / 3,
+              symbols = {
+                modified = "",
+                alternate_file = "",
+              },
+              component_separators = { left = "", right = "" },
+              buffers_color = {
+                -- Same values as the general color option can be used here.
+                active = "lualine_b_normal", -- Color for inactive buffer.
+                inactive = "lualine_c_normal", -- Color for active buffer.
+              },
+            },
+          },
+        },
       }
     end,
   },
@@ -149,5 +183,5 @@ return {
         },
       },
     },
-  }
+  },
 }
