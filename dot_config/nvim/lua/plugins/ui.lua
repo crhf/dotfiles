@@ -124,7 +124,7 @@ return {
           },
 
           lualine_x = { { "searchcount" } },
-          lualine_y = { { "filetype" }, { "location" } },
+          lualine_y = { { "filetype" }, { "location" }, { "progress" } },
           lualine_z = { { "branch", icon = icons.git.Branch, padding = { left = 1, right = 0 } } },
         },
       }

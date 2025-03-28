@@ -6,10 +6,25 @@ return {
       -- change a keymap
       keys[#keys + 1] = { "gr", "<cmd>FzfLua lsp_references      jump1=false ignore_current_line=false<CR>" }
 
-      opts["servers"]["pyright"] = {
+      local jedi_capabilities = require("vim.lsp.protocol").make_client_capabilities()
+      jedi_capabilities.documentSymbol = false
+      jedi_capabilities.workspaceSymbol = false
+      jedi_capabilities.textDocument.completion.completionItem = {
+        commitCharactersSupport = false,
+        deprecatedSupport = true,
+        documentationFormat = { "markdown", "plaintext" },
+        preselectSupport = true,
+        snippetSupport = true,
+      }
+
+      opts.servers.jedi_language_server = {
+        capabilities = jedi_capabilities,
+      }
+
+      opts.servers.pyright = {
         settings = {
           pyright = {
-            disableLanguageServices = true,
+            disableLanguageServices = false,
             openFilesOnly = false,
             analysis = {
               diagnosticMode = "workspace",
@@ -17,10 +32,12 @@ return {
           },
         },
         on_attach = function(client, bufnr)
+          -- pyright doesn't respect client capabilities, so need to change server
+          -- capabilities after client initialization
           client.server_capabilities = require("vim.lsp.protocol").resolve_capabilities({
-            referencesProvider = false,
-            documentSymbolProvider = false,
-            workspaceSymbolProvider = false,
+            referencesProvider = true,
+            documentSymbolProvider = true,
+            workspaceSymbolProvider = true,
             documentHighlightProvider = {
               workDoneProgress = false,
             },
