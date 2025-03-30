@@ -6,19 +6,17 @@ return {
       -- change a keymap
       keys[#keys + 1] = { "gr", "<cmd>FzfLua lsp_references      jump1=false ignore_current_line=false<CR>" }
 
-      local jedi_capabilities = require("vim.lsp.protocol").make_client_capabilities()
-      jedi_capabilities.documentSymbol = false
-      jedi_capabilities.workspaceSymbol = false
-      jedi_capabilities.textDocument.completion.completionItem = {
-        commitCharactersSupport = false,
-        deprecatedSupport = true,
-        documentationFormat = { "markdown", "plaintext" },
-        preselectSupport = true,
-        snippetSupport = true,
-      }
-
       opts.servers.jedi_language_server = {
-        capabilities = jedi_capabilities,
+        settings = {
+          jediSettings = {
+            debug = true,
+          },
+        },
+        on_attach = function(client, bufnr)
+          client.server_capabilities.documentSymbolProvider = false
+          client.server_capabilities.workspaceSymbolProvider = false
+          client.server_capabilities.referencesProvider = false
+        end,
       }
 
       opts.servers.pyright = {
@@ -52,16 +50,6 @@ return {
               triggerCharacters = {},
               retriggerCharacters = {},
             },
-            -- completionProvider = false,
-            -- completion = {
-            --   completionItem = {
-            --     completionItemKind = {},
-            --     completionList = {
-            --       -- itemDefaults = { "editRange", "insertTextFormat", "insertTextMode", "data" },
-            --       itemDefaults = {  },
-            --     },
-            --   },
-            -- },
           })
           -- require("nvim-navic").attach(client, bufnr)
           -- end
