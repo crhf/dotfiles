@@ -4,7 +4,7 @@ return {
     opts = function(_, opts)
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
       -- change a keymap
-      keys[#keys + 1] = { "gr", "<cmd>FzfLua lsp_references      jump1=false ignore_current_line=false<CR>" }
+      -- keys[#keys + 1] = { "gr", "<cmd>FzfLua lsp_references      jump1=false ignore_current_line=false<CR>" }
 
       opts.servers.jedi_language_server = {
         settings = {

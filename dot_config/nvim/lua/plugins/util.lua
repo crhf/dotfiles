@@ -24,7 +24,14 @@ return {
       -- return false: if it's not ok to be saved
       condition = function(buf)
         local filetype = vim.bo[buf].filetype
-        if filetype == "harpoon" or filetype == "oil" or filetype == "org" then
+        if
+          filetype == "harpoon"
+          or filetype == "oil"
+          or filetype == "org"
+          or filetype == "snacks_picker_input"
+          or filetype == "snacks_picker_preview"
+          or filetype == "snacks_picker_list"
+        then
           return false
         end
 

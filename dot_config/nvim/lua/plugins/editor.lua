@@ -437,6 +437,25 @@ return {
     },
   },
 
+  {
+    "folke/snacks.nvim",
+    opts = {
+      picker = {
+        win = {
+          input = {
+            keys = {
+              ["<a-q>"] = { "qflist", mode = { "n", "i" } },
+              ["<a-a>"] = { "select_all", mode = { "n", "i" } },
+              ["<C-q>"] = false,
+              ["<C-a>"] = false,
+              ["<C-c>"] = { "cancel", mode = { "i", "n" } },
+            },
+          },
+        },
+      },
+    },
+  },
+
   -- {
   --   "ibhagwan/fzf-lua",
   --   keys = {
