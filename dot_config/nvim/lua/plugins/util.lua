@@ -23,6 +23,13 @@ return {
       -- return true: if buffer is ok to be saved
       -- return false: if it's not ok to be saved
       condition = function(buf)
+        -- check if buf exists
+        local fn = vim.fn
+        local api = vim.api
+        if not (api.nvim_buf_is_valid(buf) and fn.buflisted(buf)) then
+          return false
+        end
+
         local filetype = vim.bo[buf].filetype
         if
           filetype == "harpoon"

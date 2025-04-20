@@ -52,3 +52,6 @@ end
 -- In case you don't want to use `:LazyExtras`,
 -- then you need to set the option below.
 vim.g.lazyvim_picker = "snacks"
+
+-- https://github.com/wezterm/wezterm/issues/4607
+vim.o.termsync = false
