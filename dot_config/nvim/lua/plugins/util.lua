@@ -34,7 +34,6 @@ return {
         if
           filetype == "harpoon"
           or filetype == "oil"
-          or filetype == "org"
           or filetype == "snacks_picker_input"
           or filetype == "snacks_picker_preview"
           or filetype == "snacks_picker_list"
@@ -50,7 +49,7 @@ return {
         end
         return false -- can't save
       end,
-      write_all_buffers = true, -- write all buffers when the current one meets `condition`
+      write_all_buffers = false, -- write all buffers when the current one meets `condition`
       debounce_delay = 135, -- saves the file at most every `debounce_delay` milliseconds
       callbacks = {
         -- functions to be executed at different intervals
@@ -148,6 +147,11 @@ return {
             target = "~/orgfiles/journal.org",
           },
         },
+        mappings = {
+          global = {
+            org_toggle_checkbox = "<leader>oC"
+          }
+        }
       })
 
       -- NOTE: If you are using nvim-treesitter with ~ensure_installed = "all"~ option

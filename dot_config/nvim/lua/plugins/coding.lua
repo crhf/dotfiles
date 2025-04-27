@@ -2,13 +2,13 @@ return {
 
   { "folke/flash.nvim", enabled = false },
 
-  {
-    "garymjr/nvim-snippets",
-    opts = {
-      friendly_snippets = false,
-    },
-    dependencies = { "rafamadriz/friendly-snippets" },
-  },
+  -- {
+  --   "garymjr/nvim-snippets",
+  --   opts = {
+  --     friendly_snippets = false,
+  --   },
+  --   dependencies = { "rafamadriz/friendly-snippets" },
+  -- },
 
   -- {
   --   "kevinhwang91/nvim-ufo",
@@ -39,27 +39,30 @@ return {
   --   },
   -- },
 
-  {
-    "hrsh7th/nvim-cmp",
-    opts = function(_, opts)
-      for i, lang in ipairs(opts.auto_brackets) do
-        if lang == "python" then
-          table.remove(opts.auto_brackets, i)
-        end
-      end
-
-      opts["performance"] = {
-        debounce = 30,
-        throttle = 5,
-        fetching_timeout = 10,
-        confirm_resolve_timeout = 5,
-        async_budget = 1,
-        max_view_entries = 15,
-      }
-
-      opts["mapping"]["<CR>"] = require("cmp").config.disable
-    end,
-  },
+  -- {
+  --   "hrsh7th/nvim-cmp",
+  --   opts = function(_, opts)
+  --     -- opts.auto_brackets = opts.auto_brackets or {}
+  --     -- table.insert(opts.auto_brackets, "python")
+  --     -- opts.auto_brackets = { "python" }
+  --     for i, lang in ipairs(opts.auto_brackets) do
+  --       if lang == "python" then
+  --         table.remove(opts.auto_brackets, i)
+  --       end
+  --     end
+  --
+  --     opts["performance"] = {
+  --       debounce = 30,
+  --       throttle = 5,
+  --       fetching_timeout = 10,
+  --       confirm_resolve_timeout = 5,
+  --       async_budget = 1,
+  --       max_view_entries = 15,
+  --     }
+  --
+  --     opts["mapping"]["<CR>"] = require("cmp").config.disable
+  --   end,
+  -- },
 
   {
     "tpope/vim-abolish",
@@ -79,5 +82,14 @@ return {
   {
     "tpope/vim-sleuth",
     tag = "v2.0",
+  },
+
+  {
+    "zbirenbaum/copilot.lua",
+    opts = {
+      suggestion = {
+        auto_trigger = false,
+      },
+    },
   },
 }
