@@ -25,7 +25,7 @@ function MyTabLine()
     local win_num = vim.fn.tabpagewinnr(index)
     local working_directory = vim.fn.getcwd(win_num, index)
     local project_name = vim.fn.fnamemodify(working_directory, ":t")
-    tabline = tabline .. " " .. project_name .. " "
+    tabline = tabline .. " " .. index .. " " .. project_name .. " "
   end
 
   return tabline

@@ -67,3 +67,7 @@ vim.cmd([[amenu .600 PopUp.Unescape\ line <Cmd>UnescapeInFloatWin<CR>]])
 vim.api.nvim_set_keymap("n", "<leader>jj", "<Cmd>UnescapeInFloatWin<CR>", {})
 
 vim.cmd.amenu([[PopUp.Close\ floatwin <Cmd>fclose<CR>]])
+
+for i = 1, 9 do
+  vim.keymap.set("n", "<leader>" .. i, i .. "gt", { noremap = true, silent = true })
+end
