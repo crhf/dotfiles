@@ -456,6 +456,32 @@ return {
     },
   },
 
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    keys = {
+      {
+        "<leader>H",
+        function()
+          require("harpoon"):list():add()
+        end,
+        desc = "Harpoon File",
+      },
+      {
+        "<leader>h",
+        function()
+          local harpoon = require("harpoon")
+          harpoon.ui:toggle_quick_menu(harpoon:list())
+        end,
+        desc = "Harpoon Quick Menu",
+      },
+      { "<leader>1", false },
+      { "<leader>2", false },
+      { "<leader>3", false },
+      { "<leader>4", false },
+      { "<leader>5", false },
+    },
+  },
   -- {
   --   "ibhagwan/fzf-lua",
   --   keys = {
