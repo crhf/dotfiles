@@ -8,52 +8,52 @@ return {
       -- change a keymap
       -- keys[#keys + 1] = { "gr", "<cmd>FzfLua lsp_references      jump1=false ignore_current_line=false<CR>" }
 
-      -- opts.servers.jedi_language_server = {
-      --   settings = {
-      --     -- jediSettings = {
-      --     --   debug = true,
-      --     -- },
-      --   },
-      --   on_attach = function(client, bufnr)
-      --     client.server_capabilities.documentSymbolProvider = false
-      --     client.server_capabilities.workspaceSymbolProvider = false
-      --     client.server_capabilities.referencesProvider = false
-      --   end,
-      -- }
+      opts.servers.jedi_language_server = {
+        settings = {
+          -- jediSettings = {
+          --   debug = true,
+          -- },
+        },
+        on_attach = function(client, bufnr)
+          client.server_capabilities.documentSymbolProvider = false
+          client.server_capabilities.workspaceSymbolProvider = false
+          client.server_capabilities.referencesProvider = false
+        end,
+      }
 
-      -- opts.servers.pyright = {
-      --   settings = {
-      --     pyright = {
-      --       disableLanguageServices = false,
-      --       openFilesOnly = false,
-      --       analysis = {
-      --         diagnosticMode = "workspace",
-      --       },
-      --     },
-      --   },
-      --   on_attach = function(client, bufnr)
-      --     client.server_capabilities = require("vim.lsp.protocol").resolve_capabilities({
-      --       completionProvider = false,
-      --       referencesProvider = true,
-      --       documentSymbolProvider = true,
-      --       workspaceSymbolProvider = true,
-      --       documentHighlightProvider = {
-      --         workDoneProgress = false,
-      --       },
-      --       textDocumentSync = {
-      --         change = 2,
-      --         openClose = true,
-      --         save = true,
-      --         willSave = false,
-      --         willSaveWaitUntil = false,
-      --       },
-      --       signatureHelpProvider = {
-      --         triggerCharacters = {},
-      --         retriggerCharacters = {},
-      --       },
-      --     })
-      --   end,
-      -- }
+      opts.servers.pyright = {
+        settings = {
+          pyright = {
+            disableLanguageServices = false,
+            openFilesOnly = false,
+            analysis = {
+              diagnosticMode = "workspace",
+            },
+          },
+        },
+        on_attach = function(client, bufnr)
+          client.server_capabilities = require("vim.lsp.protocol").resolve_capabilities({
+            completionProvider = false,
+            referencesProvider = true,
+            documentSymbolProvider = true,
+            workspaceSymbolProvider = true,
+            documentHighlightProvider = {
+              workDoneProgress = false,
+            },
+            textDocumentSync = {
+              change = 2,
+              openClose = true,
+              save = true,
+              willSave = false,
+              willSaveWaitUntil = false,
+            },
+            signatureHelpProvider = {
+              triggerCharacters = {},
+              retriggerCharacters = {},
+            },
+          })
+        end,
+      }
 
       -- opts.servers.pyright = {
       --   settings = {
