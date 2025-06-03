@@ -10,7 +10,8 @@ return {
         php = { "pretty-php" },
         twig = { "djlint", "twig-cs-fixer" },
         javascript = { "prettier" },
-        json = { "jq" }
+        json = { "jq" },
+        tex = { "tex-fmt" }
       },
       formatters = {
         ["php-cs-fixer"] = {

@@ -55,3 +55,5 @@ vim.g.lazyvim_picker = "snacks"
 
 -- https://github.com/wezterm/wezterm/issues/4607
 vim.o.termsync = false
+
+vim.g.vimtex_syntax_conceal_disable = 1
