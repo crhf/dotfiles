@@ -488,4 +488,14 @@ return {
   --     { "gr", mode = { "n" }, "<cmd>FzfLua lsp_references      jump1=false ignore_current_line=false<CR>" },
   --   }
   -- }
+  {
+    "kwkarlwang/bufjump.nvim",
+    opts = {
+      forward_key = "<C-n>",
+      backward_key = "<C-p>",
+      on_success = function()
+        -- vim.cmd([[execute "normal! g`\"zz"]])
+      end,
+    },
+  },
 }
