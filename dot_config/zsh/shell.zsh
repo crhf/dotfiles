@@ -2,6 +2,9 @@ setopt incappendhistory
 unsetopt beep
 
 bindkey -v
+# https://coderwall.com/p/h63etq/zsh-vi-mode-no-delay-entering-normal-mode
+# https://github.com/pda/dotzsh/blob/main/keyboard.zsh#L10
+KEYTIMEOUT=1
 bindkey -r "^L"
 bindkey "^J" forward-word
 bindkey "^K" forward-char
