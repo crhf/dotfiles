@@ -58,4 +58,4 @@ vim.o.termsync = false
 
 vim.g.vimtex_syntax_conceal_disable = 1
 
-vim.g.lazyvim_python_lsp = "basedpyright"
+vim.g.lazyvim_python_lsp = "pyright"
