@@ -25,11 +25,22 @@ return {
         desc = "References",
       }
 
-      opts.servers.jedi_language_server = {
+      opts.servers.pylsp = {
         settings = {
-          -- jediSettings = {
-          --   debug = true,
-          -- },
+          pylsp = {
+            plugins = {
+              rope_autoimport = {
+                enabled = false,
+              },
+              jedi_completion = {
+                enabled = true,
+                include_params = true,
+                fuzzy = true,
+                include_class_objects = true,
+                include_function_objects = true,
+              },
+            },
+          },
         },
         on_attach = function(client, bufnr)
           client.server_capabilities.documentSymbolProvider = false
@@ -38,37 +49,16 @@ return {
         end,
       }
 
-      -- opts.servers.basedpyright = {
+      -- opts.servers.jedi_language_server = {
       --   settings = {
-      --     pyright = {
-      --       disableLanguageServices = false,
-      --       openFilesOnly = false,
-      --       analysis = {
-      --         diagnosticMode = "workspace",
-      --       },
-      --     },
+      --     -- jediSettings = {
+      --     --   debug = true,
+      --     -- },
       --   },
       --   on_attach = function(client, bufnr)
-      --     client.server_capabilities = require("vim.lsp.protocol").resolve_capabilities({
-      --       completionProvider = false,
-      --       referencesProvider = true,
-      --       documentSymbolProvider = true,
-      --       workspaceSymbolProvider = true,
-      --       documentHighlightProvider = {
-      --         workDoneProgress = false,
-      --       },
-      --       textDocumentSync = {
-      --         change = 2,
-      --         openClose = true,
-      --         save = true,
-      --         willSave = false,
-      --         willSaveWaitUntil = false,
-      --       },
-      --       signatureHelpProvider = {
-      --         triggerCharacters = {},
-      --         retriggerCharacters = {},
-      --       },
-      --     })
+      --     client.server_capabilities.documentSymbolProvider = false
+      --     client.server_capabilities.workspaceSymbolProvider = false
+      --     client.server_capabilities.referencesProvider = false
       --   end,
       -- }
 
