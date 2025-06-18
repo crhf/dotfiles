@@ -71,3 +71,57 @@ vim.cmd.amenu([[PopUp.Close\ floatwin <Cmd>fclose<CR>]])
 for i = 1, 9 do
   vim.keymap.set("n", "<leader>" .. i, i .. "gt", { noremap = true, silent = true })
 end
+
+-- param remove_original: boolean
+--   true  => remove original line entirely
+--   false => replace original line with an empty line
+local function move_line_after_import(remove_original)
+  local bufnr = vim.api.nvim_get_current_buf()
+  local cursor_line = vim.api.nvim_win_get_cursor(0)[1] - 1
+
+  -- Get current line and strip leading whitespace
+  local line = vim.api.nvim_buf_get_lines(bufnr, cursor_line, cursor_line + 1, false)[1]
+  if not line then
+    return
+  end
+  local trimmed_line = line:gsub("^%s+", "")
+
+  if remove_original then
+    -- Remove original line completely
+    vim.api.nvim_buf_set_lines(bufnr, cursor_line, cursor_line + 1, false, {})
+  else
+    -- Replace original line with empty line
+    vim.api.nvim_buf_set_lines(bufnr, cursor_line, cursor_line + 1, false, { "" })
+  end
+
+  -- Find the last import line
+  local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+  local insert_line = 0
+  for i, l in ipairs(lines) do
+    if l:match("^import ") or l:match("^from .+ import ") then
+      insert_line = i
+    end
+  end
+
+  -- Insert the trimmed line after the last import
+  vim.api.nvim_buf_set_lines(bufnr, insert_line, insert_line, false, { trimmed_line })
+end
+
+vim.keymap.set(
+  "n",
+  "<leader>oo",
+  -- move_line_after_last_import,
+  function()
+    move_line_after_import(true)
+  end,
+  { desc = "Move current line after last import, trimming whitespace" }
+)
+vim.keymap.set(
+  "i",
+  "<c-l>",
+  -- move_line_after_last_import,
+  function()
+    move_line_after_import(false)
+  end,
+  { desc = "Move current line after last import, trimming whitespace" }
+)
