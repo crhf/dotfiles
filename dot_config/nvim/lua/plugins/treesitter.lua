@@ -5,6 +5,25 @@ return {
   },
 
   {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      textobjects = {
+        select = {
+          enable = true,
+          keymaps = {
+            ["ak"] = "@block.outer",
+            ["ik"] = "@block.inner",
+          },
+        },
+        selection_modes = {
+          ["@block.outer"] = "V",
+          ["@block.inner"] = "V",
+        },
+      },
+    },
+  },
+
+  {
     "nvim-treesitter/nvim-treesitter-textobjects",
     -- opts = {
     --   textobjects = {
