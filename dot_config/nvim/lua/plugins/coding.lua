@@ -100,4 +100,13 @@ return {
       -- configuration goes here
     },
   },
+
+  {
+    "saghen/blink.cmp",
+    opts = {
+      keymap = {
+        ["<cr>"] = false,
+      },
+    },
+  },
 }
