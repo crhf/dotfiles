@@ -32,9 +32,15 @@ return {
               rope_autoimport = {
                 enabled = false,
               },
+              rope_completion = {
+                enabled = false,
+              },
+              jedi_symbols = {
+                enabled = false,
+              },
               jedi_completion = {
                 enabled = true,
-                include_params = true,
+                include_params = false,
                 fuzzy = true,
                 include_class_objects = true,
                 include_function_objects = true,
