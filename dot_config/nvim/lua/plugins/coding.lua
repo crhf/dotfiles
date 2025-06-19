@@ -111,6 +111,11 @@ return {
         menu = {
           winblend = 20,
         },
+        documentation = {
+          window = {
+            winblend = 20,
+          },
+        },
       },
       signature = {
         enabled = true,
