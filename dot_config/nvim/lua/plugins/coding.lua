@@ -109,4 +109,19 @@ return {
       },
     },
   },
+
+  -- nvim-autopairs instead of mini.pairs,
+  -- see https://github.com/LazyVim/LazyVim/discussions/2248
+  {
+    "echasnovski/mini.pairs",
+    enabled = false,
+  },
+
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = true,
+    -- use opts = {} for passing setup options
+    -- this is equivalent to setup({}) function
+  },
 }
