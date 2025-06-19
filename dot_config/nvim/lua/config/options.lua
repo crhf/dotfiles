@@ -12,6 +12,7 @@ vim.cmd([[ set colorcolumn=89,121 ]])
 -- ## Tabline, defines how tabpages title looks like
 -- For convenience of cross-probjects development, show project names directly.
 --
+
 function MyTabLine()
   local tabline = ""
   for index = 1, vim.fn.tabpagenr("$") do

@@ -107,6 +107,17 @@ return {
       keymap = {
         ["<cr>"] = false,
       },
+      completion = {
+        menu = {
+          winblend = 20,
+        },
+      },
+      signature = {
+        enabled = true,
+        window = {
+          winblend = 20,
+        },
+      },
     },
   },
 

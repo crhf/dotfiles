@@ -188,5 +188,12 @@ return {
 
   {
     "sidebar-nvim/sidebar.nvim",
-  }
+  },
+
+  {
+    "loctvl842/monokai-pro.nvim",
+    opts = {
+      transparent_background = false,
+    },
+  },
 }
