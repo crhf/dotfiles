@@ -66,22 +66,18 @@ return {
 
   {
     "tpope/vim-abolish",
-    tag = "v1.2",
   },
 
   {
     "andymass/vim-matchup",
-    tag = "v0.7.3",
   },
 
   {
     "AndrewRadev/linediff.vim",
-    tag = "v0.3.0",
   },
 
   {
     "tpope/vim-sleuth",
-    tag = "v2.0",
   },
 
   {

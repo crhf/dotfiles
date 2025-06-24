@@ -19,6 +19,7 @@
     "lazyvim.plugins.extras.lang.json",
     "lazyvim.plugins.extras.lang.php",
     "lazyvim.plugins.extras.lang.tex",
+    "lazyvim.plugins.extras.lang.typescript",
     "lazyvim.plugins.extras.ui.mini-indentscope"
   ],
   "install_version": 7,

@@ -125,3 +125,9 @@ vim.keymap.set(
   end,
   { desc = "Move current line after last import, trimming whitespace" }
 )
+
+-- Scroll up 6 lines with Ctrl-y
+vim.keymap.set("n", "<C-y>", "6<C-y>", { noremap = true, silent = true })
+
+-- Scroll down 6 lines with Ctrl-e
+vim.keymap.set("n", "<C-e>", "6<C-e>", { noremap = true, silent = true })
