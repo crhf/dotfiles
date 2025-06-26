@@ -1,0 +1,15 @@
+[Unit]
+Description=Mount tabdigital:org to ~/org using rclone
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+ExecStart=/usr/bin/rclone mount tabdigital:org %h/org --vfs-cache-mode writes
+ExecStop=/bin/fusermount -u %h/org
+Restart=on-failure
+RestartSec=10
+TimeoutSec=60
+
+[Install]
+WantedBy=default.target
