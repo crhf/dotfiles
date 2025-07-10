@@ -131,3 +131,5 @@ vim.keymap.set("n", "<C-y>", "6<C-y>", { noremap = true, silent = true })
 
 -- Scroll down 6 lines with Ctrl-e
 vim.keymap.set("n", "<C-e>", "6<C-e>", { noremap = true, silent = true })
+
+vim.keymap.set("n", "<leader>K", "<cmd>source %<cr>", { noremap = true, silent = true })

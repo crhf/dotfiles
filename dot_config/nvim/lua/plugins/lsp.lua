@@ -38,7 +38,7 @@ return {
                 enabled = false,
               },
               jedi_symbols = {
-                enabled = false,
+                enabled = true,
               },
               jedi_completion = {
                 enabled = true,
@@ -50,11 +50,28 @@ return {
             },
           },
         },
-        on_attach = function(client, bufnr)
-          client.server_capabilities.documentSymbolProvider = false
-          client.server_capabilities.workspaceSymbolProvider = false
-          client.server_capabilities.referencesProvider = false
-        end,
+        -- on_attach = function(client, bufnr)
+        --   client.server_capabilities = require("vim.lsp.protocol").resolve_capabilities({
+        --     completionProvider = true,
+        --     referencesProvider = false,
+        --     documentSymbolProvider = false,
+        --     workspaceSymbolProvider = false,
+        --     documentHighlightProvider = {
+        --       workDoneProgress = false,
+        --     },
+        --     textDocumentSync = {
+        --       change = 2,
+        --       openClose = true,
+        --       save = true,
+        --       willSave = false,
+        --       willSaveWaitUntil = false,
+        --     },
+        --     signatureHelpProvider = {
+        --       triggerCharacters = {},
+        --       retriggerCharacters = {},
+        --     },
+        --   })
+        -- end,
       }
 
       -- opts.servers.jedi_language_server = {
@@ -70,44 +87,44 @@ return {
       --   end,
       -- }
 
-      opts.servers.pyright = {
-        settings = {
-          pyright = {
-            disableLanguageServices = false,
-            openFilesOnly = false,
-            analysis = {
-              diagnosticMode = "workspace",
-            },
-          },
-        },
-        on_attach = function(client, bufnr)
-          -- pyright doesn't respect client capabilities, so need to change server
-          -- capabilities after client initialization
-          -- client.server_capabilities.completionProvider = false
-          client.server_capabilities = require("vim.lsp.protocol").resolve_capabilities({
-            completionProvider = false,
-            referencesProvider = true,
-            documentSymbolProvider = true,
-            workspaceSymbolProvider = true,
-            documentHighlightProvider = {
-              workDoneProgress = false,
-            },
-            textDocumentSync = {
-              change = 2,
-              openClose = true,
-              save = true,
-              willSave = false,
-              willSaveWaitUntil = false,
-            },
-            signatureHelpProvider = {
-              triggerCharacters = {},
-              retriggerCharacters = {},
-            },
-          })
-          -- require("nvim-navic").attach(client, bufnr)
-          -- end
-        end,
-      }
+      -- opts.servers.pyright = {
+      --   settings = {
+      --     pyright = {
+      --       disableLanguageServices = false,
+      --       openFilesOnly = false,
+      --       analysis = {
+      --         diagnosticMode = "workspace",
+      --       },
+      --     },
+      --   },
+      --   on_attach = function(client, bufnr)
+      --     -- pyright doesn't respect client capabilities, so need to change server
+      --     -- capabilities after client initialization
+      --     -- client.server_capabilities.completionProvider = false
+      --     client.server_capabilities = require("vim.lsp.protocol").resolve_capabilities({
+      --       completionProvider = false,
+      --       referencesProvider = true,
+      --       documentSymbolProvider = true,
+      --       workspaceSymbolProvider = true,
+      --       documentHighlightProvider = {
+      --         workDoneProgress = false,
+      --       },
+      --       textDocumentSync = {
+      --         change = 2,
+      --         openClose = true,
+      --         save = true,
+      --         willSave = false,
+      --         willSaveWaitUntil = false,
+      --       },
+      --       signatureHelpProvider = {
+      --         triggerCharacters = {},
+      --         retriggerCharacters = {},
+      --       },
+      --     })
+      --     -- require("nvim-navic").attach(client, bufnr)
+      --     -- end
+      --   end,
+      -- }
     end,
   },
 }

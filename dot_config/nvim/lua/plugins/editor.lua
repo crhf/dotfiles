@@ -482,12 +482,11 @@ return {
       { "<leader>5", false },
     },
   },
-  -- {
-  --   "ibhagwan/fzf-lua",
-  --   keys = {
-  --     { "gr", mode = { "n" }, "<cmd>FzfLua lsp_references      jump1=false ignore_current_line=false<CR>" },
-  --   }
-  -- }
+
+  {
+    "ibhagwan/fzf-lua",
+  },
+
   {
     "kwkarlwang/bufjump.nvim",
     opts = {
