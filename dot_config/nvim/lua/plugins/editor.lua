@@ -322,6 +322,7 @@ return {
     keys = {
       { "-", mode = { "n", "x", "o" }, "<Cmd>Fern . -reveal=%<CR>" },
       { "<leader>e", mode = { "n", "x", "o" }, "<Cmd>Fern . -drawer -toggle<CR>" },
+      { "<leader>E", mode = { "n", "x", "o" }, "<Cmd>Fern . -drawer -toggle -reveal=%<CR>" },
       {
         "<leader>fe",
         mode = { "n", "x", "o" },
@@ -485,6 +486,12 @@ return {
 
   {
     "ibhagwan/fzf-lua",
+    keys = {
+      { "<leader>/", LazyVim.pick("live_grep", { root = false }), desc = "Grep (cwd)" },
+      { "<leader><space>", LazyVim.pick("files", { root = false }), desc = "Find Files (cwd)" },
+      { "<leader>ff", "<cmd>FzfLua git_files<cr>", desc = "Find Files (git-files)" },
+      { "<leader>fF", LazyVim.pick("files"), desc = "Find Files (cwd)" },
+    },
   },
 
   {
@@ -496,5 +503,9 @@ return {
         -- vim.cmd([[execute "normal! g`\"zz"]])
       end,
     },
+  },
+
+  {
+    "tpope/vim-dispatch",
   },
 }

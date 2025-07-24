@@ -105,7 +105,20 @@ return {
         winbar = winbar,
         inactive_winbar = inactive_winbar,
         sections = {
-          lualine_b = {},
+          lualine_b = {
+            {
+              "macro",
+              fmt = function()
+                local reg = vim.fn.reg_recording()
+                if reg ~= "" then
+                  return "Recording @" .. reg
+                end
+                return nil
+              end,
+              color = { fg = "#ff9e64" },
+              draw_empty = false,
+            },
+          },
           lualine_c = {
             {
               "buffers",

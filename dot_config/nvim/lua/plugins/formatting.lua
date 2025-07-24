@@ -11,7 +11,8 @@ return {
         twig = { "djlint", "twig-cs-fixer" },
         javascript = { "prettier" },
         json = { "jq" },
-        tex = { "tex-fmt" }
+        tex = { "tex-fmt" },
+        toml = { "taplo" },
       },
       formatters = {
         ["php-cs-fixer"] = {

@@ -60,3 +60,5 @@ vim.o.termsync = false
 vim.g.vimtex_syntax_conceal_disable = 1
 
 vim.g.lazyvim_python_lsp = "pylsp" -- does not enable pylsp, but only disables pyright in LazyExtras.lang.python
+
+vim.o.conceallevel = 0
