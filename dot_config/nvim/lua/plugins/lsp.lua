@@ -31,6 +31,9 @@ return {
         settings = {
           pylsp = {
             plugins = {
+              pycodestyle = {
+                enabled = false,
+              },
               rope_autoimport = {
                 enabled = false,
               },
