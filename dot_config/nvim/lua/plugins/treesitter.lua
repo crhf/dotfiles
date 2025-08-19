@@ -1,7 +1,6 @@
 return {
   {
     "nvim-treesitter/playground",
-    commit = "ba48c6a",
   },
 
   {
@@ -83,7 +82,6 @@ return {
 
   {
     "yioneko/nvim-yati",
-    commit = "df3dc06",
     dependencies = {
       { "nvim-treesitter/nvim-treesitter" },
     },

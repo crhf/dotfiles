@@ -51,33 +51,17 @@ return {
                 include_function_objects = true,
               },
               pyflakes = {
-                enabled = true
-              }
+                enabled = false,
+              },
             },
           },
         },
-        -- on_attach = function(client, bufnr)
-        --   client.server_capabilities = require("vim.lsp.protocol").resolve_capabilities({
-        --     completionProvider = true,
-        --     referencesProvider = false,
-        --     documentSymbolProvider = false,
-        --     workspaceSymbolProvider = false,
-        --     documentHighlightProvider = {
-        --       workDoneProgress = false,
-        --     },
-        --     textDocumentSync = {
-        --       change = 2,
-        --       openClose = true,
-        --       save = true,
-        --       willSave = false,
-        --       willSaveWaitUntil = false,
-        --     },
-        --     signatureHelpProvider = {
-        --       triggerCharacters = {},
-        --       retriggerCharacters = {},
-        --     },
-        --   })
-        -- end,
+        on_attach = function(client, bufnr)
+          client.server_capabilities.documentSymbolProvider = false
+          client.server_capabilities.workspaceSymbolProvider = false
+          client.server_capabilities.referencesProvider = false
+          client.server_capabilities.definitionProvider = false
+        end,
       }
 
       -- opts.servers.jedi_language_server = {
@@ -109,7 +93,8 @@ return {
           -- client.server_capabilities.completionProvider = false
           client.server_capabilities = require("vim.lsp.protocol").resolve_capabilities({
             completionProvider = false,
-            referencesProvider = false,
+            referencesProvider = true,
+            definitionProvider = true,
             documentSymbolProvider = true,
             workspaceSymbolProvider = true,
             documentHighlightProvider = {
@@ -132,6 +117,10 @@ return {
         end,
       }
     end,
+  },
+
+  {
+    "python-rope/ropevim",
   },
 }
 -- return {
