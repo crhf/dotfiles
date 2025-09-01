@@ -1,0 +1,13 @@
+[Unit]
+Description=Rclone sync Org folder to TabDigital
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/rclone sync ~/Sync/org tabdigital:org \
+  --create-empty-src-dirs \
+  --log-level INFO \
+  --log-file ~/.rclone-org-sync-logs/$(date +%%Y%%m%%d_%%H%%M%%S)_sync.log \
+  --backup-dir ~/.rclone-org-sync-logs/backup \
+  --suffix .rclonesyncbackup

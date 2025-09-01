@@ -1,0 +1,10 @@
+[Unit]
+Description=Run rclone-org-sync.service daily
+
+[Timer]
+OnCalendar=*-*-* *:0/05:00
+Persistent=true
+Unit=rclone-org-sync.service
+
+[Install]
+WantedBy=timers.target
