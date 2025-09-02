@@ -12,8 +12,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     opts = function(_, opts)
-      vim.lsp.set_log_level("debug")
-
       opts.inlay_hints.enabled = false
 
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
