@@ -32,3 +32,8 @@ export MANWIDTH=999
 # <<< conda initialize <<<
 
 export TERM='tmux-256color'
+
+export XMODIFIERS=@im=fcitx
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+

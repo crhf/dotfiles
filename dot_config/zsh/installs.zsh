@@ -35,7 +35,7 @@ alias wo='workon'
 alias da='deactivate'
 
 # software
-export PATH=$PATH:$(ls -d $HOME/software/*/bin | paste -sd:)
+export PATH=$PATH:$(find $HOME/software/ -maxdepth 2 -name bin -type d | paste -sd:)
 
 # Go
 export PATH=$PATH:$HOME/go/bin
@@ -67,27 +67,15 @@ alias zj='zellij'
 # ~/.bash_profile if it exists, otherwise ~/.profile (for login shells)
 # and ~/.bashrc (for interactive shells) :
 
-# export PYENV_ROOT="$HOME/.pyenv"
-# [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-# eval "$(pyenv init -)"
-#
-# # Restart your shell for the changes to take effect.
-#
-# # Load pyenv-virtualenv automatically by adding
-# # the following to ~/.bashrc:
-#
-# eval "$(pyenv virtualenv-init -)"
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# Restart your shell for the changes to take effect.
+
+# Load pyenv-virtualenv automatically by adding
+# the following to ~/.bashrc:
+
+eval "$(pyenv virtualenv-init -)"
 
 alias lzd=lazydocker
-
-# fzf
-# Enable fzf history search with Ctrl+R
-bindkey '^R' fzf-history-widget
-
-# fzf history widget definition
-fzf-history-widget() {
-  BUFFER=$(fc -rl 1 | fzf --height 40% --reverse --tac --query="$LBUFFER" | sed 's/^[[:space:]]*[0-9]*[[:space:]]*//')
-  CURSOR=${#BUFFER}
-  zle redisplay
-}
-zle -N fzf-history-widget

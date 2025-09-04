@@ -12,6 +12,15 @@ bindkey "^P" up-line-or-history
 bindkey "^N" down-line-or-history
 bindkey "^Y" accept-line
 
+fzf_history_widget() {
+  local selected
+  selected=$(fc -rl 1 | awk '{$1=""; sub(/^ +/, ""); print}' | awk '!seen[$0]++' | fzf --height 40% --reverse --border --ansi) || return
+  LBUFFER="$selected"
+  zle reset-prompt
+}
+zle -N fzf_history_widget
+bindkey '^R' fzf_history_widget
+
 function tmux_sessionize {
   BUFFER="${ZDOTDIR}/tmux-sessionizer.sh"
   zle accept-line

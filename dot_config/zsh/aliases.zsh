@@ -91,7 +91,7 @@ ssh_with_password() {
     command ssh -X "$@"
   else
     case "$1" in
-      fat)
+      _________)
         sshpass -p $(cat ~/.ssh/password.txt) ssh -X "$@"
         ;;
       *)
