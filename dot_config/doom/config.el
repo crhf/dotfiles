@@ -37,7 +37,7 @@
         auto-save-default nil))        ;; disables regular Emacs auto-save
                                        ;; backups
 
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 18 :weight `regular))
+(setq doom-font (font-spec :family "JetBrainsMono Nerd Font" :size 21 :weight `regular))
 (setq doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font" :size 18 :weight `regular))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and

@@ -116,15 +116,15 @@ vim.keymap.set(
   end,
   { desc = "Move current line after last import, trimming whitespace" }
 )
-vim.keymap.set(
-  "i",
-  "<c-l>",
-  -- move_line_after_last_import,
-  function()
-    move_line_after_import(false)
-  end,
-  { desc = "Move current line after last import, trimming whitespace" }
-)
+-- vim.keymap.set(
+--   "i",
+--   "<c-l>",
+--   -- move_line_after_last_import,
+--   function()
+--     move_line_after_import(false)
+--   end,
+--   { desc = "Move current line after last import, trimming whitespace" }
+-- )
 
 -- Scroll up 6 lines with Ctrl-y
 vim.keymap.set("n", "<C-y>", "6<C-y>", { noremap = true, silent = true })
