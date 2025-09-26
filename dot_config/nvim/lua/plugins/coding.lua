@@ -125,7 +125,7 @@ return {
   -- nvim-autopairs instead of mini.pairs,
   -- see https://github.com/LazyVim/LazyVim/discussions/2248
   {
-    "echasnovski/mini.pairs",
+    "nvim-mini/mini.pairs",
     enabled = false,
   },
 

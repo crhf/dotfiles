@@ -1,6 +1,6 @@
 return {
   {
-    "echasnovski/mini.files",
+    "nvim-mini/mini.files",
     lazy = false,
     config = function(_, opts)
       local minifiles = require("mini.files")
