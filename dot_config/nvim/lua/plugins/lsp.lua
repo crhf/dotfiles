@@ -14,15 +14,15 @@ return {
     opts = function(_, opts)
       opts.inlay_hints.enabled = false
 
-      local keys = require("lazyvim.plugins.lsp.keymaps").get()
-      -- change a keymap
-      keys[#keys + 1] = {
-        "gr",
-        function()
-          Snacks.picker.lsp_references({ include_current = true })
-        end,
-        nowait = true,
-        desc = "References",
+      opts.servers["*"].keys = {
+        {
+          "gr",
+          function()
+            Snacks.picker.lsp_references({ include_current = true })
+          end,
+          nowait = true,
+          desc = "References",
+        },
       }
 
       opts.servers.pylsp = {
