@@ -14,16 +14,14 @@ return {
     opts = function(_, opts)
       opts.inlay_hints.enabled = false
 
-      opts.servers["*"].keys = {
-        {
-          "gr",
-          function()
-            Snacks.picker.lsp_references({ include_current = true })
-          end,
-          nowait = true,
-          desc = "References",
-        },
-      }
+      table.insert(opts.servers["*"].keys, {
+        "gr",
+        function()
+          Snacks.picker.lsp_references({ include_current = true })
+        end,
+        nowait = true,
+        desc = "References",
+      })
 
       opts.servers.pylsp = {
         settings = {
