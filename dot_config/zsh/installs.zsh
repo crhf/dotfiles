@@ -35,7 +35,7 @@ alias wo='workon'
 alias da='deactivate'
 
 # software
-export PATH=$PATH:$(find $HOME/software/ -maxdepth 2 -name bin -type d | paste -sd:)
+export PATH=$(find $HOME/software/ -maxdepth 2 -name bin -type d | paste -sd:):$PATH
 
 # Go
 export PATH=$PATH:$HOME/go/bin
