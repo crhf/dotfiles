@@ -58,7 +58,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "yin",
+      colorscheme = "e-ink",
     },
   },
 }
