@@ -16,6 +16,7 @@ return {
 
   {
     "olimorris/codecompanion.nvim",
+    version = "17.33.0",
     opts = {},
     dependencies = {
       "nvim-lua/plenary.nvim",
