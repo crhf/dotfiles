@@ -1,6 +1,6 @@
 local config = {}
 
-config.color_scheme = "Monokai Pro (Gogh)"
-config.font_size = 18
+config.color_scheme = "Gruvbox Dark (Gogh)"
+config.font_size = 20
 
 return config

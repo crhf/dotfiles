@@ -2,7 +2,7 @@
 export PATH=$PATH:$HOME/.cargo/bin
 
 # nix must come before starship & zoxide
-. ~/.nix-profile/etc/profile.d/nix.sh
+# . ~/.nix-profile/etc/profile.d/nix.sh
 
 # zoxide
 eval "$(zoxide init zsh)"
@@ -35,7 +35,7 @@ alias wo='workon'
 alias da='deactivate'
 
 # software
-export PATH=$(find $HOME/software/ -maxdepth 2 -name bin -type d | paste -sd:):$PATH
+export PATH=$(find $HOME/software/ -maxdepth 2 -name bin -type d | paste -sd: -):$PATH
 
 # Go
 export PATH=$PATH:$HOME/go/bin

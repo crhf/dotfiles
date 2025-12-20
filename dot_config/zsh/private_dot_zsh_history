@@ -1,0 +1,86 @@
+: 1766215217:0;brew install zoxide
+: 1766215233:0;mkdir software
+: 1766215259:0;brew install fzf
+: 1766215315:0;brew install n
+: 1766215326:0;mkdir ~/projects
+: 1766215344:0;git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+: 1766215371:0;brew install python3.12-venv
+: 1766215382:0;python3 --version
+: 1766215396:0;brew install python@3.12
+: 1766215441:0;brew install gh
+: 1766215468:0;$ brew install ripgrep
+: 1766215483:0;brew install silversearcher-ag
+: 1766215536:0;brew install the_silver_searcher
+: 1766215576:0;brew install neovim
+: 1766215589:0;nvim --version
+: 1766215598:0;echo $SHELL
+: 1766215633:0;brew install starship
+: 1766216182:0;n lts
+: 1766216212:0;ls ~/.config
+: 1766216218:0;ls ~/.config/wezterm
+: 1766216234:0;man paste
+: 1766216259:0;echo 1 2 3 | paste -sd+
+: 1766216263:0;echo 1 2 3 | paste -s -d +
+: 1766216265:0;echo 1 2 3 | paste -s -d + -
+: 1766216301:0;aerospace
+: 1766216470:0;cd .config
+: 1766216477:0;mkdir aerospace
+: 1766216480:0;cd aerospace
+: 1766216485:0;wget https://nikitabobko.github.io/AeroSpace/config-examples/default-config.toml
+: 1766216493:0;mv default-config.toml aerospace.toml
+: 1766216495:0;vim .
+: 1766216502:0;fzf
+: 1766216506:0;fzf --version
+: 1766216508:0;vim ~/.config/zsh/
+: 1766216750:0;defaults write -g InitialKeyRepeat -int 12
+: 1766216755:0;defaults write -g KeyRepeat -int 1
+: 1766217723:0;osascript 'id of app "zen"'
+: 1766217733:0;osascript zen
+: 1766217737:0;osascript Zen
+: 1766217780:0;mdls -name kMDItemCFBundleIdentifier /Applications/Zen.app/Contents/MacOS/zen
+: 1766217815:0;aerospace list-app
+: 1766217825:0;aerospace enable on
+: 1766217828:0;aerospace list-apps
+: 1766218461:0;brew tap FelixKratz/formulae\
+brew install borders
+: 1766218871:0;borders
+: 1766218980:0;brew install borders
+: 1766219029:0;borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=10.0
+: 1766219036:0;borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0
+: 1766219163:0;borders active_color=0xff8aadf4 inactive_color=0xff5b6078 width=4.5
+: 1766219173:0;borders active_color=0xff8aadf4 inactive_color=0xff5b6078 width=9
+: 1766219205:0;exec-and-forget borders active_color=0xffff9f1c inactive_color=0xff2c2f3a width=6.0\
+
+: 1766219214:0;borders active_color=0xffff9f1c inactive_color=0xff2c2f3a width=6.0\
+
+: 1766219475:0;borders active_color=0xff8aadf4 inactive_color=0xff5b6078 width=4.5\
+
+: 1766219488:0;exec-and-forget borders active_color=0xfff0f2f5 inactive_color=0xff3a3d4f width=5.0\
+
+: 1766219512:0;borders active_color=0xfff0f2f5 inactive_color=0xff3a3d4f width=5.0\
+
+: 1766219539:0;borders active_color=0xffff9f1c inactive_color=0xff2c2f3a width=6.0
+: 1766219604:0;borders active_color=0xffffb000 inactive_color=0xff5b6078 width=4.5
+: 1766219642:0;borders active_color=0xffff8c00 inactive_color=0xff5b6078 width=4.5
+: 1766219663:0;borders active_color=0xffff8c00 inactive_color=0xff5b6078 width=5
+: 1766219718:0;which borders
+: 1766219749:0;/Users/haifeng/.config/zsh/tmux-sessionizer.sh
+: 1766219754:0;vim ~/.config/aerospace
+: 1766220248:0;s
+: 1766220362:0;vim ~/.config/wezterm/wezterm.lua
+: 1766220367:0;ls
+: 1766220404:0;vim ~/.config/wezterm/wezterm.lua
+: 1766220412:0;ls
+: 1766220438:0;./bin/chezmoi add ~/.config/
+: 1766220447:0;cd .config
+: 1766220448:0;ls
+: 1766220451:0;ls chezmoi
+: 1766220459:0;rm -rf chezmoi
+: 1766220461:0;cd ..
+: 1766220488:0;brew install chezmoi
+: 1766220516:0;ls
+: 1766220521:0;ls chezmoi
+: 1766220557:0;ls
+: 1766220561:0;ls chezmoi
+: 1766220566:0;chezmoi add ~/.config
+: 1766220589:0;chezmoi add ~/.config/zsh
