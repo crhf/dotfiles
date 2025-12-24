@@ -193,3 +193,6 @@ on-mode-changed = []
     if.app-id = 'com.github.wez.wezterm'
     run = 'move-node-to-workspace 3' # mnemonics W - Web browser
 
+[[on-window-detected]]
+    if.app-id = 'com.hnc.Discord'
+    run = 'move-node-to-workspace 5' # mnemonics W - Web browser
