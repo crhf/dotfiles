@@ -48,7 +48,7 @@ automatically-unhide-macos-hidden-apps = false
 # even when they are invisible.
 # This config version is only available since 'config-version = 2'
 # Fallback value (if you omit the key): persistent-workspaces = []
-persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "Q", "R", "W"]
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "Q", "R", "W", "A", "G"]
 
 # A callback that runs every time binding mode changes
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -142,6 +142,8 @@ on-mode-changed = []
     alt-q = 'workspace Q'
     alt-r = 'workspace R'
     alt-w = 'workspace W'
+    alt-a = 'workspace A'
+    alt-g = 'workspace G'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1'
@@ -156,6 +158,8 @@ on-mode-changed = []
     alt-shift-q = 'move-node-to-workspace Q'
     alt-shift-r = 'move-node-to-workspace R'
     alt-shift-w = 'move-node-to-workspace W'
+    alt-shift-a = 'move-node-to-workspace A'
+    alt-shift-g = 'move-node-to-workspace G'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     alt-tab = 'workspace-back-and-forth'
@@ -196,3 +200,15 @@ on-mode-changed = []
 [[on-window-detected]]
     if.app-id = 'com.hnc.Discord'
     run = 'move-node-to-workspace 5' # mnemonics W - Web browser
+
+[[on-window-detected]]
+    if.app-id = 'ru.keepcoder.Telegram'
+    run = 'move-node-to-workspace Q' # mnemonics W - Web browser
+
+[[on-window-detected]]
+    if.app-id = 'com.mimestream.Mimestream'
+    run = 'move-node-to-workspace W' # mnemonics W - Web browser
+
+[[on-window-detected]]
+    if.app-name-regex-substring = 'Gmail'
+    run = ['layout floating', 'move-node-to-workspace A'] # mnemonics W - Web browser
