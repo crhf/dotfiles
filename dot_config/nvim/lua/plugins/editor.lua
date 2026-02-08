@@ -1,6 +1,7 @@
 return {
   {
     "nvim-mini/mini.files",
+    enabled = false,
     lazy = false,
     config = function(_, opts)
       local minifiles = require("mini.files")
@@ -317,68 +318,68 @@ return {
   --   },
   -- },
 
-  {
-    "lambdalisue/vim-fern",
-    keys = {
-      { "-", mode = { "n", "x", "o" }, "<Cmd>Fern . -reveal=%<CR>" },
-      { "<leader>e", mode = { "n", "x", "o" }, "<Cmd>Fern . -drawer -toggle<CR>" },
-      { "<leader>E", mode = { "n", "x", "o" }, "<Cmd>Fern . -drawer -toggle -reveal=%<CR>" },
-      {
-        "<leader>fe",
-        mode = { "n", "x", "o" },
-        function()
-          vim.cmd("FernDo FernReveal " .. vim.fn.expand("%:p"))
-        end,
-      },
-    },
-    config = function()
-      vim.cmd.amenu([[PopUp.Toggle\ tree <Cmd>Fern . -drawer -toggle<CR>]])
-      vim.cmd([[
-        function! s:init_fern() abort
-          map <buffer><expr> <LeftRelease> fern#smart#leaf("<Plug>(fern-action-open)", "<Plug>(fern-action-expand:stay)", "<Plug>(fern-action-collapse)")
-          map <buffer><expr> <CR> fern#smart#leaf("<Plug>(fern-action-open)", "<Plug>(fern-action-expand:stay)", "<Plug>(fern-action-collapse)")
-          map <buffer> <BS> <Plug>(fern-action-collapse)
-          map <buffer> - <Plug>(fern-action-leave)
-          map <buffer><expr> <C-]> fern#smart#leaf("<Plug>(fern-action-open)", "<Plug>(fern-action-enter)", "<Plug>(fern-action-enter)")
-        endfunction
-
-        augroup FernGroup
-        autocmd! *
-        autocmd FileType fern call s:init_fern()
-        augroup END
-      ]])
-    end,
-  },
-  { "lambdalisue/vim-fern-hijack", dependencies = { "lambdalisue/vim-fern" } },
-  {
-    "lambdalisue/vim-fern-git-status",
-    enabled = false,
-    dependencies = { "lambdalisue/vim-fern" },
-    config = function()
-      vim.cmd([[
-        " Disable the following options one by one if you encounter performance issues.
-
-        " Disable listing ignored files/directories
-        let g:fern_git_status#disable_ignored = 1
-
-        " Disable listing untracked files
-        let g:fern_git_status#disable_untracked = 1
-
-        " Disable listing status of submodules
-        let g:fern_git_status#disable_submodules = 1
-
-        " Disable listing status of directories
-        let g:fern_git_status#disable_directories = 1
-      ]])
-    end,
-  },
-  {
-    "lambdalisue/vim-fern-renderer-nerdfont",
-    dependencies = { "lambdalisue/vim-fern", "lambdalisue/vim-nerdfont" },
-    config = function()
-      vim.cmd([[let g:fern#renderer = "nerdfont"]])
-    end,
-  },
+  -- {
+  --   "lambdalisue/vim-fern",
+  --   keys = {
+  --     { "-", mode = { "n", "x", "o" }, "<Cmd>Fern . -reveal=%<CR>" },
+  --     { "<leader>e", mode = { "n", "x", "o" }, "<Cmd>Fern . -drawer -toggle<CR>" },
+  --     { "<leader>E", mode = { "n", "x", "o" }, "<Cmd>Fern . -drawer -toggle -reveal=%<CR>" },
+  --     {
+  --       "<leader>fe",
+  --       mode = { "n", "x", "o" },
+  --       function()
+  --         vim.cmd("FernDo FernReveal " .. vim.fn.expand("%:p"))
+  --       end,
+  --     },
+  --   },
+  --   config = function()
+  --     vim.cmd.amenu([[PopUp.Toggle\ tree <Cmd>Fern . -drawer -toggle<CR>]])
+  --     vim.cmd([[
+  --       function! s:init_fern() abort
+  --         map <buffer><expr> <LeftRelease> fern#smart#leaf("<Plug>(fern-action-open)", "<Plug>(fern-action-expand:stay)", "<Plug>(fern-action-collapse)")
+  --         map <buffer><expr> <CR> fern#smart#leaf("<Plug>(fern-action-open)", "<Plug>(fern-action-expand:stay)", "<Plug>(fern-action-collapse)")
+  --         map <buffer> <BS> <Plug>(fern-action-collapse)
+  --         map <buffer> - <Plug>(fern-action-leave)
+  --         map <buffer><expr> <C-]> fern#smart#leaf("<Plug>(fern-action-open)", "<Plug>(fern-action-enter)", "<Plug>(fern-action-enter)")
+  --       endfunction
+  --
+  --       augroup FernGroup
+  --       autocmd! *
+  --       autocmd FileType fern call s:init_fern()
+  --       augroup END
+  --     ]])
+  --   end,
+  -- },
+  -- { "lambdalisue/vim-fern-hijack", dependencies = { "lambdalisue/vim-fern" } },
+  -- {
+  --   "lambdalisue/vim-fern-git-status",
+  --   enabled = false,
+  --   dependencies = { "lambdalisue/vim-fern" },
+  --   config = function()
+  --     vim.cmd([[
+  --       " Disable the following options one by one if you encounter performance issues.
+  --
+  --       " Disable listing ignored files/directories
+  --       let g:fern_git_status#disable_ignored = 1
+  --
+  --       " Disable listing untracked files
+  --       let g:fern_git_status#disable_untracked = 1
+  --
+  --       " Disable listing status of submodules
+  --       let g:fern_git_status#disable_submodules = 1
+  --
+  --       " Disable listing status of directories
+  --       let g:fern_git_status#disable_directories = 1
+  --     ]])
+  --   end,
+  -- },
+  -- {
+  --   "lambdalisue/vim-fern-renderer-nerdfont",
+  --   dependencies = { "lambdalisue/vim-fern", "lambdalisue/vim-nerdfont" },
+  --   config = function()
+  --     vim.cmd([[let g:fern#renderer = "nerdfont"]])
+  --   end,
+  -- },
 
   -- {
   --   "nvim-telescope/telescope.nvim",
@@ -557,5 +558,63 @@ return {
 
   {
     "tpope/vim-dispatch",
+  },
+
+  {
+    "rolv-apneseth/tfm.nvim",
+    lazy = false,
+    opts = {
+      -- TFM to use
+      -- Possible choices: "ranger" | "nnn" | "lf" | "vifm" | "yazi" (default)
+      file_manager = "yazi",
+      -- Replace netrw entirely
+      -- Default: false
+      replace_netrw = true,
+      -- Enable creation of commands
+      -- Default: false
+      -- Commands:
+      --   Tfm: selected file(s) will be opened in the current window
+      --   TfmSplit: selected file(s) will be opened in a horizontal split
+      --   TfmVsplit: selected file(s) will be opened in a vertical split
+      --   TfmTabedit: selected file(s) will be opened in a new tab page
+      enable_cmds = true,
+      -- Custom keybindings only applied within the TFM buffer
+      -- Default: {}
+      keybindings = {
+        ["<ESC>"] = "q",
+        -- Override the open mode (i.e. vertical/horizontal split, new tab)
+        -- Tip: you can add an extra `<CR>` to the end of these to immediately open the selected file(s) (assuming the TFM uses `enter` to finalise selection)
+        ["<C-v>"] = "<C-\\><C-O>:lua require('tfm').set_next_open_mode(require('tfm').OPEN_MODE.vsplit)<CR>",
+        ["<C-x>"] = "<C-\\><C-O>:lua require('tfm').set_next_open_mode(require('tfm').OPEN_MODE.split)<CR>",
+        ["<C-t>"] = "<C-\\><C-O>:lua require('tfm').set_next_open_mode(require('tfm').OPEN_MODE.tabedit)<CR>",
+      },
+      -- Customise UI. The below options are the default
+      ui = {
+        border = "rounded",
+        height = 1,
+        width = 1,
+        x = 0.5,
+        y = 0.5,
+      },
+    },
+    keys = {
+      -- Make sure to change these keybindings to your preference,
+      -- and remove the ones you won't use
+      {
+        "<leader>e",
+        ":Tfm<CR>",
+        desc = "TFM",
+      },
+      {
+        "-",
+        ":Tfm<CR>",
+        desc = "TFM",
+      },
+      {
+        "<leader>mt",
+        ":TfmTabedit<CR>",
+        desc = "TFM - new tab",
+      },
+    },
   },
 }

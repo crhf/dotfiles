@@ -149,9 +149,9 @@ return {
         },
         mappings = {
           global = {
-            org_toggle_checkbox = "<leader>oC"
-          }
-        }
+            org_toggle_checkbox = "<leader>oC",
+          },
+        },
       })
 
       -- NOTE: If you are using nvim-treesitter with ~ensure_installed = "all"~ option
@@ -181,5 +181,14 @@ return {
       "RainbowDelimQuoted",
       "RainbowMultiDelim",
     },
+  },
+
+  {
+    "iamcco/markdown-preview.nvim",
+    ft = { "markdown" },
+    build = "cd app && yarn install",
+    config = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
   },
 }
