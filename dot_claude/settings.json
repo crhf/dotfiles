@@ -1,0 +1,15 @@
+{
+  "skipDangerousModePermissionPrompt": true,
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/haifeng/.claude/hooks/notify-telegram.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
