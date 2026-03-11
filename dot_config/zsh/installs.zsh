@@ -79,3 +79,5 @@ alias zj='zellij'
 # eval "$(pyenv virtualenv-init -)"
 
 alias lzd=lazydocker
+
+eval "$(~/.local/bin/mise activate zsh)"

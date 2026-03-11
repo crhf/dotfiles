@@ -121,3 +121,6 @@ alias la='ls -a'
 alias ll='ls -l'
 
 alias c='clear'
+
+alias bat='batcat'
+alias fd='fdfind'
