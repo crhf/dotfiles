@@ -347,6 +347,7 @@ return {
         autocmd FileType fern call s:init_fern()
         augroup END
       ]])
+      vim.g["fern#default_hidden"] = 1
     end,
   },
   { "lambdalisue/vim-fern-hijack", dependencies = { "lambdalisue/vim-fern" } },
