@@ -1,7 +1,8 @@
 return {
   {
     "zbirenbaum/copilot.lua",
-    enable = true,
+    enabled = true,
+    cmd = "Copilot",
     opts = {
       suggestion = {
         auto_trigger = false,
@@ -15,11 +16,14 @@ return {
         function()
           local cmd = require("copilot.command")
           local client = require("copilot.client")
-          cmd.toggle({ force = true })
-          if client.buf_is_attached(0) then
-            vim.api.nvim_echo({ { "Copilot attached", "DiagnosticOk" } }, false, {})
+
+          if client.is_disabled() then
+            cmd.enable()
+            cmd.attach({ force = true })
+            vim.api.nvim_echo({ { "Copilot enabled", "DiagnosticOk" } }, false, {})
           else
-            vim.api.nvim_echo({ { "Copilot detached", "DiagnosticWarn" } }, false, {})
+            cmd.disable()
+            vim.api.nvim_echo({ { "Copilot disabled", "DiagnosticWarn" } }, false, {})
           end
         end,
         desc = "Copilot toggle",
