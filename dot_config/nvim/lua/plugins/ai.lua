@@ -8,9 +8,22 @@ return {
       },
     },
     keys = {
-      { "<leader>ae", "<cmd>Copilot enable | Copilot status<cr>", { desc = "Copilot enable" } },
-      { "<leader>ad", "<cmd>Copilot disable | Copilot status<cr>", { desc = "Copilot disable" } },
-      { "<leader>ac", "<cmd>Copilot toggle | Copilot status<cr>", { desc = "Copilot enable" } },
+      { "<leader>ae", "<cmd>Copilot enable<cr>", desc = "Copilot enable" },
+      { "<leader>ad", "<cmd>Copilot disable<cr>", desc = "Copilot disable" },
+      {
+        "<leader>ac",
+        function()
+          local cmd = require("copilot.command")
+          local client = require("copilot.client")
+          cmd.toggle({ force = true })
+          if client.buf_is_attached(0) then
+            vim.api.nvim_echo({ { "Copilot attached", "DiagnosticOk" } }, false, {})
+          else
+            vim.api.nvim_echo({ { "Copilot detached", "DiagnosticWarn" } }, false, {})
+          end
+        end,
+        desc = "Copilot toggle",
+      },
     },
   },
 

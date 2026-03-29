@@ -5,7 +5,16 @@ return {
 
   {
     "nvim-treesitter/nvim-treesitter",
+    init = function()
+      -- Use curl+tar instead of git; only needs gcc (build-essential on Ubuntu)
+      require("nvim-treesitter.install").prefer_git = false
+    end,
     opts = {
+      ensure_installed = {
+        "python", "javascript", "typescript", "tsx",
+        "php", "html", "css", "json", "markdown", "markdown_inline",
+        "lua", "bash", "yaml", "toml", "regex", "vim", "vimdoc",
+      },
       textobjects = {
         select = {
           enable = true,

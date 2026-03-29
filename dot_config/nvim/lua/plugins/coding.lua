@@ -81,15 +81,6 @@ return {
   },
 
   {
-    "zbirenbaum/copilot.lua",
-    opts = {
-      suggestion = {
-        auto_trigger = false,
-      },
-    },
-  },
-
-  {
     "kawre/neotab.nvim",
     event = "InsertEnter",
     opts = {
@@ -99,6 +90,7 @@ return {
 
   {
     "saghen/blink.cmp",
+    build = false, -- don't try to download/compile native Rust lib
     opts = {
        fuzzy = { implementation = "lua" },
       keymap = {

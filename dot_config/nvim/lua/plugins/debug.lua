@@ -9,8 +9,5 @@ return {
       },
     },
   },
-  {
-    "rcarriga/nvim-dap-ui",
-    enable = false
-  }
+
 }

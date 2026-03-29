@@ -196,6 +196,19 @@ return {
           position = "float",
         },
       },
+      picker = {
+        win = {
+          input = {
+            keys = {
+              ["<a-q>"] = { "qflist", mode = { "n", "i" } },
+              ["<a-a>"] = { "select_all", mode = { "n", "i" } },
+              ["<C-q>"] = false,
+              ["<C-a>"] = false,
+              ["<C-c>"] = { "cancel", mode = { "i", "n" } },
+            },
+          },
+        },
+      },
     },
   },
 
@@ -203,10 +216,5 @@ return {
     "sidebar-nvim/sidebar.nvim",
   },
 
-  {
-    "loctvl842/monokai-pro.nvim",
-    opts = {
-      transparent_background = false,
-    },
-  },
+
 }
