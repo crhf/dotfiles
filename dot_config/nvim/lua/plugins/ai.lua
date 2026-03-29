@@ -1,33 +1,24 @@
+local function copilot_action(action)
+  return function()
+    local command = require("copilot.command")
+    command[action]()
+    vim.cmd("Copilot status")
+  end
+end
+
 return {
   {
     "zbirenbaum/copilot.lua",
-    enabled = true,
-    cmd = "Copilot",
+    enable = true,
     opts = {
       suggestion = {
         auto_trigger = false,
       },
     },
     keys = {
-      { "<leader>ae", "<cmd>Copilot enable<cr>", desc = "Copilot enable" },
-      { "<leader>ad", "<cmd>Copilot disable<cr>", desc = "Copilot disable" },
-      {
-        "<leader>ac",
-        function()
-          local cmd = require("copilot.command")
-          local client = require("copilot.client")
-
-          if client.is_disabled() then
-            cmd.enable()
-            cmd.attach({ force = true })
-            vim.api.nvim_echo({ { "Copilot enabled", "DiagnosticOk" } }, false, {})
-          else
-            cmd.disable()
-            vim.api.nvim_echo({ { "Copilot disabled", "DiagnosticWarn" } }, false, {})
-          end
-        end,
-        desc = "Copilot toggle",
-      },
+      { "<leader>ae", copilot_action("enable"), desc = "Copilot enable" },
+      { "<leader>ad", copilot_action("disable"), desc = "Copilot disable" },
+      { "<leader>ac", copilot_action("toggle"), desc = "Copilot toggle" },
     },
   },
 
