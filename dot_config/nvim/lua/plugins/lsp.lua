@@ -37,6 +37,45 @@ local function pylsp_config()
   }
 end
 
+local function basedpyright_references_config()
+  return {
+    handlers = {
+      ["textDocument/publishDiagnostics"] = function() end,
+    },
+    settings = {
+      basedpyright = {
+        disableOrganizeImports = true,
+        analysis = {
+          diagnosticMode = "off",
+          typeCheckingMode = "off",
+          inlayHints = {
+            variableTypes = false,
+            callArgumentNames = false,
+            functionReturnTypes = false,
+            genericTypes = false,
+          },
+        },
+      },
+    },
+    on_attach = function(client, _)
+      local keep = {
+        referencesProvider = true,
+      }
+
+      for capability, _ in pairs(client.server_capabilities) do
+        if capability:match("Provider$") and not keep[capability] then
+          client.server_capabilities[capability] = false
+        end
+      end
+
+      client.server_capabilities.completionProvider = nil
+      client.server_capabilities.executeCommandProvider = nil
+      client.server_capabilities.semanticTokensProvider = nil
+      client.server_capabilities.inlayHintProvider = false
+    end,
+  }
+end
+
 return {
   {
     "neovim/nvim-lspconfig",
@@ -53,6 +92,7 @@ return {
       })
 
       opts.servers.pylsp = pylsp_config()
+      opts.servers.basedpyright = basedpyright_references_config()
     end,
   },
 
