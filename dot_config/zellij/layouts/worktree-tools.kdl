@@ -1,0 +1,30 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="tab-bar"
+        }
+        children
+        pane size=1 borderless=true {
+            plugin location="status-bar"
+        }
+    }
+
+    tab name="nvim" {
+        pane command="/Users/haifeng/.config/zellij/bin/nvim-project"
+    }
+    tab name="cmd" {
+        pane
+    }
+    tab name="yazi" {
+        pane command="yazi"
+    }
+    tab name="lazygit" {
+        pane command="lazygit"
+    }
+    tab name="dotfiles" {
+        pane
+    }
+    tab name="agents" {
+        pane
+    }
+}
