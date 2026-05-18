@@ -5,7 +5,7 @@
 #
 # Stole and modified from: https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/bin/tmux-sessionizer
 
-PROJECTS="$HOME/projects $(echo ~/projects/*) $HOME"
+PROJECTS="$HOME/projects $(echo ~/projects/*) $HOME $(echo $HOME/google-drive/*)"
 
 # increase frecency
 increase() {

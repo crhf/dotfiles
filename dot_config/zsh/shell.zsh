@@ -28,6 +28,13 @@ function tmux_sessionize {
 zle -N tmux_sessionize tmux_sessionize
 bindkey '^f' "tmux_sessionize"
 
+function zellij_sessionize {
+  BUFFER="${ZDOTDIR}/zellij-sessionizer.sh"
+  zle accept-line
+}
+zle -N zellij_sessionize zellij_sessionize
+bindkey '^[f' "zellij_sessionize"
+
 
 function repeat_last {
   zle up-line-or-history
@@ -35,3 +42,15 @@ function repeat_last {
 }
 zle -N repeat_last repeat_last
 bindkey '^O' "repeat_last"
+
+function zjt {
+  zellij -n "${XDG_CONFIG_HOME:-$HOME/.config}/zellij/layouts/worktree-tools.kdl" "$@"
+}
+
+function zjtab {
+  "${ZDOTDIR}/zellij-switch-tab.sh" "$@"
+}
+
+function zjpane {
+  "${ZDOTDIR}/zellij-switch-pane.sh" "$@"
+}
