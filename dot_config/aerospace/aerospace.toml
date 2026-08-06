@@ -9,7 +9,17 @@ config-version = 2
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [# JankyBorders has a built-in detection of already running process,
     # so it won't be run twice on AeroSpace restart
-    'exec-and-forget borders active_color=0xffff8c00 inactive_color=0xff5b6078 width=5'
+    'exec-and-forget borders active_color=0xffff8c00 inactive_color=0xff5b6078 width=5',
+
+    # Run Sketchybar together with AeroSpace
+    # sketchybar has a built-in detection of already running process,
+    # so it won't be run twice on AeroSpace restart
+    'exec-and-forget sketchybar'
+]
+
+# Notify Sketchybar about workspace change
+exec-on-workspace-change = ['/bin/bash', '-c',
+    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
 ]
 
 # Start AeroSpace at login
@@ -48,7 +58,7 @@ automatically-unhide-macos-hidden-apps = false
 # even when they are invisible.
 # This config version is only available since 'config-version = 2'
 # Fallback value (if you omit the key): persistent-workspaces = []
-persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "Q", "R", "W", "A", "G"]
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "Q", "R", "W", "A", "G", "P"]
 
 # A callback that runs every time binding mode changes
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -144,6 +154,7 @@ on-mode-changed = []
     alt-w = 'workspace W'
     alt-a = 'workspace A'
     alt-g = 'workspace G'
+    alt-p = 'workspace P'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1'
@@ -155,11 +166,13 @@ on-mode-changed = []
     alt-shift-7 = 'move-node-to-workspace 7'
     alt-shift-8 = 'move-node-to-workspace 8'
     alt-shift-9 = 'move-node-to-workspace 9'
+    alt-shift-0 = 'exec-and-forget /Users/haifeng/.config/aerospace/reset-workspace-assignments.sh'
     alt-shift-q = 'move-node-to-workspace Q'
     alt-shift-r = 'move-node-to-workspace R'
     alt-shift-w = 'move-node-to-workspace W'
     alt-shift-a = 'move-node-to-workspace A'
     alt-shift-g = 'move-node-to-workspace G'
+    alt-shift-p = 'move-node-to-workspace P'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     alt-tab = 'workspace-back-and-forth'
@@ -191,24 +204,80 @@ on-mode-changed = []
 
 [[on-window-detected]]
     if.app-id = 'app.zen-browser.zen'
-    run = 'move-node-to-workspace 1' # mnemonics T - Terminal
+    run = 'move-node-to-workspace 1' # Browser
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.Safari'
+    run = 'move-node-to-workspace 1' # Browser
+
+[[on-window-detected]]
+    if.app-id = 'com.google.Chrome'
+    run = 'move-node-to-workspace 1' # Browser
+
+[[on-window-detected]]
+    if.app-id = 'org.mozilla.firefox'
+    run = 'move-node-to-workspace 1' # Browser
+
+[[on-window-detected]]
+    if.app-id = 'com.kagi.kagimacOS'
+    run = 'move-node-to-workspace 1' # Orion
+
+[[on-window-detected]]
+    if.app-id = 'com.todesktop.230313mzl4w4u92'
+    run = 'move-node-to-workspace 2' # Cursor
 
 [[on-window-detected]]
     if.app-id = 'com.github.wez.wezterm'
-    run = 'move-node-to-workspace 3' # mnemonics W - Web browser
+    run = 'move-node-to-workspace 3' # WezTerm
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.finder'
+    run = 'move-node-to-workspace 4' # Finder
 
 [[on-window-detected]]
     if.app-id = 'com.hnc.Discord'
-    run = 'move-node-to-workspace 5' # mnemonics W - Web browser
+    run = 'move-node-to-workspace 5' # Discord
+
+[[on-window-detected]]
+    if.app-id = 'com.tinyspeck.slackmacgap'
+    run = 'move-node-to-workspace 5' # Slack
+
+[[on-window-detected]]
+    if.app-id = 'org.gnu.Emacs'
+    run = 'move-node-to-workspace A' # Emacs
+
+[[on-window-detected]]
+    if.app-id = 'notion.id'
+    run = 'move-node-to-workspace A' # Notion
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.Preview'
+    run = 'move-node-to-workspace P' # PDF Preview
+
+[[on-window-detected]]
+    if.app-id = 'com.openai.codex'
+    run = 'move-node-to-workspace R' # Codex
+
+[[on-window-detected]]
+    if.app-id = 'com.anthropic.claudefordesktop'
+    run = 'move-node-to-workspace R' # Claude
+
+[[on-window-detected]]
+    if.app-id = 'com.openai.chat'
+    run = 'move-node-to-workspace R' # ChatGPT
+
+[[on-window-detected]]
+    if.app-id = 'net.whatsapp.WhatsApp'
+    run = 'move-node-to-workspace W' # WhatsApp
 
 [[on-window-detected]]
     if.app-id = 'ru.keepcoder.Telegram'
-    run = 'move-node-to-workspace Q' # mnemonics W - Web browser
+    run = 'move-node-to-workspace Q' # Telegram
 
 [[on-window-detected]]
     if.app-id = 'com.mimestream.Mimestream'
-    run = 'move-node-to-workspace W' # mnemonics W - Web browser
+    run = 'move-node-to-workspace G' # Mail
 
 [[on-window-detected]]
     if.app-name-regex-substring = 'Gmail'
-    run = ['layout floating', 'move-node-to-workspace A'] # mnemonics W - Web browser
+    run = ['layout floating', 'move-node-to-workspace G'] # Gmail
