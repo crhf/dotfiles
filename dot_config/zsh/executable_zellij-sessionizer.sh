@@ -72,7 +72,11 @@ inside_zellij() {
 
 session_exists() {
   local name="$1"
-  zellij list-sessions --short 2>/dev/null | grep -Fxq "$name"
+  # `list-sessions` also reports serialized EXITED sessions. Those are
+  # resurrection candidates, not live sessions, and attaching to one here
+  # makes the sessionizer bring back stale layouts.
+  zellij list-sessions --no-formatting 2>/dev/null |
+    awk -v name="$name" '$1 == name && $0 !~ /\(EXITED/ { found = 1 } END { exit !found }'
 }
 
 main() {
