@@ -79,6 +79,62 @@ session_exists() {
     awk -v name="$name" '$1 == name && $0 !~ /\(EXITED/ { found = 1 } END { exit !found }'
 }
 
+delete_exited_session() {
+  local name="$1"
+  local cache_root socket_path pids pid attempt running
+
+  if zellij list-sessions --no-formatting 2>/dev/null |
+    awk -v name="$name" '$1 == name && $0 ~ /\(EXITED/ { found = 1 } END { exit !found }'; then
+    # Zellij 0.44 can return success here without removing an EXITED session's
+    # orphaned server or serialized metadata. Try the CLI first, then clean up
+    # only the process and files belonging to this exact session.
+    zellij delete-session "$name" >/dev/null 2>&1 || true
+
+    if zellij list-sessions --no-formatting 2>/dev/null |
+      awk -v name="$name" '$1 == name && $0 ~ /\(EXITED/ { found = 1 } END { exit !found }'; then
+      socket_path="${ZELLIJ_SOCKET_DIR%/}/contract_version_1/$name"
+
+      if [ -S "$socket_path" ] && command -v lsof >/dev/null 2>&1; then
+        pids="$(lsof -t -- "$socket_path" 2>/dev/null || true)"
+        for pid in $pids; do
+          kill "$pid" 2>/dev/null || true
+        done
+
+        for attempt in {1..20}; do
+          running=false
+          for pid in $pids; do
+            if kill -0 "$pid" 2>/dev/null; then
+              running=true
+              break
+            fi
+          done
+          [ "$running" = false ] && break
+          sleep 0.1
+        done
+
+        for pid in $pids; do
+          kill -KILL "$pid" 2>/dev/null || true
+        done
+      fi
+
+      case "$(uname -s)" in
+        Darwin)
+          cache_root="${XDG_CACHE_HOME:-$HOME/Library/Caches}/org.Zellij-Contributors.Zellij"
+          ;;
+        *)
+          cache_root="${XDG_CACHE_HOME:-$HOME/.cache}/zellij"
+          ;;
+      esac
+
+      if [ -d "$cache_root" ]; then
+        find "$cache_root" -type d -path "*/session_info/$name" -prune -exec rm -rf -- {} +
+      fi
+
+      [ ! -S "$socket_path" ] || rm -f -- "$socket_path"
+    fi
+  fi
+}
+
 main() {
   local selected session_name
 
@@ -99,6 +155,10 @@ main() {
 
   session_name="$(session_name_for "$selected")"
   increase "$selected"
+
+  # A serialized session with the same name is automatically resurrected by
+  # both `attach` and `switch-session`. Remove it before creating a fresh one.
+  delete_exited_session "$session_name"
 
   if session_exists "$session_name"; then
     if inside_zellij; then
