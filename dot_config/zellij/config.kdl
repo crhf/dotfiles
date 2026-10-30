@@ -156,7 +156,7 @@ keybinds clear-defaults=true {
             SwitchToMode "locked"
         }
         bind "r" {
-            Run "/Users/haifeng/.config/zsh/zellij-rename-session.sh" {
+            Run "$HOME/.config/zsh/zellij-rename-session.sh" {
                 name "rename-session"
                 floating true
                 close_on_exit true

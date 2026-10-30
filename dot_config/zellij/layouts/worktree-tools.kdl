@@ -10,7 +10,7 @@ layout {
     }
 
     tab name="nvim" {
-        pane command="/Users/haifeng/.config/zellij/bin/nvim-project"
+        pane command="nvim" args="."
     }
     tab name="cmd" {
         pane
